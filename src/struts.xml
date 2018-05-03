@@ -1,0 +1,226 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="default" extends="struts-default">
+		<!-- LE NHAT TUNG -->
+		<!-- Dang nhap -->
+		<action name="dangNhap" class="eCore.controller.Controller_XacThuc"
+			method="dangNhap">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/login.jsp</result>
+		</action>
+		<!-- Dang nhap -->
+		<action name="dangXuat" class="eCore.controller.Controller_XacThuc"
+			method="dangXuat">
+			<result name="SUCCESS">/login.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- Xử lý lớp -->
+		<!-- Tìm kiếm lớp -->
+		<action name="timKiemLop" class="eCore.controller.Controller_Lop"
+			method="search">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Tải lại lớp -->
+		<action name="taiLaiLop" class="eCore.controller.Controller_Lop"
+			method="refresh">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Thêm mới lớp -->
+		<action name="themMoiLop" class="eCore.controller.Controller_Lop"
+			method="addNew">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Lưu lớp -->
+		<action name="luuDuLieuLop" class="eCore.controller.Controller_Lop"
+			method="saveOrUpdate">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiet -->
+		<action name="xemChiTietLop" class="eCore.controller.Controller_Lop"
+			method="viewDetail">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiet va chinh sua -->
+		<action name="xemChiTietVaChinhSuaLop" class="eCore.controller.Controller_Lop"
+			method="viewDetailAndEdit">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xoa Lop -->
+		<action name="deleteLop" class="eCore.controller.Controller_Lop"
+			method="delete">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- kết thúc xử lý lớp -->
+
+		<!-- Xử lý năm học -->
+		<!-- Tìm kiếm năm học -->
+		<action name="timKiemNamHoc" class="eCore.controller.Controller_NamHoc"
+			method="search">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Tải lại năm học -->
+		<action name="taiLaiNamHoc" class="eCore.controller.Controller_NamHoc"
+			method="refresh">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Thêm mới năm học -->
+		<action name="themMoiNamHoc" class="eCore.controller.Controller_NamHoc"
+			method="addNew">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Lưu năm học -->
+		<action name="luuDuLieuNamHoc" class="eCore.controller.Controller_NamHoc"
+			method="saveOrUpdate">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiet -->
+		<action name="xemChiTietNamHoc" class="eCore.controller.Controller_NamHoc"
+			method="viewDetail">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiet va chinh sua -->
+		<action name="xemChiTietVaChinhSuaNamHoc" class="eCore.controller.Controller_NamHoc"
+			method="viewDetailAndEdit">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xoa năm học -->
+		<action name="deleteNamHoc" class="eCore.controller.Controller_NamHoc"
+			method="delete">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- kết thúc xử lý năm học -->
+
+		<!-- Xử lý học kỳ -->
+		<!-- Tìm kiếm học kỳ -->
+		<action name="timKiemHocKy" class="eCore.controller.Controller_HocKy"
+			method="search">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Tải lại học kỳ -->
+		<action name="taiLaiHocKy" class="eCore.controller.Controller_HocKy"
+			method="refresh">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Thêm mới học kỳ -->
+		<action name="themMoiHocKy" class="eCore.controller.Controller_HocKy"
+			method="addNew">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Lưu học kỳ -->
+		<action name="luuDuLieuHocKy" class="eCore.controller.Controller_HocKy"
+			method="saveOrUpdate">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiet -->
+		<action name="xemChiTietHocKy" class="eCore.controller.Controller_HocKy"
+			method="viewDetail">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiet va chinh sua -->
+		<action name="xemChiTietVaChinhSuaHocKy" class="eCore.controller.Controller_HocKy"
+			method="viewDetailAndEdit">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xoa học kỳ -->
+		<action name="deleteHocKy" class="eCore.controller.Controller_HocKy"
+			method="delete">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- kết thúc xử lý học kỳ -->
+		
+		<!-- Xử lý đơn vị -->
+		<!-- Tìm kiếm đơn vị -->
+		<action name="timKiemDonVi" class="eCore.controller.Controller_DonVi"
+			method="search">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Tải lại đơn vị-->
+		<action name="taiLaiDonVi" class="eCore.controller.Controller_DonVi"
+			method="refresh">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Thêm mới đơn vị -->
+		<action name="themMoiDonVi" class="eCore.controller.Controller_DonVi"
+			method="addNew">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Lưu học kỳ -->
+		<action name="luuDuLieuDonVi" class="eCore.controller.Controller_DonVi"
+			method="saveOrUpdate">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiet -->
+		<action name="xemChiTietDonVi" class="eCore.controller.Controller_DonVi"
+			method="viewDetail">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiet va chinh sua -->
+		<action name="xemChiTietVaChinhSuaDonVi" class="eCore.controller.Controller_DonVi"
+			method="viewDetailAndEdit">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xoa học kỳ -->
+		<action name="deleteDonVi" class="eCore.controller.Controller_DonVi"
+			method="delete">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- kết thúc xử lý học kỳ -->
+
+
+	</package>
+</struts>
