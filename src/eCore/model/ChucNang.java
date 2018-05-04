@@ -24,12 +24,12 @@ public class ChucNang implements Comparable<ChucNang> {
 	public String moTa;
 	@Type(type = "text")
 	public String ghiChu;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	public ChucNang ChucNangCha;
 	public Date thoiGianCapNhat;
 
 	@ManyToMany(mappedBy = "chucNangs", fetch = FetchType.EAGER)
-	private Set<NhomPhanQuyen> nhomPhanQuyens = new HashSet<>();
+	public Set<NhomPhanQuyen> nhomPhanQuyens = new HashSet<>();
 
 	public ChucNang() {
 	}

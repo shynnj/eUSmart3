@@ -1,6 +1,5 @@
-<%@page import="eCore.util.Util_Date"%>
-<%@page import="eCore.modelDao.DAO_NamHoc"%>
-<%@page import="eCore.model.NamHoc"%>
+<%@page import="eCore.modelDao.DAO_ChucNang"%>
+<%@page import="eCore.model.ChucNang"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.lang.reflect.Array"%>
 <%@page import="eCore.dao.ObjectDAO"%>
@@ -8,31 +7,30 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String tenLop = "NamHoc";
-	String tenTrang = "Quản lý Năm Học";
-	String trangDanhSach = "index.jsp?p=eCore/pages/namhocs.jsp";
-	String[] tk_value = { "maNamHoc", "tenNamHoc", "ngayBatDau", "ngayKetThuc" };
-	String[] tk_show = { "Mã năm học", "Tên năm học", "Ngày bắt đầu", "Ngày kết thuc" };
+	String tenLop = "ChucNang";
+	String tenTrang = "Quản lý Chức Năng";
+	String[] tk_value = { "maChucNang", "tenHienThi", "duongDan", "chucNangCha" };
+	String[] tk_show = { "Mã chức năng", "Tên hiển thị", "Đường dẫn", "Chức năng cha" };
 %>
 
 <%@ include file="../../ePartial/code-header.jsp"%>
 
 <%
-	ObjectDAO<NamHoc> dao = new DAO_NamHoc();
+	ObjectDAO<ChucNang> dao = new DAO_ChucNang();
 
-	ArrayList<NamHoc> list = new ArrayList<NamHoc>();
+	ArrayList<ChucNang> list = new ArrayList<ChucNang>();
 
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
 		if (listTemp.size() > 0) {
-	if (listTemp.get(0) instanceof NamHoc) {
-				list = (ArrayList<NamHoc>) listTemp;
+	if (listTemp.get(0) instanceof ChucNang) {
+				list = (ArrayList<ChucNang>) listTemp;
 			} else {
 				session.setAttribute("checkTimKiem", null);
 				list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 			}
 		} else
-			list = new ArrayList<NamHoc>();
+			list = new ArrayList<ChucNang>();
 	} else {
 		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 	}
@@ -58,25 +56,27 @@
 				id="dataTables-example">
 				<thead>
 					<tr>
-						<th>Mã năm học</th>
-						<th>Tên năm học</th>
-						<th>Ngày bắt đầu</th>
-						<th>Ngày kết thúc</th>				
+						<th>Mã chức năng</th>
+						<th>Tên hiển thị</th>
+						<th>Đường dẫn</th>
+						<th>Hình ảnh</th>
+						<th>Chức năng cha</th>
 						<th>Xử lý</th>
 					</tr>
 				</thead>
 				<tbody>
 					<%
-						for (NamHoc obj : list) {
+						for (ChucNang obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
-							String maDoiTuong = obj.getMaNamHoc();
-							String tenDoiTuong = obj.getTenNamHoc();
+							String maDoiTuong = obj.getMaChucNang();
+							String tenDoiTuong = obj.getTenHienThi();
 					%>
 					<tr class="odd gradeX">
-						<td><%=obj.getMaNamHoc()%></td>
-						<td><%=obj.getTenNamHoc()%></td>
-						<td><%=Util_Date.dateToString2(obj.getNgayBatDau())%></td>
-						<td><%=Util_Date.dateToString2(obj.getNgayKetThuc())%></td>
+						<td><%=obj.getMaChucNang()%></td>
+						<td><%=obj.getTenHienThi()%></td>
+						<td><%=obj.getDuongDan()%></td>
+						<td><%=obj.getHinhAnh()%></td>
+						<td><%=obj.getChucNangCha() == null ? "" : obj.getChucNangCha().getTenHienThi()%></td>
 						<td style="text-align: center;"><%@ include
 								file="../../ePartial/menupullcuadoituong.jsp"%></td>
 					</tr>

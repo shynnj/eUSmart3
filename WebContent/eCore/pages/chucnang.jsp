@@ -1,18 +1,16 @@
-<%@page import="eCore.model.Lop"%>
-<%@page import="eCore.model.DonVi"%>
+<%@page import="eCore.modelDao.DAO_ChucNang"%>
+<%@page import="eCore.model.ChucNang"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="eCore.modelDao.DAO_DonVi"%>
 <%@page import="eCore.dao.ObjectDAO"%>
-<%@page import="eCore.model.ChucNang" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
-	String tenLop = "DonVi";
-	String tenTrang = "Quản lý Đơn Vị";
-	String trangDanhSach = "index.jsp?p=eCore/pages/donvis.jsp";
-	String[] tk_value = { "maDonVi", "tenDonVi", "email", "soDienThoai", "diaChiLienHe", "donViCha" };
-	String[] tk_show = { "Mã đơn vị", "Tên đơn vị", "Email", "Số điện thoại", "Địa chỉ liên hệ", "Đơn vị cha" };
+	String tenLop = "ChucNang";
+	String tenTrang = "Quản lý Chức Năng";
+	String trangDanhSach = "index.jsp?p=eCore/pages/chucnangs.jsp";
+	String[] tk_value = { "maChucNang", "tenHienThi", "duongDan", "chucNangCha" };
+	String[] tk_show = { "Mã chức năng", "Tên hiển thị", "Đường dẫn", "Chức năng cha" };
 %>
 <%@ include file="../../ePartial/code-header.jsp"%>
 
@@ -27,7 +25,7 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	DonVi obj = session.getAttribute("obj") != null ? (DonVi) session.getAttribute("obj") : null;
+	ChucNang obj = session.getAttribute("obj") != null ? (ChucNang) session.getAttribute("obj") : null;
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -58,57 +56,52 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Mã đơn vị</label> <input class="form-control"
-										name="maDonVi"
-										value="<%=(obj != null ? obj.getMaDonVi() : "")%>"
+									<label>Mã chức năng</label> <input class="form-control"
+										name="maChucNang"
+										value="<%=(obj != null ? obj.getMaChucNang() + "" : "")%>"
 										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Tên đơn vị</label> <input class="form-control"
-										name="tenDonVi"
-										value="<%=(obj != null ? obj.getTenDonVi() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
+									<label>Tên hiển thị</label> <input class="form-control"
+										name="tenHienThi"
+										value="<%=(obj != null ? obj.getTenHienThi() + "" : "")%>"
+										<%=(modeView ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Email</label> <input class="form-control" name="email"
-										value="<%=(obj != null ? obj.getEmail() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
+									<label>Đường dẫn</label> <input class="form-control"
+										name="duongDan"
+										value="<%=(obj != null ? obj.getDuongDan() + "" : "")%>"
+										<%=(modeView ? " readonly " : "")%>>
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Số điện thoại</label> <input class="form-control"
-										name="soDienThoai"
-										value="<%=(obj != null ? obj.getSoDienThoai() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
+									<label>Hình ảnh</label> <input class="form-control"
+										name="hinhAnh"
+										value="<%=(obj != null ? obj.getHinhAnh() + "" : "")%>"
+										<%=(modeView ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Địa chỉ liên hệ</label> <input class="form-control"
-										name="diaChiLienHe"
-										value="<%=(obj != null ? obj.getDiaChiLienHe() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Đơn vị cha</label> <select class="form-control"
-										name="maDonViCha" <%=(modeView ? " disabled " : "")%>>
+									<label>Chức năng cha</label> <select class="form-control"
+										name="maChucNangCha" <%=(modeView ? " disabled " : "")%>>
 										<option value=""></option>
 										<%
-											ObjectDAO objdao = new DAO_DonVi();
-											ArrayList<DonVi> listDonVi = objdao.listAll();
-											for (DonVi dv : listDonVi) {
+											ObjectDAO objdao = new DAO_ChucNang();
+											ArrayList<ChucNang> listChucNang = objdao.listAll();
+											for (ChucNang cn : listChucNang) {
 
-												if (obj != null && dv.compareTo(obj) != 0) {
+												if (obj != null && cn.compareTo(obj) != 0) {
 										%>
-										<option value="<%=dv.maDonVi%> "
-											<%=obj != null && obj.getDonViCha() != null
-							&& obj.getDonViCha().getMaDonVi().equals(dv.maDonVi) ? "selected" : ""%>>
-											<%=dv.tenDonVi%>
+										<option value="<%=cn.maChucNang%> "
+											<%=obj != null && obj.getChucNangCha() != null
+							&& obj.getChucNangCha().getMaChucNang().equals(cn.maChucNang) ? "selected" : ""%>>
+											<%=cn.tenHienThi%>
 										</option>
 										<%
 											} else {
 										%>
-										<option value="<%=dv.maDonVi%>">
-											<%=dv.tenDonVi%>
+										<option value="<%=cn.maChucNang%>">
+											<%=cn.tenHienThi%>
 										</option>
 										<%
 											}
@@ -123,12 +116,12 @@
 								<div class="form-group">
 									<label>Mô tả</label>
 									<textarea class="form-control" cols="80" id="editor1" rows="5"
-										name="moTa" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getMoTa() : "")%></textarea>
+										name="moTa" <%=(modeView ? " readonly " : "")%>><%=(obj != null ? obj.getMoTa() + "" : "")%></textarea>
 								</div>
 								<div class="form-group">
 									<label>Ghi chú</label>
 									<textarea class="form-control" cols="80" id="editor2" rows="5"
-										name="ghiChu" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getGhiChu() : "")%></textarea>
+										name="ghiChu" <%=(modeView ? " readonly " : "")%>><%=(obj != null ? obj.getGhiChu() + "" : "")%></textarea>
 								</div>
 							</div>
 						</div>

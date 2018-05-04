@@ -26,8 +26,20 @@
 
 	ArrayList<HocKy> list = new ArrayList<HocKy>();
 
-	list = session.getAttribute("checkTimKiem") != null ? (ArrayList<HocKy>) session.getAttribute("arr")
-			: dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+	if (session.getAttribute("checkTimKiem") != null) {
+		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
+		if (listTemp.size() > 0) {
+	if (listTemp.get(0) instanceof HocKy) {
+				list = (ArrayList<HocKy>) listTemp;
+			} else {
+				session.setAttribute("checkTimKiem", null);
+				list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+			}
+		} else
+			list = new ArrayList<HocKy>();
+	} else {
+		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+	}
 %>
 
 
