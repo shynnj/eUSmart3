@@ -13,15 +13,15 @@ import eCore.model.NhanVien;
 public class CoVanHocTap implements Comparable<CoVanHocTap> {
 
 	@Id
-	String maCoVanHocTap;
+	public	String maCoVanHocTap;
 	@OneToOne
-	NhanVien nhanVien;
-	String dienThoaiCoQuan;
-	String diaChiGuiThu;
-	String diDong;
-	String moTa;
-	String ghiChu;
-	Date thoiGianCapNhat;
+	public	NhanVien nhanVien;
+	public	String dienThoaiCoQuan;
+	public	String diaChiGuiThu;
+	public	String diDong;
+	public	String moTa;
+	public	String ghiChu;
+	public	Date thoiGianCapNhat;
 
 	public CoVanHocTap() {
 	}

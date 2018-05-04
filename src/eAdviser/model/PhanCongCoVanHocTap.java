@@ -12,18 +12,18 @@ import eCore.model.NamHoc;
 @Entity
 public class PhanCongCoVanHocTap implements Comparable<PhanCongCoVanHocTap> {
 	@Id
-	String maPhanCong;
+	public	String maPhanCong;
 	@OneToOne
-	CoVanHocTap coVanHocTap;
+	public	CoVanHocTap coVanHocTap;
 	@OneToOne
-	SoCoVanHocTap soCoVanHocTap;
+	public	SoCoVanHocTap soCoVanHocTap;
 	@ManyToOne
-	NamHoc namHoc;
-	Date thoiGianBatDau;
-	Date thoiGianKetThuc;
-	String moTa;
-	String ghiChu;
-	Date thoiGianCapNhat;
+	public	NamHoc namHoc;
+	public	Date thoiGianBatDau;
+	public	Date thoiGianKetThuc;
+	public	String moTa;
+	public	String ghiChu;
+	public	Date thoiGianCapNhat;
 
 	public PhanCongCoVanHocTap() {
 	}

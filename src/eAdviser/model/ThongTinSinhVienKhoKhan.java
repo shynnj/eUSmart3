@@ -13,18 +13,18 @@ import eCore.model.SinhVien;
 public class ThongTinSinhVienKhoKhan implements Comparable<ThongTinSinhVienKhoKhan> {
 
 	@Id
-	String maThongTinSinhVienKhoKhan;
+	public	String maThongTinSinhVienKhoKhan;
 	@ManyToOne
-	SinhVien sinhVien;
-	String hoanCanhGiaDinh;
-	String lyDo;
+	public	SinhVien sinhVien;
+	public	String hoanCanhGiaDinh;
+	public	String lyDo;
 	String deXuat;
-	Date thoiGianGhiNhan;
-	String moTa;
-	String ghiChu;
-	Date thoiGianCapNhat;
+	public Date thoiGianGhiNhan;
+	public	String moTa;
+	public	String ghiChu;
+	public	Date thoiGianCapNhat;
 	@ManyToOne
-	SoCoVanHocTap soCoVanHocTap;
+	public	SoCoVanHocTap soCoVanHocTap;
 	
 	public ThongTinSinhVienKhoKhan() {
 	}

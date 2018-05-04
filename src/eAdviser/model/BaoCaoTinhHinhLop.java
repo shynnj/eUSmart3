@@ -14,32 +14,32 @@ import eCore.model.NamHoc;
 public class BaoCaoTinhHinhLop implements Comparable<BaoCaoTinhHinhLop> {
 
 	@Id
-	String maBaoCaoTinhHinhLop;
-	String tenBaoCaoTinhHinhLop;
-	String hocKy;
-	String namHoc;
-	int soSinhVienTrongLop;
+	public	String maBaoCaoTinhHinhLop;
+	public	String tenBaoCaoTinhHinhLop;
+	public	String hocKy;
+	public	String namHoc;
+	public	int soSinhVienTrongLop;
 	@Type(type = "text")
-	String tinhHinhChung;
+	public	String tinhHinhChung;
 	@Type(type = "text")
-	String tuTuongChinhTri;
+	public	String tuTuongChinhTri;
 	@Type(type = "text")
-	String ketQuaHocTap;
+	public	String ketQuaHocTap;
 	@Type(type = "text")
-	String ketQuaRenLuyen;
+	public	String ketQuaRenLuyen;
 	@Type(type = "text")
-	String ketQuaCacHoatDongKhac;
+	public String ketQuaCacHoatDongKhac;
 	@Type(type = "text")
-	String kienNghiDeXuat;
+	public	String kienNghiDeXuat;
 	@ManyToOne
-	CoVanHocTap coVanHocTap;
+	public	CoVanHocTap coVanHocTap;
 	@ManyToOne
-	SoCoVanHocTap soCoVanHocTap;
+	public	SoCoVanHocTap soCoVanHocTap;
 	@Type(type = "text")
-	String moTa;
+	public	String moTa;
 	@Type(type = "text")
-	String ghiChu;
-	Date thoiGianCapNhat;
+	public	String ghiChu;
+	public	Date thoiGianCapNhat;
 
 	public BaoCaoTinhHinhLop() {
 	}

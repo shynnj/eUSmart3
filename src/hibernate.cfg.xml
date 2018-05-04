@@ -37,5 +37,17 @@
 		<mapping class="eCore.model.TaiKhoanSinhVien" />
 		<mapping class="eCore.modelDanhMuc.DanToc" />
 		<mapping class="eCore.modelDanhMuc.TonGiao" />
+
+		<!-- Quan ly eAdviser -->
+		<mapping class="eAdviser.model.CoVanHocTap"/>
+		<mapping class="eAdviser.model.SoCoVanHocTap"/>
+		<mapping class="eAdviser.model.PhanCongCoVanHocTap"/>
+		<mapping class="eAdviser.model.ThongTinSinhVien"/>
+		<mapping class="eAdviser.model.BienBanSinhHoatLop"/>
+		<mapping class="eAdviser.model.BaoCaoTinhHinhLop"/>
+		<mapping class="eAdviser.model.ThongBaoKetQuaHocTapVaRenLuyen"/>
+		<mapping class="eAdviser.model.ThongTinKhenThuongSinhVien"/>
+		<mapping class="eAdviser.model.ThongTinKyLuatSinhVien"/>
+		<mapping class="eAdviser.model.ThongTinSinhVienKhoKhan"/>
 	</session-factory>
 </hibernate-configuration>

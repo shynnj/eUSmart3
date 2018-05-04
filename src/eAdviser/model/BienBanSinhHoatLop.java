@@ -13,25 +13,25 @@ import eCore.model.NamHoc;
 public class BienBanSinhHoatLop implements Comparable<BienBanSinhHoatLop> {
 
 	@Id
-	String maBienBanSinhHoatLop;
-	String tenBienBanSinhHoatLop;
-	String chuTriCuocHop;
-	String thuKyCuocHop;
-	String diaDiem;
-	String thoiGian;
-	String soLuongThamGia;
-	String soLuongVang;
+	public	String maBienBanSinhHoatLop;
+	public	String tenBienBanSinhHoatLop;
+	public	String chuTriCuocHop;
+	public	String thuKyCuocHop;
+	public	String diaDiem;
+	public	String thoiGian;
+	public	String soLuongThamGia;
+	public	String soLuongVang;
 	@Type(type="text")
-	String danhSachVangMat;
+	public	String danhSachVangMat;
 	@Type(type="text")
-	String noiDung;
+	public	String noiDung;
 	@Type(type="text")
-	String deXuat;
-	String moTa;
-	String ghiChu;
-	Date thoiGianCapNhat;
+	public	String deXuat;
+	public	String moTa;
+	public	String ghiChu;
+	public	Date thoiGianCapNhat;
 	@ManyToOne
-	SoCoVanHocTap soCoVanHocTap;
+	public	SoCoVanHocTap soCoVanHocTap;
 	
 	
 	public BienBanSinhHoatLop() {

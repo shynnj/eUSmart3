@@ -11,15 +11,15 @@ import eCore.model.Lop;
 public class SoCoVanHocTap implements Comparable<SoCoVanHocTap> {
 
 	@Id
-	String maSoCoVanHocTap;
-	String tenSoCoVanHocTap;
+	public	String maSoCoVanHocTap;
+	public	String tenSoCoVanHocTap;
 	@OneToOne
-	Lop lop;
-	Date ngayBD;
-	Date ngayKT;
-	String moTa;
-	String ghiChu;
-	Date thoiGianCapNhat;
+	public	Lop lop;
+	public	Date ngayBD;
+	public	Date ngayKT;
+	public	String moTa;
+	public	String ghiChu;
+	public	Date thoiGianCapNhat;
 
 
 	public SoCoVanHocTap() {

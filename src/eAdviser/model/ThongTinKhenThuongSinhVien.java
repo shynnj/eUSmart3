@@ -13,16 +13,16 @@ import eCore.model.SinhVien;
 public class ThongTinKhenThuongSinhVien implements Comparable<ThongTinKhenThuongSinhVien> {
 
 	@Id
-	String maThongTinKhenThuongSinhVien;
+	public	String maThongTinKhenThuongSinhVien;
 	@ManyToOne
-	SinhVien sinhVien;
-	String noiDungKhenThuong;
-	Date thoiGianKhenThuong;
-	String moTa;
-	String ghiChu;
-	Date thoiGianCapNhat;
+	public	SinhVien sinhVien;
+	public	String noiDungKhenThuong;
+	public	Date thoiGianKhenThuong;
+	public	String moTa;
+	public	String ghiChu;
+	public	Date thoiGianCapNhat;
 	@ManyToOne
-	SoCoVanHocTap soCoVanHocTap;
+	public	SoCoVanHocTap soCoVanHocTap;
 
 	@Override
 
