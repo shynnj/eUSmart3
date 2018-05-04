@@ -12,87 +12,87 @@ import org.hibernate.annotations.Type;
 @Entity
 public class SinhVien implements Comparable<SinhVien> {
 	@Id
-	String maSinhVien;
-	String ten;
-	String hoDem;
-	String gioiTinh;
-	String soCMND;
-	String ngayCap;
-	String noiCap;
-	String ngaySinh;
-	String noiSinh;
-	String doiTuong;
-	String khuVuc;
-	String namTotNghiepTHPT;
-	String toNghiepTaiTruongTHPT;
-	String xepLoaiVanHoa;
-	String xepLoaiDaoDuc;
-	String quenQuan;
-	String hoKhauThuongTru;
-	String maTinh;
-	String maQuanHuyen;
-	String maPhuongXa;
-	String maDanToc;
-	String maTonGiao;
-	String maQuocTich;
-	String maThanhPhanGiaDinh;
-	String dienThoaiDiDong;
-	String dienThoaiCoDinh;
-	String dienThoaiGiaDinh;
-	String email;
-	String thongTinBaoTin;
-	String ngayVaoDoan;
-	String ngayVaoDang;
-	String maSoHinhAnh;
-	String khiCanBaoTinChoAi;
-	String diaChiKhiCanBaoTinChoAi;
-	String bhyt_maTinh;
-	String bhyt_maBenhVien;
-	String bhyt_tenBenhVien;
-	String bhtn_thamgia;
-	String bthn_sothang;
-	String soBaoDanh;
-	String diemMon1;
-	String diemMon2;
-	String diemMon3;
-	String diemUuTien;
-	String tongDiem;
-	String ngheNghiepTruocKhiVaoTruong;
-	String thanhPhanGiaDinh;
-	String thiTHPTNgay;
-	String diaChiNhanThu;
-	String emailPhuHuynh;
-	String tenNganhTrungTuyen;
-	String daKhaiPhieuQuanLySinhVien;
-	String daNhapHoc;
-	String maChuyenNganh1;
-	String maChuyenNganh2;
+	public String maSinhVien;
+	public String ten;
+	public String hoDem;
+	public String gioiTinh;
+	public String soCMND;
+	public String ngayCap;
+	public String noiCap;
+	public String ngaySinh;
+	public String noiSinh;
+	public String doiTuong;
+	public String khuVuc;
+	public String namTotNghiepTHPT;
+	public String totNghiepTaiTruongTHPT;
+	public String xepLoaiVanHoa;
+	public String xepLoaiDaoDuc;
+	public String queQuan;
+	public String hoKhauThuongTru;
+	public String maTinh;
+	public String maQuanHuyen;
+	public String maPhuongXa;
+	public String maDanToc;
+	public String maTonGiao;
+	public String maQuocTich;
+	public String maThanhPhanGiaDinh;
+	public String dienThoaiDiDong;
+	public String dienThoaiCoDinh;
+	public String dienThoaiGiaDinh;
+	public String email;
+	public String thongTinBaoTin;
+	public String ngayVaoDoan;
+	public String ngayVaoDang;
+	public String maSoHinhAnh;
+	public String khiCanBaoTinChoAi;
+	public String diaChiKhiCanBaoTinChoAi;
+	public String bhyt_maTinh;
+	public String bhyt_maBenhVien;
+	public String bhyt_tenBenhVien;
+	public String bhtn_thamGia;
+	public String bhtn_soThang;
+	public String soBaoDanh;
+	public String diemMon1;
+	public String diemMon2;
+	public String diemMon3;
+	public String diemUuTien;
+	public String tongDiem;
+	public String ngheNghiepTruocKhiVaoTruong;
+	public String thanhPhanGiaDinh;
+	public String thiTHPTNgay;
+	public String diaChiNhanThu;
+	public String emailPhuHuynh;
+	public String tenNganhTrungTuyen;
+	public String daKhaiPhieuQuanLySinhVien;
+	public String daNhapHoc;
+	public String maChuyenNganh1;
+	public String maChuyenNganh2;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	Lop lop;
+	@ManyToOne(fetch = FetchType.EAGER)
+	public Lop lop;
 	@Type(type = "text")
-	String ghiChu;
+	public String ghiChu;
 	@Type(type = "text")
-	String moTa;
-	Date thoiGianCapNhat;
+	public String moTa;
+	public Date thoiGianCapNhat;
 
 	public SinhVien() {
 	}
 
 	public SinhVien(String maSinhVien, String ten, String hoDem, String gioiTinh, String soCMND, String ngayCap,
 			String noiCap, String ngaySinh, String noiSinh, String doiTuong, String khuVuc, String namTotNghiepTHPT,
-			String toNghiepTaiTruongTHPT, String xepLoaiVanHoa, String xepLoaiDaoDuc, String quenQuan,
+			String totNghiepTaiTruongTHPT, String xepLoaiVanHoa, String xepLoaiDaoDuc, String queQuan,
 			String hoKhauThuongTru, String maTinh, String maQuanHuyen, String maPhuongXa, String maDanToc,
 			String maTonGiao, String maQuocTich, String maThanhPhanGiaDinh, String dienThoaiDiDong,
 			String dienThoaiCoDinh, String dienThoaiGiaDinh, String email, String thongTinBaoTin, String ngayVaoDoan,
 			String ngayVaoDang, String maSoHinhAnh, String khiCanBaoTinChoAi, String diaChiKhiCanBaoTinChoAi,
-			String bhyt_maTinh, String bhyt_maBenhVien, String bhyt_tenBenhVien, String bhtn_thamgia,
-			String bthn_sothang, String soBaoDanh, String diemMon1, String diemMon2, String diemMon3, String diemUuTien,
+			String bhyt_maTinh, String bhyt_maBenhVien, String bhyt_tenBenhVien, String bhtn_thamGia,
+			String bhtn_soThang, String soBaoDanh, String diemMon1, String diemMon2, String diemMon3, String diemUuTien,
 			String tongDiem, String ngheNghiepTruocKhiVaoTruong, String thanhPhanGiaDinh, String thiTHPTNgay,
 			String diaChiNhanThu, String emailPhuHuynh, String tenNganhTrungTuyen, String daKhaiPhieuQuanLySinhVien,
 			String daNhapHoc, String maChuyenNganh1, String maChuyenNganh2, Lop lop, String ghiChu, String moTa,
 			Date thoiGianCapNhat) {
-		super();
+		
 		this.maSinhVien = maSinhVien;
 		this.ten = ten;
 		this.hoDem = hoDem;
@@ -105,10 +105,10 @@ public class SinhVien implements Comparable<SinhVien> {
 		this.doiTuong = doiTuong;
 		this.khuVuc = khuVuc;
 		this.namTotNghiepTHPT = namTotNghiepTHPT;
-		this.toNghiepTaiTruongTHPT = toNghiepTaiTruongTHPT;
+		this.totNghiepTaiTruongTHPT = totNghiepTaiTruongTHPT;
 		this.xepLoaiVanHoa = xepLoaiVanHoa;
 		this.xepLoaiDaoDuc = xepLoaiDaoDuc;
-		this.quenQuan = quenQuan;
+		this.queQuan = queQuan;
 		this.hoKhauThuongTru = hoKhauThuongTru;
 		this.maTinh = maTinh;
 		this.maQuanHuyen = maQuanHuyen;
@@ -130,8 +130,8 @@ public class SinhVien implements Comparable<SinhVien> {
 		this.bhyt_maTinh = bhyt_maTinh;
 		this.bhyt_maBenhVien = bhyt_maBenhVien;
 		this.bhyt_tenBenhVien = bhyt_tenBenhVien;
-		this.bhtn_thamgia = bhtn_thamgia;
-		this.bthn_sothang = bthn_sothang;
+		this.bhtn_thamGia = bhtn_thamGia;
+		this.bhtn_soThang = bhtn_soThang;
 		this.soBaoDanh = soBaoDanh;
 		this.diemMon1 = diemMon1;
 		this.diemMon2 = diemMon2;
@@ -250,12 +250,12 @@ public class SinhVien implements Comparable<SinhVien> {
 		this.namTotNghiepTHPT = namTotNghiepTHPT;
 	}
 
-	public String getToNghiepTaiTruongTHPT() {
-		return toNghiepTaiTruongTHPT;
+	public String gettotNghiepTaiTruongTHPT() {
+		return totNghiepTaiTruongTHPT;
 	}
 
-	public void setToNghiepTaiTruongTHPT(String toNghiepTaiTruongTHPT) {
-		this.toNghiepTaiTruongTHPT = toNghiepTaiTruongTHPT;
+	public void settotNghiepTaiTruongTHPT(String totNghiepTaiTruongTHPT) {
+		this.totNghiepTaiTruongTHPT = totNghiepTaiTruongTHPT;
 	}
 
 	public String getXepLoaiVanHoa() {
@@ -274,12 +274,12 @@ public class SinhVien implements Comparable<SinhVien> {
 		this.xepLoaiDaoDuc = xepLoaiDaoDuc;
 	}
 
-	public String getQuenQuan() {
-		return quenQuan;
+	public String getqueQuan() {
+		return queQuan;
 	}
 
-	public void setQuenQuan(String quenQuan) {
-		this.quenQuan = quenQuan;
+	public void setqueQuan(String queQuan) {
+		this.queQuan = queQuan;
 	}
 
 	public String getHoKhauThuongTru() {
@@ -450,20 +450,20 @@ public class SinhVien implements Comparable<SinhVien> {
 		this.bhyt_tenBenhVien = bhyt_tenBenhVien;
 	}
 
-	public String getBhtn_thamgia() {
-		return bhtn_thamgia;
+	public String getbhtn_thamGia() {
+		return bhtn_thamGia;
 	}
 
-	public void setBhtn_thamgia(String bhtn_thamgia) {
-		this.bhtn_thamgia = bhtn_thamgia;
+	public void setbhtn_thamGia(String bhtn_thamGia) {
+		this.bhtn_thamGia = bhtn_thamGia;
 	}
 
-	public String getBthn_sothang() {
-		return bthn_sothang;
+	public String getbhtn_soThang() {
+		return bhtn_soThang;
 	}
 
-	public void setBthn_sothang(String bthn_sothang) {
-		this.bthn_sothang = bthn_sothang;
+	public void setbhtn_soThang(String bhtn_soThang) {
+		this.bhtn_soThang = bhtn_soThang;
 	}
 
 	public String getSoBaoDanh() {
@@ -630,11 +630,11 @@ public class SinhVien implements Comparable<SinhVien> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bhtn_thamgia == null) ? 0 : bhtn_thamgia.hashCode());
+		result = prime * result + ((bhtn_thamGia == null) ? 0 : bhtn_thamGia.hashCode());
 		result = prime * result + ((bhyt_maBenhVien == null) ? 0 : bhyt_maBenhVien.hashCode());
 		result = prime * result + ((bhyt_maTinh == null) ? 0 : bhyt_maTinh.hashCode());
 		result = prime * result + ((bhyt_tenBenhVien == null) ? 0 : bhyt_tenBenhVien.hashCode());
-		result = prime * result + ((bthn_sothang == null) ? 0 : bthn_sothang.hashCode());
+		result = prime * result + ((bhtn_soThang == null) ? 0 : bhtn_soThang.hashCode());
 		result = prime * result + ((daKhaiPhieuQuanLySinhVien == null) ? 0 : daKhaiPhieuQuanLySinhVien.hashCode());
 		result = prime * result + ((daNhapHoc == null) ? 0 : daNhapHoc.hashCode());
 		result = prime * result + ((diaChiKhiCanBaoTinChoAi == null) ? 0 : diaChiKhiCanBaoTinChoAi.hashCode());
@@ -676,7 +676,7 @@ public class SinhVien implements Comparable<SinhVien> {
 		result = prime * result + ((ngheNghiepTruocKhiVaoTruong == null) ? 0 : ngheNghiepTruocKhiVaoTruong.hashCode());
 		result = prime * result + ((noiCap == null) ? 0 : noiCap.hashCode());
 		result = prime * result + ((noiSinh == null) ? 0 : noiSinh.hashCode());
-		result = prime * result + ((quenQuan == null) ? 0 : quenQuan.hashCode());
+		result = prime * result + ((queQuan == null) ? 0 : queQuan.hashCode());
 		result = prime * result + ((soBaoDanh == null) ? 0 : soBaoDanh.hashCode());
 		result = prime * result + ((soCMND == null) ? 0 : soCMND.hashCode());
 		result = prime * result + ((ten == null) ? 0 : ten.hashCode());
@@ -685,7 +685,7 @@ public class SinhVien implements Comparable<SinhVien> {
 		result = prime * result + ((thiTHPTNgay == null) ? 0 : thiTHPTNgay.hashCode());
 		result = prime * result + ((thoiGianCapNhat == null) ? 0 : thoiGianCapNhat.hashCode());
 		result = prime * result + ((thongTinBaoTin == null) ? 0 : thongTinBaoTin.hashCode());
-		result = prime * result + ((toNghiepTaiTruongTHPT == null) ? 0 : toNghiepTaiTruongTHPT.hashCode());
+		result = prime * result + ((totNghiepTaiTruongTHPT == null) ? 0 : totNghiepTaiTruongTHPT.hashCode());
 		result = prime * result + ((tongDiem == null) ? 0 : tongDiem.hashCode());
 		result = prime * result + ((xepLoaiDaoDuc == null) ? 0 : xepLoaiDaoDuc.hashCode());
 		result = prime * result + ((xepLoaiVanHoa == null) ? 0 : xepLoaiVanHoa.hashCode());
@@ -701,10 +701,10 @@ public class SinhVien implements Comparable<SinhVien> {
 		if (getClass() != obj.getClass())
 			return false;
 		SinhVien other = (SinhVien) obj;
-		if (bhtn_thamgia == null) {
-			if (other.bhtn_thamgia != null)
+		if (bhtn_thamGia == null) {
+			if (other.bhtn_thamGia != null)
 				return false;
-		} else if (!bhtn_thamgia.equals(other.bhtn_thamgia))
+		} else if (!bhtn_thamGia.equals(other.bhtn_thamGia))
 			return false;
 		if (bhyt_maBenhVien == null) {
 			if (other.bhyt_maBenhVien != null)
@@ -721,10 +721,10 @@ public class SinhVien implements Comparable<SinhVien> {
 				return false;
 		} else if (!bhyt_tenBenhVien.equals(other.bhyt_tenBenhVien))
 			return false;
-		if (bthn_sothang == null) {
-			if (other.bthn_sothang != null)
+		if (bhtn_soThang == null) {
+			if (other.bhtn_soThang != null)
 				return false;
-		} else if (!bthn_sothang.equals(other.bthn_sothang))
+		} else if (!bhtn_soThang.equals(other.bhtn_soThang))
 			return false;
 		if (daKhaiPhieuQuanLySinhVien == null) {
 			if (other.daKhaiPhieuQuanLySinhVien != null)
@@ -931,10 +931,10 @@ public class SinhVien implements Comparable<SinhVien> {
 				return false;
 		} else if (!noiSinh.equals(other.noiSinh))
 			return false;
-		if (quenQuan == null) {
-			if (other.quenQuan != null)
+		if (queQuan == null) {
+			if (other.queQuan != null)
 				return false;
-		} else if (!quenQuan.equals(other.quenQuan))
+		} else if (!queQuan.equals(other.queQuan))
 			return false;
 		if (soBaoDanh == null) {
 			if (other.soBaoDanh != null)
@@ -976,10 +976,10 @@ public class SinhVien implements Comparable<SinhVien> {
 				return false;
 		} else if (!thongTinBaoTin.equals(other.thongTinBaoTin))
 			return false;
-		if (toNghiepTaiTruongTHPT == null) {
-			if (other.toNghiepTaiTruongTHPT != null)
+		if (totNghiepTaiTruongTHPT == null) {
+			if (other.totNghiepTaiTruongTHPT != null)
 				return false;
-		} else if (!toNghiepTaiTruongTHPT.equals(other.toNghiepTaiTruongTHPT))
+		} else if (!totNghiepTaiTruongTHPT.equals(other.totNghiepTaiTruongTHPT))
 			return false;
 		if (tongDiem == null) {
 			if (other.tongDiem != null)
@@ -1004,8 +1004,8 @@ public class SinhVien implements Comparable<SinhVien> {
 		return "SinhVien [maSinhVien=" + maSinhVien + ", ten=" + ten + ", hoDem=" + hoDem + ", gioiTinh=" + gioiTinh
 				+ ", soCMND=" + soCMND + ", ngayCap=" + ngayCap + ", noiCap=" + noiCap + ", ngaySinh=" + ngaySinh
 				+ ", noiSinh=" + noiSinh + ", doiTuong=" + doiTuong + ", khuVuc=" + khuVuc + ", namTotNghiepTHPT="
-				+ namTotNghiepTHPT + ", toNghiepTaiTruongTHPT=" + toNghiepTaiTruongTHPT + ", xepLoaiVanHoa="
-				+ xepLoaiVanHoa + ", xepLoaiDaoDuc=" + xepLoaiDaoDuc + ", quenQuan=" + quenQuan + ", hoKhauThuongTru="
+				+ namTotNghiepTHPT + ", totNghiepTaiTruongTHPT=" + totNghiepTaiTruongTHPT + ", xepLoaiVanHoa="
+				+ xepLoaiVanHoa + ", xepLoaiDaoDuc=" + xepLoaiDaoDuc + ", queQuan=" + queQuan + ", hoKhauThuongTru="
 				+ hoKhauThuongTru + ", maTinh=" + maTinh + ", maQuanHuyen=" + maQuanHuyen + ", maPhuongXa=" + maPhuongXa
 				+ ", maDanToc=" + maDanToc + ", maTonGiao=" + maTonGiao + ", maQuocTich=" + maQuocTich
 				+ ", maThanhPhanGiaDinh=" + maThanhPhanGiaDinh + ", dienThoaiDiDong=" + dienThoaiDiDong
@@ -1013,8 +1013,8 @@ public class SinhVien implements Comparable<SinhVien> {
 				+ ", thongTinBaoTin=" + thongTinBaoTin + ", ngayVaoDoan=" + ngayVaoDoan + ", ngayVaoDang=" + ngayVaoDang
 				+ ", maSoHinhAnh=" + maSoHinhAnh + ", khiCanBaoTinChoAi=" + khiCanBaoTinChoAi
 				+ ", diaChiKhiCanBaoTinChoAi=" + diaChiKhiCanBaoTinChoAi + ", bhyt_maTinh=" + bhyt_maTinh
-				+ ", bhyt_maBenhVien=" + bhyt_maBenhVien + ", bhyt_tenBenhVien=" + bhyt_tenBenhVien + ", bhtn_thamgia="
-				+ bhtn_thamgia + ", bthn_sothang=" + bthn_sothang + ", soBaoDanh=" + soBaoDanh + ", diemMon1="
+				+ ", bhyt_maBenhVien=" + bhyt_maBenhVien + ", bhyt_tenBenhVien=" + bhyt_tenBenhVien + ", bhtn_thamGia="
+				+ bhtn_thamGia + ", bhtn_soThang=" + bhtn_soThang + ", soBaoDanh=" + soBaoDanh + ", diemMon1="
 				+ diemMon1 + ", diemMon2=" + diemMon2 + ", diemMon3=" + diemMon3 + ", diemUuTien=" + diemUuTien
 				+ ", tongDiem=" + tongDiem + ", ngheNghiepTruocKhiVaoTruong=" + ngheNghiepTruocKhiVaoTruong
 				+ ", thanhPhanGiaDinh=" + thanhPhanGiaDinh + ", thiTHPTNgay=" + thiTHPTNgay + ", diaChiNhanThu="

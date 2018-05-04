@@ -22,20 +22,8 @@
 
 	ArrayList<DonVi> list = new ArrayList<DonVi>();
 
-	if (session.getAttribute("checkTimKiem") != null) {
-		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
-		if (listTemp.size() > 0) {
-	if (listTemp.get(0) instanceof DonVi) {
-				list = (ArrayList<DonVi>) listTemp;
-			} else {
-				session.setAttribute("checkTimKiem", null);
-				list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
-			}
-		} else
-			list = new ArrayList<DonVi>();
-	} else {
-		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
-	}
+	list = session.getAttribute("checkTimKiem") != null ? (ArrayList<DonVi>) session.getAttribute("arr")
+			: dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 %>
 
 

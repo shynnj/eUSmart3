@@ -82,7 +82,7 @@
 								</div>
 								<div class="form-group">
 									<label>Đơn vị quản lý</label> <select class="form-control"
-										name="maNamHoc" <%=(modeView ? " disabled " : "")%>>
+										name="maDonVi" <%=(modeView ? " disabled " : "")%>>
 										<option value=""></option>
 										<%
 											ObjectDAO objdao = new DAO_DonVi();

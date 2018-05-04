@@ -23,25 +23,25 @@ import javax.persistence.JoinColumn;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class TaiKhoan implements Comparable<TaiKhoan> {
 	@Id
-	String maDangNhap;
-	String matKhau;
-	String anhDaiDien;
-	Date ngayTao;
-	Date ngayCapNhatMatKhau;
-	String cauHoiBiMat;
-	String traLoiCauHoiBiMat;
-	String loaiTaiKhoan;
-	boolean trangThaiHoatDong;
-	String email;
-	String hoVaTen;
+	public String maDangNhap;
+	public String matKhau;
+	public String anhDaiDien;
+	public Date ngayTao;
+	public Date ngayCapNhatMatKhau;
+	public String cauHoiBiMat;
+	public String traLoiCauHoiBiMat;
+	public String loaiTaiKhoan;
+	public boolean trangThaiHoatDong;
+	public String email;
+	public String hoVaTen;
 	@Type(type = "text")
-	String moTa;
+	public String moTa;
 	@Type(type = "text")
-	String ghiChu;
-	Date thoiGianCapNhat;
+	public String ghiChu;
+	public Date thoiGianCapNhat;
 
 	@ManyToOne
-	NhomPhanQuyen nhomPhanQuyen;
+	public NhomPhanQuyen nhomPhanQuyen;
 
 	public TaiKhoan() {
 	}

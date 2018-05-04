@@ -22,7 +22,6 @@
 		<property name="c3p0.max_statements">0</property>
 		<property name="c3p0.acquire_increment">1</property>
 		<property name="c3p0.idle_test_period">60</property>
-		
 		<!-- Quan ly core -->
 		<mapping class="eCore.model.DonVi" />
 		<mapping class="eCore.model.NhanVien" />
@@ -35,5 +34,7 @@
 		<mapping class="eCore.model.TaiKhoan" />
 		<mapping class="eCore.model.TaiKhoanNhanVien" />
 		<mapping class="eCore.model.TaiKhoanSinhVien" />
+		<mapping class="eCore.modelDanhMuc.DanToc"/>
+		<mapping class="eCore.modelDanhMuc.TonGiao"/>
 	</session-factory>
 </hibernate-configuration>

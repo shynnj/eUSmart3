@@ -12,78 +12,78 @@ import org.hibernate.annotations.Type;
 @Entity
 public class NhanVien implements Comparable<NhanVien> {
 	@Id
-	String maNhanVien; // CMND, SDT, TKEMail
-	String tenNhanVien;
-	String hinhAnh;
-	Date ngaySinh;
-	String gioiTinh;
-	String noiSinh;
-	String queQuan;
-	String danToc;
-	String tonGiao;
-	String hoKhauThuongTru;
-	String noiOHienTai;
-	String ngheNghiepTruocKhiTuyenDung;
-	Date ngayTuyenDung;
-	String chucVu;
-	String congViecChinhDuocGiao;
-	String ngachCongChuc;
-	String maNgach;
-	String bacLuong;
-	String heSo;
-	Date ngayHuong;
-	String trinhDoGiaoDucPhoThong;
-	String trinhDoChuyenMonCaoNhat;
-	String lyLuanChinhTri;
-	String quanLyNhaNuoc;
-	String ngoaiNgu;
-	String tinHoc;
-	Date ngayVaoDangDuBi;
-	Date ngayVaoDangChinhThuc;
-	String thamGiaToChucChinhTriXaHoi;
-	Date ngayNhapNgu;
-	Date ngayXuatNgu;
-	String quanHamCaoNhat;
-	String danhHieuDuocPhongTangCaoNhat;
-	String soTruongCongTac;
+	public String maNhanVien; // CMND, SDT, TKEMail
+	public String tenNhanVien;
+	public String hinhAnh;
+	public Date ngaySinh;
+	public String gioiTinh;
+	public String noiSinh;
+	public String queQuan;
+	public String danToc;
+	public String tonGiao;
+	public String hoKhauThuongTru;
+	public String noiOHienTai;
+	public String ngheNghiepTruocKhiTuyenDung;
+	public Date ngayTuyenDung;
+	public String chucVu;
+	public String congViecChinhDuocGiao;
+	public String ngachCongChuc;
+	public String maNgach;
+	public String bacLuong;
+	public String heSo;
+	public Date ngayHuong;
+	public String trinhDoGiaoDucPhoThong;
+	public String trinhDoChuyenMonCaoNhat;
+	public String lyLuanChinhTri;
+	public String quanLyNhaNuoc;
+	public String ngoaiNgu;
+	public String tinHoc;
+	public Date ngayVaoDangDuBi;
+	public Date ngayVaoDangChinhThuc;
+	public String thamGiaToChucChinhTriXaHoi;
+	public Date ngayNhapNgu;
+	public Date ngayXuatNgu;
+	public String quanHamCaoNhat;
+	public String danhHieuDuocPhongTangCaoNhat;
+	public String soTruongCongTac;
 	@Type(type = "text")
-	String khenThuong;
+	public String khenThuong;
 	@Type(type = "text")
-	String kyLuat;
-	String tinhTrangSucKhoe;
-	String laConThuongBinh;
-	String laConGiaDinhChinhSach;
-	String soCMND;
-	Date ngayCapCMND;
-	String noiCapCMND;
-	String soHoChieu;
-	Date ngayCapHoChieu;
-	String noiCapHoChieu;
-	String soSoBaoHiemXaHoi;
+	public String kyLuat;
+	public String tinhTrangSucKhoe;
+	public String laConThuongBinh;
+	public String laConGiaDinhChinhSach;
+	public String soCMND;
+	public Date ngayCapCMND;
+	public String noiCapCMND;
+	public String soHoChieu;
+	public Date ngayCapHoChieu;
+	public String noiCapHoChieu;
+	public String soSoBaoHiemXaHoi;
 	@Type(type = "text")
-	String quaTrinhDaoTao;
+	public String quaTrinhDaoTao;
 	@Type(type = "text")
-	String quaTrinhCongTac;
+	public String quaTrinhCongTac;
 	@Type(type = "text")
-	String dacDiemLichSuBanThan;
+	public String dacDiemLichSuBanThan;
 	@Type(type = "text")
-	String quanHeVoiGiaDinh;
+	public String quanHeVoiGiaDinh;
 	@Type(type = "text")
-	String hoanCanhKinhTeGiaDinh;
+	public String hoanCanhKinhTeGiaDinh;
 	@Type(type = "text")
-	String nhanXetDanhGiaCuaCoQuan;
-	String email;
-	String soDienThoaiDiDong;
-	String soDienThoaiCoQuan;
-	String diaChiLienHe;
-	String diaChiBaoTin;
+	public String nhanXetDanhGiaCuaCoQuan;
+	public String email;
+	public String soDienThoaiDiDong;
+	public String soDienThoaiCoQuan;
+	public String diaChiLienHe;
+	public String diaChiBaoTin;
 	@Type(type = "text")
-	String moTa;
+	public String moTa;
 	@Type(type = "text")
-	String ghiChu;
-	@ManyToOne(fetch = FetchType.LAZY)
-	DonVi donVi;
-	Date thoiGianCapNhat;
+	public String ghiChu;
+	@ManyToOne(fetch = FetchType.EAGER)
+	public DonVi donVi;
+	public Date thoiGianCapNhat;
 
 	public NhanVien() {
 	}
