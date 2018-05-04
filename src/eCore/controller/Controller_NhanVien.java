@@ -393,8 +393,16 @@ public class Controller_NhanVien extends NhanVien implements ZEController {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		String maobj = request.getParameter("maobj");
-		NhanVien obj = new NhanVien();
-		obj.setMaNhanVien(maobj);
+		NhanVien obj = (NhanVien) dao.listByColumns("maNhanVien", maobj).get(0);
+//		obj.setMaNhanVien(maobj);
+		if(obj.getHinhAnh()!=null) {
+			myFileName = request.getRealPath("eCore/images/nhanviens")+"/"+obj.getHinhAnh();
+			System.out.println(myFileName);
+			File destFile = new File(myFolder, myFileName);
+			if(destFile.exists()) {
+				destFile.delete();
+			}
+		}
 		if (dao.delete(obj)) {
 			session.setAttribute("msg", "Xóa dữ liệu thành công");
 			session.setAttribute("p", duongDanTrang);

@@ -17,25 +17,25 @@ import org.hibernate.annotations.Type;
 @Entity
 public class NhomPhanQuyen implements Comparable<NhomPhanQuyen> {
 	@Id
-	String maNhomPhanQuyen;
-	String tenNhomPhanQuyen;
+	public String maNhomPhanQuyen;
+	public String tenNhomPhanQuyen;
 	@Type(type = "text")
-	String moTa;
+	public String moTa;
 	@Type(type = "text")
-	String ghiChu;
-	Date thoiGianCapNhat;
+	public String ghiChu;
+	public Date thoiGianCapNhat;
 
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	@JoinTable(name = "NhomPhanQuyen_ChucNang", joinColumns = {
 			@JoinColumn(name = "maNhomPhanQuyen") }, inverseJoinColumns = { @JoinColumn(name = "maChucNang") })
-	Set<ChucNang> chucNangs = new HashSet<>();
+	public 	Set<ChucNang> chucNangs = new HashSet<>();
 
 	public NhomPhanQuyen() {
 	}
 
 	public NhomPhanQuyen(String maNhomPhanQuyen, String tenNhomPhanQuyen, String moTa, String ghiChu,
 			Date thoiGianCapNhat) {
-		
+		super();
 		this.maNhomPhanQuyen = maNhomPhanQuyen;
 		this.tenNhomPhanQuyen = tenNhomPhanQuyen;
 		this.moTa = moTa;

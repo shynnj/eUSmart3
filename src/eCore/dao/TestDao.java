@@ -6,12 +6,10 @@ import eCore.model.DonVi;
 import eCore.model.HocKy;
 import eCore.model.Lop;
 import eCore.model.NamHoc;
-import eCore.model.NhanVien;
 import eCore.modelDao.DAO_DonVi;
 import eCore.modelDao.DAO_HocKy;
 import eCore.modelDao.DAO_Lop;
 import eCore.modelDao.DAO_NamHoc;
-import eCore.modelDao.DAO_NhanVien;
 
 public class TestDao {
 	public static void main(String[] args) {
@@ -35,27 +33,12 @@ public class TestDao {
 		// dao.saveOrUpdate(l2);
 		// }
 
-		 ObjectDAO<DonVi> dao_donVi = new DAO_DonVi();
-		// dao.saveOrUpdate(new DonVi("Đơn vị 0", "Đơn vị 0", "donvi@utc2.edu.vn",
-		// "0123456701", "450 Lê Văn Việt", "", "",
-		// null, new Date()));
-		// for (int i = 1; i < 10; i++) {
-		// DonVi l = new DonVi("Đơn vị " + i, "Đơn vị " + i, "donvi" + i +
-		// "@utc2.edu.vn", "01234567" + i + (i + 1),
-		// "450 Lê Văn Việt", "", "", dao.listByColumns("maDonVi", "Đơn vị " +
-		// (i-1)).get(0), new Date());
-		// dao.saveOrUpdate(l);
-
-		ObjectDAO<NhanVien> dao = new DAO_NhanVien();
+		ObjectDAO<DonVi> dao = new DAO_DonVi();
+		dao.saveOrUpdate(new DonVi("Đơn vị 0", "Đơn vị 0", "donvi@utc2.edu.vn", "0123456701", "450 Lê Văn Việt", "", "",
+				null, new Date()));
 		for (int i = 1; i < 10; i++) {
-			NhanVien l = new NhanVien();
-			l.setMaNhanVien("Nhân viên " +i);
-			l.setTenNhanVien("Nhân viên "+i);
-			l.setEmail("nhanvien"+i+"@utc2.edu.vn");
-			l.setSoCMND("12345678"+i);
-			l.setSoDienThoaiDiDong("09012345678"+i);
-			l.setThoiGianCapNhat(new Date());
-			l.setDonVi(dao_donVi.listByColumns("maDonVi", "Đơn vị " + i).get(0));
+			DonVi l = new DonVi("Đơn vị " + i, "Đơn vị " + i, "donvi" + i + "@utc2.edu.vn", "01234567" + i + (i + 1),
+					"450 Lê Văn Việt", "", "", dao.listByColumns("maDonVi", "Đơn vị " + (i-1)).get(0), new Date());
 			dao.saveOrUpdate(l);
 		}
 	}

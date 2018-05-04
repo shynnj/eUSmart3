@@ -1,3 +1,5 @@
+<%@page import="eCore.modelDao.DAO_TaiKhoan"%>
+<%@page import="eCore.model.TaiKhoan"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.lang.reflect.Array"%>
 <%@page import="eCore.modelDao.DAO_Lop"%>
@@ -7,30 +9,30 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String tenLop = "Lop";
-	String tenTrang = "Quản lý Lớp";
-	String[] tk_value = { "maLop", "tenLop", "khoa", "nienKhoa", "donVi" };
-	String[] tk_show = { "Mã lớp", "Tên lớp", "Khóa", "Niên khóa", "Đơn vị" };
+	String tenLop = "TaiKhoan";
+	String tenTrang = "Quản lý tài khoản";
+	String[] tk_value = { "maDangNhap", "ngayTao", "cauHoiBiMat", "loaiTaiKhoan", "hoVaTen", "email" };
+	String[] tk_show = { "Mã đăng nhập", "Ngày tạo", "Câu hỏi bí mật", "Loại tài khoản", "Họ và tên", "Email" };
 %>
 
 <%@ include file="../../ePartial/code-header.jsp"%>
 
 <%
-	ObjectDAO<Lop> dao = new DAO_Lop();
+	ObjectDAO<TaiKhoan> dao = new DAO_TaiKhoan();
 
-	ArrayList<Lop> list = new ArrayList<Lop>();
+	ArrayList<TaiKhoan> list = new ArrayList<TaiKhoan>();
 
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
 		if (listTemp.size() > 0) {
-	if (listTemp.get(0) instanceof Lop) {
-				list = (ArrayList<Lop>) listTemp;
+			if (listTemp.get(0) instanceof TaiKhoan) {
+				list = (ArrayList<TaiKhoan>) listTemp;
 			} else {
 				session.setAttribute("checkTimKiem", null);
 				list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 			}
 		} else
-			list = new ArrayList<Lop>();
+			list = new ArrayList<TaiKhoan>();
 	} else {
 		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 	}
@@ -56,29 +58,48 @@
 				id="dataTables-example">
 				<thead>
 					<tr>
-						<th>Mã lớp</th>
-						<th>Tên lớp</th>
-						<th>Khóa</th>
-						<th>Thời gian đào tạo</th>
-						<th>Đơn vị quản lý</th>
+						<th>Ảnh đại diện</th>
+						<th>Mã đăng nhập</th>
+<!-- 						<th>Mật khẩu</th> -->
+						<th>Ngày tạo</th>
+						<th>Ngày cập nhật mật khẩu</th>
+						<th>Câu hỏi bí mật</th>
+<!-- 						<th>Trả lời câu hỏi bí mật</th> -->
+						<th>Loại tài khoản</th>
+						<th>Trạng thái hoạt động</th>
+						<th>Email</th>
+						<th>Họ và tên</th>
 						<th>Mô tả</th>
-						<th>Xử lý</th>
+<!-- 						<th>Ghi chú</th> -->
+						<th>Xử lí</th>
+<!-- 						<th>Thời gian cập nhật</th> -->
+
 					</tr>
 				</thead>
 				<tbody>
 					<%
-						for (Lop obj : list) {
+						for (TaiKhoan obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
-							String maDoiTuong = obj.getMaLop();
-							String tenDoiTuong = obj.getTenLop();
+							String maDoiTuong = obj.getMaDangNhap();
+							String tenDoiTuong = obj.getHoVaTen();
 					%>
 					<tr class="odd gradeX">
-						<td><%=obj.getMaLop()%></td>
-						<td><%=obj.getTenLop()%></td>
-						<td><%=obj.getKhoa()%></td>
-						<td><%=obj.getNienKhoa()%></td>
-						<td><%=obj.getDonVi() == null ? "" : obj.getDonVi().getTenDonVi()%></td>
+						<td><%=obj.getAnhDaiDien()%></td>
+						<td><%=obj.getMaDangNhap()%></td>
+<%-- 						<td><%=obj.getMatKhau()%></td> --%>
+						<td><%=obj.getNgayTao()%></td>
+						<td><%=obj.getNgayCapNhatMatKhau()%></td>
+						<td><%=obj.getCauHoiBiMat()%></td>
+<%-- 						<td><%=obj.getTraLoiCauHoiBiMat()%></td> --%>
+						<td><%=obj.getLoaiTaiKhoan()%></td>
+						<td><%=obj.isTrangThaiHoatDong()%></td>
+						<td><%=obj.getEmail()%></td>
+<%-- 						<td><%=obj.getDonViCha() == null ? "" : obj.getDonViCha().getTenDonVi()%></td> --%>
 						<td><%=obj.getMoTa()%></td>
+<%-- 						<td><%=obj.getGhiChu()%></td> --%>
+<%-- 						<td><%=obj.getThoiGianCapNhat()%></td> --%>
+<%-- 						<td><%=obj.getNhomPhanQuyen()%></td> --%>
+						
 						<td style="text-align: center;"><%@ include
 								file="../../ePartial/menupullcuadoituong.jsp"%></td>
 					</tr>

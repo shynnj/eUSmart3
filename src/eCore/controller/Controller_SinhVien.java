@@ -1,56 +1,30 @@
 package eCore.controller;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
-import org.hibernate.annotations.Type;
 
 import eCore.dao.ObjectDAO;
-import eCore.model.DonVi;
 import eCore.model.Lop;
-import eCore.model.NhanVien;
 import eCore.model.SinhVien;
-import eCore.modelDao.DAO_DonVi;
 import eCore.modelDao.DAO_Lop;
-import eCore.modelDao.DAO_NhanVien;
 import eCore.modelDao.DAO_SinhVien;
-import eCore.modelDao.DAO_TaiKhoanSinhVien;
 import eCore.util.Util_Date;
 
-public class Controller_SinhVien extends SinhVien implements ZEController {
-	ObjectDAO dao = new DAO_SinhVien();
-
+public class Controller_SinhVien extends SinhVien implements ZEController<SinhVien> {
+	ObjectDAO<SinhVien> dao = new DAO_SinhVien();
 	String timKiemTheo;
 	String tuKhoa;
 	String duongDanTrang = "eCore/pages/sinhviens.jsp";
 	String duongDanTrangView = "eCore/pages/sinhvien.jsp";
-	String tenCotTimDoiTuong = "maNhanVien";
+	String tenCotTimDoiTuong = "maSinhVien";
 	String maObj;
 	String maLop;
-
-	public String getMaLop() {
-		return maLop;
-	}
-
-	public void setMaLop(String maLop) {
-		this.maLop = maLop;
-	}
-
-	public Lop getLop() {
-		ObjectDAO dao_lop = new DAO_Lop();
-		ArrayList<Lop> list_lop = dao_lop.listByColumns("maLop", getMaLop());
-		if (list_lop.size() > 0)
-			return list_lop.get(0);
-		else
-			return null;
-	}
+	String s_thoiGianCapNhat;
 
 	public String getTimKiemTheo() {
 		return timKiemTheo;
@@ -68,12 +42,66 @@ public class Controller_SinhVien extends SinhVien implements ZEController {
 		this.tuKhoa = tuKhoa;
 	}
 
+	public String getDuongDanTrang() {
+		return duongDanTrang;
+	}
+
+	public void setDuongDanTrang(String duongDanTrang) {
+		this.duongDanTrang = duongDanTrang;
+	}
+
+	public String getDuongDanTrangView() {
+		return duongDanTrangView;
+	}
+
+	public void setDuongDanTrangView(String duongDanTrangView) {
+		this.duongDanTrangView = duongDanTrangView;
+	}
+
+	public String getTenCotTimDoiTuong() {
+		return tenCotTimDoiTuong;
+	}
+
+	public void setTenCotTimDoiTuong(String tenCotTimDoiTuong) {
+		this.tenCotTimDoiTuong = tenCotTimDoiTuong;
+	}
+
 	public String getMaObj() {
 		return maObj;
 	}
 
 	public void setMaObj(String maObj) {
 		this.maObj = maObj;
+	}
+
+	public String getMaLop() {
+		return maLop;
+	}
+
+	public void setMaLop(String maLop) {
+		this.maLop = maLop;
+	}
+
+	public String getS_thoiGianCapNhat() {
+		return s_thoiGianCapNhat;
+	}
+
+	public void setS_thoiGianCapNhat(String s_thoiGianCapNhat) {
+		this.s_thoiGianCapNhat = s_thoiGianCapNhat;
+	}
+	
+	public Lop getLop() {
+		ObjectDAO<Lop> dao_Lop = new DAO_Lop();
+		ArrayList<Lop> list_Lop = dao_Lop.listByColumns("maLop", getMaLop());
+		if (list_Lop.size() > 0) {
+			return list_Lop.get(0);
+		} else {
+			return null;
+		}
+	}
+	
+	public Date getThoiGianCapNhat() {
+		return Util_Date.stringToDate(getS_thoiGianCapNhat());
 	}
 
 	@Override
@@ -128,66 +156,68 @@ public class Controller_SinhVien extends SinhVien implements ZEController {
 	public String saveOrUpdate() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
+
 		SinhVien obj = new SinhVien();
-		obj.maSinhVien=getMaSinhVien();
-		obj.ten=getTen();
-		obj.hoDem=getHoDem();
-		obj.gioiTinh=getGioiTinh();
-		obj.soCMND=getSoCMND();
-		obj.ngayCap=getNgayCap();
-		obj.noiCap=getNoiCap();
-		obj.ngaySinh=getNgaySinh();
-		obj.noiSinh=getNoiSinh();
-		obj.doiTuong=getDoiTuong();
-		obj.khuVuc=getKhuVuc();
-		obj.namTotNghiepTHPT=getNamTotNghiepTHPT();
-		obj.totNghiepTaiTruongTHPT=gettotNghiepTaiTruongTHPT();
-		obj.xepLoaiVanHoa=getXepLoaiVanHoa();
-		obj.xepLoaiDaoDuc=getXepLoaiDaoDuc();
-		obj.queQuan=getqueQuan();
-		obj.hoKhauThuongTru=getHoKhauThuongTru();
-		obj.maTinh=getMaTinh();
-		obj.maQuanHuyen=getMaQuanHuyen();
-		obj.maPhuongXa=getMaPhuongXa();
-		obj.maDanToc=getMaDanToc();
-		obj.maTonGiao=getMaTonGiao();
-		obj.maQuocTich=getMaQuocTich();
-		obj.maThanhPhanGiaDinh=getMaThanhPhanGiaDinh();
-		obj.dienThoaiDiDong=getDienThoaiDiDong();
-		obj.dienThoaiCoDinh=getDienThoaiCoDinh();
-		obj.dienThoaiGiaDinh=getDienThoaiGiaDinh();
-		obj.email=getEmail();
-		obj.thongTinBaoTin=getThongTinBaoTin();
-		obj.ngayVaoDoan=getNgayVaoDoan();
-		obj.ngayVaoDang=getNgayVaoDang();
-		obj.maSoHinhAnh=getMaSoHinhAnh();
-		obj.khiCanBaoTinChoAi=getKhiCanBaoTinChoAi();
-		obj.diaChiKhiCanBaoTinChoAi=getDiaChiKhiCanBaoTinChoAi();
-		obj.bhyt_maTinh=getBhyt_maTinh();
-		obj.bhyt_maBenhVien=getBhyt_maBenhVien();
-		obj.bhyt_tenBenhVien=getBhyt_tenBenhVien();
-		obj.bhtn_thamGia=getbhtn_thamGia();
-		obj.bhtn_soThang=getbhtn_soThang();
-		obj.soBaoDanh=getSoBaoDanh();
-		obj.diemMon1=getDiemMon1();
-		obj.diemMon2=getDiemMon2();
-		obj.diemMon3=getDiemMon3();
-		obj.diemUuTien=getDiemUuTien();
-		obj.tongDiem=getTongDiem();
-		obj.ngheNghiepTruocKhiVaoTruong=getNgheNghiepTruocKhiVaoTruong();
-		obj.thanhPhanGiaDinh=getThanhPhanGiaDinh();
-		obj.thiTHPTNgay=getThiTHPTNgay();
-		obj.diaChiNhanThu=getDiaChiNhanThu();
-		obj.emailPhuHuynh=getEmailPhuHuynh();
-		obj.tenNganhTrungTuyen=getTenNganhTrungTuyen();
-		obj.daKhaiPhieuQuanLySinhVien=getDaKhaiPhieuQuanLySinhVien();
-		obj.daNhapHoc=getDaNhapHoc();
-		obj.maChuyenNganh1=getMaChuyenNganh1();
-		obj.maChuyenNganh2=getMaChuyenNganh2();
-		obj.lop=getLop();
-		obj. ghiChu=getGhiChu();
-		obj.moTa=getMoTa();
-		obj.thoiGianCapNhat=new Date();
+		obj.maSinhVien = getMaSinhVien();  
+		obj.ten = getTen();  
+		obj.hoDem = getHoDem();
+		obj.hoVaTen = getHoDem() + " " + getTen();
+		obj.gioiTinh = getGioiTinh();  
+		obj.soCMND = getSoCMND();  
+		obj.ngayCap = getNgayCap();  
+		obj.noiCap = getNoiCap();  
+		obj.ngaySinh = getNgaySinh();  
+		obj.noiSinh = getNoiSinh();  
+		obj.doiTuong = getDoiTuong();  
+		obj.khuVuc = getKhuVuc();  
+		obj.namTotNghiepTHPT = getNamTotNghiepTHPT();  
+		obj.totNghiepTaiTruongTHPT = getTotNghiepTaiTruongTHPT();  
+		obj.xepLoaiVanHoa = getXepLoaiVanHoa();  
+		obj.xepLoaiGiaoDuc = getXepLoaiGiaoDuc();
+		obj.queQuan = getQueQuan();  
+		obj.hoKhauThuongTru = getHoKhauThuongTru();  
+		obj.maTinh = getMaTinh();  
+		obj.maQuanHuyen = getMaQuanHuyen();  
+		obj.maPhuongXa = getMaPhuongXa();  
+		obj.maDanToc = getMaDanToc();  
+		obj.maTonGiao = getMaTonGiao();  
+		obj.maQuocTich = getMaQuocTich();  
+		obj.maThanhPhanGiaDinh = getMaThanhPhanGiaDinh();  
+		obj.dienThoaiDiDong = getDienThoaiDiDong();  
+		obj.dienThoaiCoDinh = getDienThoaiCoDinh();  
+		obj.dienThoaiGiaDinh = getDienThoaiGiaDinh();  
+		obj.email = getEmail();  
+		obj.thongTinBaoTin = getThongTinBaoTin();  
+		obj.ngayVaoDoan = getNgayVaoDoan();  
+		obj.ngayVaoDang = getNgayVaoDang();  
+		obj.maSoHinhAnh = getMaSoHinhAnh();  
+		obj.khiCanBaoTinChoAi = getKhiCanBaoTinChoAi();  
+		obj.diaChiKhiCanBaoTinChoAi = getDiaChiKhiCanBaoTinChoAi();  
+		obj.bhyt_maTinh = getBhyt_maTinh();  
+		obj.bhyt_maBenhVien = getBhyt_maBenhVien();  
+		obj.bhyt_tenBenhVien = getBhyt_tenBenhVien();  
+		obj.bhtn_thamgia = getBhtn_thamgia();  
+		obj.bthn_sothang = getBthn_sothang();  
+		obj.soBaoDanh = getSoBaoDanh();  
+		obj.diemMon1 = getDiemMon1();  
+		obj.diemMon2 = getDiemMon2();  
+		obj.diemMon3 = getDiemMon3();  
+		obj.diemUuTien = getDiemUuTien();  
+		obj.tongDiem = getTongDiem();  
+		obj.ngheNghiepTruocKhiVaoTruong = getNgheNghiepTruocKhiVaoTruong();  
+		obj.thanhPhanGiaDinh = getThanhPhanGiaDinh();  
+		obj.thiTHPTNgay = getThiTHPTNgay();  
+		obj.diaChiNhanThu = getDiaChiNhanThu();  
+		obj.emailPhuHuynh = getEmailPhuHuynh();  
+		obj.tenNganhTrungTuyen = getTenNganhTrungTuyen();  
+		obj.daKhaiPhieuQuanLySinhVien = getDaKhaiPhieuQuanLySinhVien();  
+		obj.daNhapHoc = getDaNhapHoc();  
+		obj.maChuyenNganh1 = getMaChuyenNganh1();  
+		obj.maChuyenNganh2 = getMaChuyenNganh2();  
+		obj.lop = getLop();
+		obj.moTa = getMoTa();
+		obj.ghiChu = getGhiChu();
+		obj.thoiGianCapNhat = new Date();
 		if (dao.saveOrUpdate(obj)) {
 			session.setAttribute("msg", "Cập nhật dữ liệu thành công");
 			session.setAttribute("obj", obj);

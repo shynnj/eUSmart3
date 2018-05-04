@@ -3,6 +3,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="eCore.modelDao.DAO_DonVi"%>
 <%@page import="eCore.dao.ObjectDAO"%>
+<%@page import="eCore.model.ChucNang" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -95,13 +96,22 @@
 											ObjectDAO objdao = new DAO_DonVi();
 											ArrayList<DonVi> listDonVi = objdao.listAll();
 											for (DonVi dv : listDonVi) {
+
+												if (obj != null && dv.compareTo(obj) != 0) {
 										%>
 										<option value="<%=dv.maDonVi%> "
-											<%=obj != null && obj.donViCha != null && obj.donViCha.maDonVi.equals(dv.maDonVi) ? "selected"
-						: ""%>>
+											<%=obj != null && obj.getDonViCha() != null
+							&& obj.getDonViCha().getMaDonVi().equals(dv.maDonVi) ? "selected" : ""%>>
 											<%=dv.tenDonVi%>
 										</option>
 										<%
+											} else {
+										%>
+										<option value="<%=dv.maDonVi%>">
+											<%=dv.tenDonVi%>
+										</option>
+										<%
+											}
 											}
 										%>
 									</select>

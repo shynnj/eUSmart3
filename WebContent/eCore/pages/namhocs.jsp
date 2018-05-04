@@ -3,8 +3,6 @@
 <%@page import="eCore.model.NamHoc"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.lang.reflect.Array"%>
-<%@page import="eCore.modelDao.DAO_Lop"%>
-<%@page import="eCore.model.Lop"%>
 <%@page import="eCore.dao.ObjectDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -12,6 +10,7 @@
 <%
 	String tenLop = "NamHoc";
 	String tenTrang = "Quản lý Năm Học";
+	String trangDanhSach = "index.jsp?p=eCore/pages/namhocs.jsp";
 	String[] tk_value = { "maNamHoc", "tenNamHoc", "ngayBatDau", "ngayKetThuc" };
 	String[] tk_show = { "Mã năm học", "Tên năm học", "Ngày bắt đầu", "Ngày kết thuc" };
 %>
@@ -23,8 +22,20 @@
 
 	ArrayList<NamHoc> list = new ArrayList<NamHoc>();
 
-	list = session.getAttribute("checkTimKiem") != null ? (ArrayList<NamHoc>) session.getAttribute("arr")
-			: dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+	if (session.getAttribute("checkTimKiem") != null) {
+		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
+		if (listTemp.size() > 0) {
+	if (listTemp.get(0) instanceof NamHoc) {
+				list = (ArrayList<NamHoc>) listTemp;
+			} else {
+				session.setAttribute("checkTimKiem", null);
+				list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+			}
+		} else
+			list = new ArrayList<NamHoc>();
+	} else {
+		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+	}
 %>
 
 

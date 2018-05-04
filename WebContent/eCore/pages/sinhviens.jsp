@@ -1,3 +1,10 @@
+<%@page import="eCore.model.SinhVien"%>
+<%@page import="eCore.modelDao.DAO_SinhVien"%>
+<%@page import="eCore.util.Util_Date"%>
+<%@page import="eCore.modelDao.DAO_HocKy"%>
+<%@page import="eCore.model.HocKy"%>
+<%@page import="eCore.modelDao.DAO_HocKy"%>
+<%@page import="eCore.model.HocKy"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.lang.reflect.Array"%>
 <%@page import="eCore.modelDao.DAO_Lop"%>
@@ -7,33 +14,22 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String tenLop = "Lop";
-	String tenTrang = "Quản lý Lớp";
-	String[] tk_value = { "maLop", "tenLop", "khoa", "nienKhoa", "donVi" };
-	String[] tk_show = { "Mã lớp", "Tên lớp", "Khóa", "Niên khóa", "Đơn vị" };
+	String tenLop = "SinhVien";
+	String tenTrang = "Quản lý Sinh Viên";
+	String trangDanhSach = "index.jsp?p=eCore/pages/sinhviens.jsp";
+	String[] tk_value = { "maSinhVien", "tenHocKy", "ngayBatDau", "ngayKetThuc", "namHoc" };
+	String[] tk_show = { "Mã sinh viên", "Họ và tên", "Giới tính", "Ngày sinh", "Email", "Chuyên ngành" };
 %>
 
 <%@ include file="../../ePartial/code-header.jsp"%>
 
 <%
-	ObjectDAO<Lop> dao = new DAO_Lop();
+	ObjectDAO<SinhVien> dao = new DAO_SinhVien();
 
-	ArrayList<Lop> list = new ArrayList<Lop>();
+	ArrayList<SinhVien> list = new ArrayList<SinhVien>();
 
-	if (session.getAttribute("checkTimKiem") != null) {
-		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
-		if (listTemp.size() > 0) {
-	if (listTemp.get(0) instanceof Lop) {
-				list = (ArrayList<Lop>) listTemp;
-			} else {
-				session.setAttribute("checkTimKiem", null);
-				list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
-			}
-		} else
-			list = new ArrayList<Lop>();
-	} else {
-		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
-	}
+	list = session.getAttribute("checkTimKiem") != null ? (ArrayList<SinhVien>) session.getAttribute("arr")
+			: dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 %>
 
 
@@ -56,29 +52,29 @@
 				id="dataTables-example">
 				<thead>
 					<tr>
-						<th>Mã lớp</th>
-						<th>Tên lớp</th>
-						<th>Khóa</th>
-						<th>Thời gian đào tạo</th>
-						<th>Đơn vị quản lý</th>
-						<th>Mô tả</th>
+						<th>Mã sinh viên</th>
+						<th>Họ và tên</th>
+						<th>Giới tính</th>
+						<th>Ngày sinh</th>
+						<th>Email</th>
+						<th>Chuyên ngành</th>
 						<th>Xử lý</th>
 					</tr>
 				</thead>
 				<tbody>
 					<%
-						for (Lop obj : list) {
+						for (SinhVien obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
-							String maDoiTuong = obj.getMaLop();
-							String tenDoiTuong = obj.getTenLop();
+							String maDoiTuong = obj.getMaSinhVien();
+							String tenDoiTuong = obj.getHoDem() + " " + obj.getTen();
 					%>
 					<tr class="odd gradeX">
-						<td><%=obj.getMaLop()%></td>
-						<td><%=obj.getTenLop()%></td>
-						<td><%=obj.getKhoa()%></td>
-						<td><%=obj.getNienKhoa()%></td>
-						<td><%=obj.getDonVi() == null ? "" : obj.getDonVi().getTenDonVi()%></td>
-						<td><%=obj.getMoTa()%></td>
+						<td><%=obj.getMaSinhVien()%></td>
+						<td><%=obj.getHoDem() + " " + obj.getTen()%></td>
+						<td><%=obj.getGioiTinh()%></td>
+						<td><%=obj.getNgaySinh()%></td>
+						<td><%=obj.getEmail()%></td>
+						<td><%=obj.getTenNganhTrungTuyen() %>
 						<td style="text-align: center;"><%@ include
 								file="../../ePartial/menupullcuadoituong.jsp"%></td>
 					</tr>
