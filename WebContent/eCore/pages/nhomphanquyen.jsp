@@ -74,7 +74,7 @@
 										<%=(modeView ? " readonly " : "")%>> <input hidden>
 								</div>
 								<div class="form-group">
-									<label>Chức năng </label>
+									<label>Chức năng </label> <br>
 									<%
 										String ls_MaChucNang = "";
 										Set<ChucNang> chucNangSet = new HashSet<>();

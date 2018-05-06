@@ -376,7 +376,7 @@
 			});
 		});
 	</script>
-	<!-- 	<ckeditor:replaceAll basePath="content/ckeditor/" /> -->
+		<ckeditor:replace replace="noiDung" basePath="content/ckeditor/" />
 </body>
 
 </html>

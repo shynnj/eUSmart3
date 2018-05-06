@@ -1,3 +1,6 @@
+<%@page import="eCore.util.Util_Date"%>
+<%@page import="eAdviser.modelDao.DAO_SoCoVanHocTap"%>
+<%@page import="eAdviser.model.SoCoVanHocTap"%>
 <%@page import="eAdviser.modelDao.DAO_CoVanHocTap"%>
 <%@page import="eAdviser.model.CoVanHocTap"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,31 +12,31 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String tenLop = "CoVanHocTap";
-	String tenTrang = "Quản lý Cố vấn học tập";
-	String trangDanhSach = "index.jsp?p=eAdviser/pages/covanhoctaps.jsp";
-	String[] tk_value = { "maCoVanHocTap", "nhanVien", "dienThoaiCoQuan", "diaChiGuiThu", "diDong" };
-	String[] tk_show = { "Mã Cố vấn học tập", "Nhân viên", "Điện thoại cơ quan", "Địa chỉ gửi thư", "Di động" };
+	String tenLop = "SoCoVanHocTap";
+	String tenTrang = "Quản lý sổ Cố vấn học tập";
+	String trangDanhSach = "index.jsp?p=eAdviser/pages/socovanhoctaps.jsp";
+	String[] tk_value = { "lop","maSoCoVanHocTap", "tenSoCoVanHocTap", "ngayBD", "ngayKT"};
+	String[] tk_show = { "Lớp", "Mã sổ cố vấn học tập", "Tên sổ cố vấn học tập", "Ngày bắt đầu", "Ngày kết thúc" };
 %>
 
 <%@ include file="../../ePartial/code-header.jsp"%>
 
 <%
-	ObjectDAO<CoVanHocTap> dao = new DAO_CoVanHocTap();
+	ObjectDAO<SoCoVanHocTap> dao = new DAO_SoCoVanHocTap();
 
-	ArrayList<CoVanHocTap> list = new ArrayList<CoVanHocTap>();
+	ArrayList<SoCoVanHocTap> list = new ArrayList<SoCoVanHocTap>();
 
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
 		if (listTemp.size() > 0) {
-			if (listTemp.get(0) instanceof CoVanHocTap) {
-				list = (ArrayList<CoVanHocTap>) listTemp;
+			if (listTemp.get(0) instanceof SoCoVanHocTap) {
+				list = (ArrayList<SoCoVanHocTap>) listTemp;
 			} else {
 				session.setAttribute("checkTimKiem", null);
 				list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 			}
 		} else
-			list = new ArrayList<CoVanHocTap>();
+			list = new ArrayList<SoCoVanHocTap>();
 	} else {
 		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 	}
@@ -59,31 +62,31 @@
 				id="dataTables-example">
 				<thead>
 					<tr>
-						<th>Mã Cố vấn học tập</th>
-						<th>Nhân viên</th>
-						<th>Điện thoại cơ quan</th>
-						<th>Địa chỉ liên hệ</th>
-						<th>Di động</th>
+						<th>Lớp</th>
+						<th>Mã sổ cố vấn học tập</th>
+						<th>Tên sổ cố vấn học tập</th>
+						<th>Ngày bắt đầu</th>
+						<th>Ngày kết thúc</th>
 						<th>Xử lý</th>
 					</tr>
 				</thead>
 				<tbody>
 					<%
-						for (CoVanHocTap obj : list) {
+						for (SoCoVanHocTap obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
-							String maDoiTuong = obj.getMaCoVanHocTap();
+							String maDoiTuong = obj.getMaSoCoVanHocTap();
 							String tenDoiTuong ="";
-							if (obj.getNhanVien() != null && obj.getNhanVien().getTenNhanVien() != null) {
-								 tenDoiTuong = obj.getNhanVien().getTenNhanVien();
+							if (obj.getLop() != null && obj.getLop().getTenLop() != null) {
+								 tenDoiTuong = obj.getLop().getTenLop();
 							}
 					%>
 					<tr class="odd gradeX">
-						<td><%=obj.getMaCoVanHocTap()%></td>
-						<td><%=obj.getNhanVien() != null && obj.getNhanVien().getTenNhanVien()!=null
-						? obj.getNhanVien().getTenNhanVien() : ""%></td>
-						<td><%=obj.getDienThoaiCoQuan()%></td>
-						<td><%=obj.getDiaChiGuiThu()%></td>
-						<td><%=obj.getDiDong()%></td>
+						<td><%=obj.getLop() != null && obj.getLop().getTenLop()!=null
+						? obj.getLop().getTenLop() : ""%></td>
+						<td><%=obj.getMaSoCoVanHocTap()%></td>
+						<td><%=obj.getTenSoCoVanHocTap()%></td>
+						<td><%=Util_Date.dateToString2(obj.getNgayBD())%></td>
+						<td><%=Util_Date.dateToString2(obj.getNgayKT())%></td>
 						<td style="text-align: center;"><%@ include
 								file="../../ePartial/menupullcuadoituong.jsp"%></td>
 					</tr>

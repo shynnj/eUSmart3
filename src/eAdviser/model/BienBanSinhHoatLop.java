@@ -33,6 +33,9 @@ public class BienBanSinhHoatLop implements Comparable<BienBanSinhHoatLop> {
 	@ManyToOne
 	public	SoCoVanHocTap soCoVanHocTap;
 	
+
+	
+	
 	
 	public BienBanSinhHoatLop() {
 	}
@@ -60,7 +63,6 @@ public class BienBanSinhHoatLop implements Comparable<BienBanSinhHoatLop> {
 		this.thoiGianCapNhat = thoiGianCapNhat;
 		this.soCoVanHocTap = soCoVanHocTap;
 	}
-
 
 
 	public String getMaBienBanSinhHoatLop() {

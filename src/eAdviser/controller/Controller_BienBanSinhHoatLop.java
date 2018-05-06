@@ -8,26 +8,25 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import eAdviser.model.BaoCaoTinhHinhLop;
 import eAdviser.model.BienBanSinhHoatLop;
 import eAdviser.model.CoVanHocTap;
 import eAdviser.model.SoCoVanHocTap;
-import eAdviser.modelDao.DAO_BaoCaoTinhHinhLop;
-import eAdviser.modelDao.DAO_CoVanHocTap;
+import eAdviser.modelDao.DAO_BienBanSinhHoatLop;
 import eAdviser.modelDao.DAO_SoCoVanHocTap;
 import eCore.controller.ZEController;
 import eCore.dao.ObjectDAO;
+import eCore.model.DonVi;
 
-public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements ZEController{
+public class Controller_BienBanSinhHoatLop extends BienBanSinhHoatLop implements ZEController{
 
-	ObjectDAO dao = new DAO_BaoCaoTinhHinhLop();
+	ObjectDAO dao=new DAO_BienBanSinhHoatLop();
+	
 	String timKiemTheo;
 	String tuKhoa;
-	String duongDanTrang = "eAdviser/pages/baocaotinhhinhlops.jsp";
-	String duongDanTrangView = "eAdviser/pages/baocaotinhhinhlop.jsp";
-	String tenCotTimDoiTuong = "maBaoCaoTinhHinhLop";
+	String duongDanTrang = "eAdviser/pages/bienbansinhhoatlops.jsp";
+	String duongDanTrangView = "eAdviser/pages/bienbansinhhoatlop.jsp";
+	String tenCotTimDoiTuong = "maBienBanSinhHoatLop";
 	String maObj;
-	String maCoVanHocTap;
 	String maSoCoVanHocTap;
 	public String getTimKiemTheo() {
 		return timKiemTheo;
@@ -65,22 +64,6 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 	public void setMaObj(String maObj) {
 		this.maObj = maObj;
 	}
-	
-	public String getMaCoVanHocTap() {
-		return maCoVanHocTap;
-	}
-	public void setMaCoVanHocTap(String maCoVanHocTap) {
-		this.maCoVanHocTap = maCoVanHocTap;
-	}
-	public CoVanHocTap getCoVanHocTap() {
-		ObjectDAO<CoVanHocTap> objdao_covanhoctap = new DAO_CoVanHocTap();
-		ArrayList<CoVanHocTap> list = objdao_covanhoctap.listByColumns("maCoVanHocTap", getMaCoVanHocTap());
-		if(list.size()>0)
-			return list.get(0);
-		else
-			return null;
-	}
-	
 	public String getMaSoCoVanHocTap() {
 		return maSoCoVanHocTap;
 	}
@@ -89,10 +72,10 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 	}
 	
 	public SoCoVanHocTap getSoCoVanHocTap() {
-		ObjectDAO<SoCoVanHocTap> objdao_socovanhoctap = new DAO_SoCoVanHocTap();
-		ArrayList<SoCoVanHocTap> list_SoCoVanHocTap = objdao_socovanhoctap.listByColumns("maSoCoVanHocTap", getMaSoCoVanHocTap());
-		if(list_SoCoVanHocTap.size()>0)
-			return list_SoCoVanHocTap.get(0);
+		ObjectDAO dao_soCoVanHocTap = new DAO_SoCoVanHocTap();
+		ArrayList<SoCoVanHocTap> list = dao_soCoVanHocTap.listByColumns("maSoCoVanHocTap", getMaSoCoVanHocTap());
+		if(list.size()>0)
+			return list.get(0);
 		else
 			return null;
 	}
@@ -117,7 +100,7 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 		
 		session.setAttribute("mode", "viewDetail");
 
-		ArrayList<BaoCaoTinhHinhLop> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
+		ArrayList<BienBanSinhHoatLop> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
 		if (arr.size() > 0) {
 			session.setAttribute("obj", arr.get(0));
 			session.setAttribute("p", duongDanTrangView);
@@ -135,7 +118,7 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 
 		String maobj = request.getParameter("maobj");
 		session.setAttribute("mode", "viewDetailAndEdit");
-		ArrayList<BaoCaoTinhHinhLop> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
+		ArrayList<BienBanSinhHoatLop> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
 		if (arr.size() > 0) {
 			session.setAttribute("obj", arr.get(0));
 			session.setAttribute("p", duongDanTrangView);
@@ -150,20 +133,19 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 
-		BaoCaoTinhHinhLop obj = new BaoCaoTinhHinhLop();
+		BienBanSinhHoatLop obj = new BienBanSinhHoatLop();
 		obj.soCoVanHocTap=getSoCoVanHocTap();
-		obj.coVanHocTap = getCoVanHocTap();
-		obj.maBaoCaoTinhHinhLop = getMaBaoCaoTinhHinhLop();
-		obj.tenBaoCaoTinhHinhLop = getTenBaoCaoTinhHinhLop();
-		obj.hocKy=getHocKy();
-		obj.namHoc = getNamHoc();
-		obj.soSinhVienTrongLop=getSoSinhVienTrongLop();
-		obj.tinhHinhChung=getTinhHinhChung();
-		obj.tuTuongChinhTri=getTuTuongChinhTri();
-		obj.ketQuaHocTap=getKetQuaHocTap();
-		obj.ketQuaRenLuyen=getKetQuaRenLuyen();
-		obj.ketQuaCacHoatDongKhac=getKetQuaCacHoatDongKhac();
-		obj.kienNghiDeXuat=getKienNghiDeXuat();
+		obj.maBienBanSinhHoatLop = getMaBienBanSinhHoatLop();
+		obj.tenBienBanSinhHoatLop = getTenBienBanSinhHoatLop();
+		obj.chuTriCuocHop = getChuTriCuocHop();
+		obj.thuKyCuocHop=getThuKyCuocHop();
+		obj.diaDiem = getDiaDiem();
+		obj.thoiGian=getThoiGian();
+		obj.soLuongThamGia=getSoLuongThamGia();
+		obj.soLuongVang=getSoLuongVang();
+		obj.danhSachVangMat=getDanhSachVangMat();
+		obj.noiDung=getNoiDung();
+		obj.deXuat=getDeXuat();
 		obj.moTa=getMoTa();
 		obj.ghiChu = getGhiChu();
 		obj.thoiGianCapNhat = new Date();
@@ -183,8 +165,8 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		String maobj = request.getParameter("maobj");
-		BaoCaoTinhHinhLop obj = new BaoCaoTinhHinhLop();
-		obj.setMaBaoCaoTinhHinhLop(maobj);
+		BienBanSinhHoatLop obj = new BienBanSinhHoatLop();
+		obj.setMaBienBanSinhHoatLop(maobj);
 		if (dao.delete(obj)) {
 			session.setAttribute("msg", "Xóa dữ liệu thành công");
 			session.setAttribute("p", duongDanTrang);
@@ -200,7 +182,7 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 		HttpSession session = request.getSession();
 		String column = getTimKiemTheo();
 		String key = getTuKhoa();
-		ArrayList<BaoCaoTinhHinhLop> arr = dao.listByColumnLike(column, key);
+		ArrayList<BienBanSinhHoatLop> arr = dao.listByColumnLike(column, key);
 		session.setAttribute("arr", arr);
 		session.setAttribute("checkTimKiem", "true");
 		session.setAttribute("p", duongDanTrang);
@@ -230,5 +212,6 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 		return null;
 	}
 
+	
 	
 }

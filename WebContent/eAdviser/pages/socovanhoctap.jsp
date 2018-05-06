@@ -1,3 +1,6 @@
+<%@page import="eCore.util.Util_Date"%>
+<%@page import="eAdviser.model.SoCoVanHocTap"%>
+<%@page import="eCore.modelDao.DAO_Lop"%>
 <%@page import="eCore.model.NhanVien"%>
 <%@page import="eCore.modelDao.DAO_NhanVien"%>
 <%@page import="eAdviser.model.CoVanHocTap"%>
@@ -11,11 +14,12 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String tenLop = "CoVanHocTap";
-	String tenTrang = "Quản lý Cố vấn học tập";
-	String trangDanhSach = "index.jsp?p=eAdviser/pages/covanhoctaps.jsp";
-	String[] tk_value = { "maCoVanHocTap", "nhanVien", "dienThoaiCoQuan", "diaChiGuiThu", "diDong" };
-	String[] tk_show = { "Mã Cố vấn học tập", "Nhân viên", "Điện thoại cơ quan", "Địa chỉ gửi thư", "Di động" };
+	String tenLop = "SoCoVanHocTap";
+	String tenTrang = "Quản lý sổ Cố vấn học tập";
+	String trangDanhSach = "index.jsp?p=eAdviser/pages/socovanhoctaps.jsp";
+	String[] tk_value = { "lop", "maSoCoVanHocTap", "tenSoCoVanHocTap", "ngayBD", "ngayKT" };
+	String[] tk_show = { "Lớp", "Mã sổ cố vấn học tập", "Tên sổ cố vấn học tập", "Ngày bắt đầu",
+			"Ngày kết thúc" };
 %>
 <%@ include file="../../ePartial/code-header.jsp"%>
 
@@ -30,7 +34,8 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	CoVanHocTap obj = session.getAttribute("obj") != null ? (CoVanHocTap) session.getAttribute("obj") : null;
+	SoCoVanHocTap obj = session.getAttribute("obj") != null ? (SoCoVanHocTap) session.getAttribute("obj")
+			: null;
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -61,45 +66,44 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Mã Cố vấn học tập</label> <input class="form-control"
-										name="maCoVanHocTap"
-										value="<%=(obj != null ? obj.getMaCoVanHocTap() : "")%>"
-										<%=(modeView || modeEdit ? " readonly " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Nhân viên</label> <select class="form-control"
-										name="maNhanVien" <%=(modeView ? " disabled " : "")%>>
-										<option value=""></option>
+									<label>Lớp</label> <select class="form-control" name="maLop"
+										<%=(modeView ? " disabled " : "")%>>
 										<%
-											ObjectDAO objdao = new DAO_NhanVien();
-											ArrayList<NhanVien> listNhanVien= objdao.listAll();
-											for (NhanVien nv : listNhanVien) {
+											ObjectDAO objdao = new DAO_Lop();
+											ArrayList<Lop> listLop = objdao.listAll();
+											for (Lop l : listLop) {
 										%>
-										<option value="<%=nv.maNhanVien%>" <%=obj != null && obj.getNhanVien().maNhanVien.equals(nv.maNhanVien) ? "selected" : ""%>
-										><%=nv.tenNhanVien%></option>
+										<option value="<%=l.maLop%>"
+											<%=obj != null && obj.getLop().maLop.equals(l.maLop) ? "selected" : ""%>><%=l.tenLop%></option>
 										<%
 											}
 										%>
 									</select>
 								</div>
 								<div class="form-group">
-									<label>Điện thoại cơ quan</label> <input class="form-control"
-										name="dienThoaiCoQuan"
-										value="<%=(obj != null ? obj.getDienThoaiCoQuan() : "")%>"
+									<label>Mã sổ cố vấn học tập</label> <input class="form-control"
+										name="maSoCoVanHocTap"
+										value="<%=(obj != null ? obj.getMaSoCoVanHocTap() : "")%>"
+										<%=(modeView || modeEdit ? " readonly " : "")%>>
+								</div>
+								<div class="form-group">
+									<label>Tên sổ cố vấn học tập</label> <input
+										class="form-control" name="tenSoCoVanHocTap"
+										value="<%=(obj != null ? obj.getTenSoCoVanHocTap() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Địa chỉ gửi thư</label> <input class="form-control"
-										name="diaChiGuiThu"
-										value="<%=(obj != null ? obj.getDiaChiGuiThu() : "")%>"
+									<label>Ngày bắt đầu</label> <input type="date"
+										class="form-control" name="s_ngayBD"
+										value="<%=(obj != null ? Util_Date.dateToString(obj.getNgayBD()) : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Di động</label> <input class="form-control"
-										name="diDong"
-										value="<%=(obj != null ? obj.getDiDong() : "")%>"
+									<label>Ngày kết thúc</label> <input type="date"
+										class="form-control" name="s_ngayKT"
+										value="<%=(obj != null ? Util_Date.dateToString(obj.getNgayKT()) : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 
