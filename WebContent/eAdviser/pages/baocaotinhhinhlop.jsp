@@ -38,9 +38,12 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	BaoCaoTinhHinhLop obj = session.getAttribute("obj") != null
-			? (BaoCaoTinhHinhLop) session.getAttribute("obj")
-			: null;
+	BaoCaoTinhHinhLop obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof BaoCaoTinhHinhLop) {
+			obj = (BaoCaoTinhHinhLop) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -78,14 +81,19 @@
 											ObjectDAO objdao = new DAO_SoCoVanHocTap();
 											ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objdao.listAll();
 											for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
+												if(obj != null && obj.getSoCoVanHocTap() != null && obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap()))
+												{
 										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>"
-											<%=obj != null && obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap()) ? "selected"
-								: ""%>><%=scvht.getTenSoCoVanHocTap()%>
+										<option value="<%=scvht.maSoCoVanHocTap%>" selected="selected"><%=scvht.getTenSoCoVanHocTap()%>
 										</option>
 										<%
 											}
-										%>
+												else {
+													%>
+										<option value="<%=scvht.maSoCoVanHocTap%>"><%=scvht.getTenSoCoVanHocTap()%>
+										</option>
+										<%} 
+											}%>
 									</select>
 								</div>
 								<div class="form-group">
@@ -159,8 +167,8 @@
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Kết quả các hoạt động khác</label> <input class="form-control"
-										name="ketQuaCacHoatDongKhac"
+									<label>Kết quả các hoạt động khác</label> <input
+										class="form-control" name="ketQuaCacHoatDongKhac"
 										value="<%=(obj != null ? obj.getKetQuaRenLuyen() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
@@ -170,38 +178,38 @@
 										value="<%=(obj != null ? obj.getKetQuaRenLuyen() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
-							
+
 							</div>
 						</div>
 						<div class="row">
-								<div class="form-group">
-									<label>Mô tả</label>
-									<textarea class="form-control" cols="80" id="editor1" rows="5"
-										name="moTa" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getMoTa() : "")%></textarea>
-								</div>
-								<div class="form-group">
-									<label>Ghi chú</label>
-									<textarea class="form-control" cols="80" id="editor2" rows="5"
-										name="ghiChu" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getGhiChu() : "")%></textarea>
-								</div>
+							<div class="form-group">
+								<label>Mô tả</label>
+								<textarea class="form-control" cols="80" id="editor1" rows="5"
+									name="moTa" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getMoTa() : "")%></textarea>
+							</div>
+							<div class="form-group">
+								<label>Ghi chú</label>
+								<textarea class="form-control" cols="80" id="editor2" rows="5"
+									name="ghiChu" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getGhiChu() : "")%></textarea>
 							</div>
 						</div>
-						<div class="panel-footer" style="text-align: left;">
-							<div class="col-md-5"></div>
-							<div class="col-md-7">
-								<%@ include file="../../ePartial/processform.jsp"%>
-							</div>
-						</div>
-						<!-- /.col-lg-6 (nested) -->
-						<!-- /.col-lg-6 (nested) -->
 					</div>
-					<!-- /.row (nested) -->
+					<div class="panel-footer" style="text-align: left;">
+						<div class="col-md-5"></div>
+						<div class="col-md-7">
+							<%@ include file="../../ePartial/processform.jsp"%>
+						</div>
+					</div>
+					<!-- /.col-lg-6 (nested) -->
+					<!-- /.col-lg-6 (nested) -->
 				</div>
-				<!-- /.panel-body -->
+				<!-- /.row (nested) -->
 			</div>
-			<!-- /.panel -->
+			<!-- /.panel-body -->
 		</div>
-		<!-- /.col-lg-12 -->
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
 	</div>
 	<!-- /.row -->
 </form>

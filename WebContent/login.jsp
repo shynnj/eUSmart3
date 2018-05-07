@@ -52,7 +52,8 @@
 					<div class="panel-heading" style="text-align: center;">
 						<p class="panel-title">
 							<img src="content/images/logo.png" width="50px" height="50px" /><br />
-							PHÂN HIỆU TRƯỜNG ĐH GTVT TẠI TP. HCM <br /> Hệ thống UTC2 Smart
+							PHÂN HIỆU TRƯỜNG ĐH GTVT TẠI TP. HCM <br /> Hệ thống Cố vấn học tập trực tuyến trong đào tạo theo học chế tín chỉ.
+							UTC2 Smart
 						</p>
 					</div>
 					<div class="panel-body">
