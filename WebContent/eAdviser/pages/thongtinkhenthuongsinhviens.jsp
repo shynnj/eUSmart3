@@ -1,3 +1,6 @@
+<%@page import="eCore.util.Util_Date"%>
+<%@page import="eAdviser.model.ThongTinKhenThuongSinhVien"%>
+<%@page import="eAdviser.modelDao.DAO_ThongTinKhenThuongSinhVien"%>
 <%@page import="eAdviser.modelDao.DAO_ThongTinSinhVien"%>
 <%@page import="eAdviser.model.ThongTinSinhVien"%>
 <%@page import="eAdviser.modelDao.DAO_BienBanSinhHoatLop"%>
@@ -13,33 +16,32 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String tenLop = "ThongTinSinhVien";
-	String tenTrang = "Quản lý thông tin sinh viên";
-	String trangDanhSach = "index.jsp?p=eAdviser/pages/thongtinsinhviens.jsp";
-	String[] tk_value = { "soCoVanHocTap","sinhVien", "maThongTinSinhVien", "doiTuongChinhSach", "canBoLop",
-			"email", "dienThoaiDiDong", "dienThoaiGiaDinh", "diaChiBaoTin"};
-	String[] tk_show = { "Sổ cố vấn học tập","Sinh viên", "Mã thông tin sinh viên", "Đối tượng chính sách",
-			"Cán bộ lớp", "Email", "Điện thoại di động", "Điện thoại gia đình", "Địa chỉ báo tin"};
+	String tenLop = "ThongTinKhenThuongSinhVien";
+	String tenTrang = "Quản lý thông tin khen thưởng sinh viên";
+	String trangDanhSach = "index.jsp?p=eAdviser/pages/thongtinkhenthuongsinhviens.jsp";
+	String[] tk_value = { "soCoVanHocTap","sinhVien", "maThongTinKhenThuongSinhVien", "noiDungKhenThuong", "thoiGianKhenThuong"	};
+	String[] tk_show = { "Sổ cố vấn học tập","Sinh viên", "Mã thông tin khen thưởng sinh viên", "Nội dung khen thưởng",
+			"Thời gian khen thưởng"};
 %>
 
 <%@ include file="../../ePartial/code-header.jsp"%>
 
 <%
-	ObjectDAO<ThongTinSinhVien> dao = new DAO_ThongTinSinhVien();
+	ObjectDAO<ThongTinKhenThuongSinhVien> dao = new DAO_ThongTinKhenThuongSinhVien();
 
-	ArrayList<ThongTinSinhVien> list = new ArrayList<ThongTinSinhVien>();
+	ArrayList<ThongTinKhenThuongSinhVien> list = new ArrayList<ThongTinKhenThuongSinhVien>();
 
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
 		if (listTemp.size() > 0) {
-			if (listTemp.get(0) instanceof ThongTinSinhVien) {
-				list = (ArrayList<ThongTinSinhVien>) listTemp;
+			if (listTemp.get(0) instanceof ThongTinKhenThuongSinhVien) {
+				list = (ArrayList<ThongTinKhenThuongSinhVien>) listTemp;
 			} else {
 				session.setAttribute("checkTimKiem", null);
 				list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 			}
 		} else
-			list = new ArrayList<ThongTinSinhVien>();
+			list = new ArrayList<ThongTinKhenThuongSinhVien>();
 	} else {
 		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 	}
@@ -67,20 +69,17 @@
 					<tr>
 						<th>Sổ cố vấn học tập</th>
 						<th>Sinh Viên</th>
-						<th>Mã thông tin sinh viên</th>
-						<th>Cán bộ lớp</th>
-						<th>Email</th>
-						<th>Điện thoại di động</th>
-						<th>Điện thoại gia đình</th>
-						<th>Địa chỉ báo tin</th>
+						<th>Mã khen thưởng</th>
+						<th>Nội dung khen thưởng</th>
+						<th>Thời gian khen thưởng</th>
 						<th>Xử lý</th>
 					</tr>
 				</thead>
 				<tbody>
 					<%
-						for (ThongTinSinhVien obj : list) {
+						for (ThongTinKhenThuongSinhVien obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
-							String maDoiTuong = obj.getMaThongTinSinhVien();
+							String maDoiTuong = obj.getMaThongTinKhenThuongSinhVien();
 							String tenDoiTuong = "";
 							if (obj.getSoCoVanHocTap() != null && obj.getSoCoVanHocTap().getTenSoCoVanHocTap() != null) {
 								tenDoiTuong = obj.getSoCoVanHocTap().getTenSoCoVanHocTap();
@@ -89,12 +88,9 @@
 					<tr class="odd gradeX">
 						<td><%=obj.getSoCoVanHocTap() != null && obj.getSoCoVanHocTap().getTenSoCoVanHocTap() != null ? obj.getSoCoVanHocTap().getTenSoCoVanHocTap() : ""%></td>
 						<td><%=obj.getSinhVien().getHoDem()+" "+ obj.getSinhVien().getTen()%></td>
-						<td><%=obj.getMaThongTinSinhVien()%></td>
-						<td><%=obj.getDoiTuongChinhSach()%></td>
-						<td><%=obj.getEmail()%></td>
-						<td><%=obj.getDienThoaiDiDong()%></td>
-						<td><%=obj.getDienThoaiGiaDinh()%></td>
-						<td><%=obj.getDiaChiBaoTin()%></td>
+						<td><%=obj.getMaThongTinKhenThuongSinhVien()%></td>
+						<td><%=obj.getNoiDungKhenThuong()%></td>
+						<td><%=Util_Date.dateToString2(obj.getThoiGianKhenThuong())%></td>
 						<td style="text-align: center;"><%@ include
 								file="../../ePartial/menupullcuadoituong.jsp"%></td>
 					</tr>

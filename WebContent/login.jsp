@@ -43,7 +43,7 @@
 	String err = request.getSession().getAttribute("err") + "";
 	err = err.equals("null") ? "" : err;
 %>
-<body background="content/images/background (2).jpg"
+<body background="content/images/backgroud-login.jpg"
 	style="background-repeat: no-repeat; background-size: 100% 100%; margin: 0; padding: 0">
 	<div class="container" style="margin: 0; margin-top: 20;">
 		<div class="row" style="padding-top: 30px;">
@@ -53,7 +53,7 @@
 						<p class="panel-title">
 							<img src="content/images/logo.png" width="50px" height="50px" /><br />
 							PHÂN HIỆU TRƯỜNG ĐH GTVT TẠI TP. HCM <br /> Hệ thống Cố vấn học tập trực tuyến trong đào tạo theo học chế tín chỉ.
-							UTC2 Smart
+							<br>UTC2 Smart
 						</p>
 					</div>
 					<div class="panel-body">

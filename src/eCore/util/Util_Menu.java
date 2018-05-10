@@ -46,11 +46,11 @@ public class Util_Menu {
 						+ " <span class=\"fa arrow\"></span> </span> </a>";
 				if (hashMap.containsKey(chucNang2.getMaChucNang())) {
 					TreeSet<ChucNang> treeSet2 = hashMap.get(chucNang2.getMaChucNang());
-					result += "<ul class=\"nav nav-second-level collapse\" aria-expanded=\"true\"\r\n style=\"height: 0px;\">";
+					result += "<ul class=\"nav nav-second-level\">";
 					for (ChucNang chucNang3 : treeSet2) {
 						result += "<li><a  href=index.jsp?p=" + chucNang3.duongDan + "><i class=\""
 								+ chucNang3.hinhAnh + "\"></i> <span class=\"masked\"> " + chucNang3.tenHienThi
-								+ " </span> </a>";
+								+ " </span> </a></li>";
 					}
 					result += "</ul>";
 				}

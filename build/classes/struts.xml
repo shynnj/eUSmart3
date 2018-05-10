@@ -728,7 +728,260 @@
 			<result name="FAIL">/index.jsp</result>
 		</action>
 		<!-- kết thúc xử lý báo cáo tình hình lớp -->
+		
+		
+		<!-- Xử lý Thông tin khen thưởng sinh viên -->
+		<!-- Tìm kiếm Thông tin khen thưởng sinh viên -->
+		<action name="timKiemThongTinKhenThuongSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKhenThuongSinhVien" method="search">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Tải lại Thông tin khen thưởng sinh viên -->
+		<action name="taiLaiThongTinKhenThuongSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKhenThuongSinhVien" method="refresh">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Thêm mới Thông tin khen thưởng sinh viên -->
+		<action name="themMoiThongTinKhenThuongSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKhenThuongSinhVien" method="addNew">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- Lưu Thông tin khen thưởng sinh viên -->
+		<action name="luuDuLieuThongTinKhenThuongSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKhenThuongSinhVien" method="saveOrUpdate">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiết Thông tin khen thưởng sinh viên -->
+		<action name="xemChiTietThongTinKhenThuongSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKhenThuongSinhVien" method="viewDetail">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiết và chỉnh sửa Thông tin khen thưởng sinh viên -->
+		<action name="xemChiTietVaChinhSuaThongTinKhenThuongSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKhenThuongSinhVien" method="viewDetailAndEdit">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xóa Thông tin khen thưởng sinh viên -->
+		<action name="deleteThongTinKhenThuongSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKhenThuongSinhVien" method="delete">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- kết thúc xử lý Thông tin khen thưởng sinh viên -->
 
 
+		<!-- Xử lý Thông tin sinh viên -->
+		<!-- Tìm kiếm Thông tin sinh viên -->
+		<action name="timKiemThongTinKyLuatSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKyLuatSinhVien" method="search">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Tải lại Thông tin kỷ luật sinh viên -->
+		<action name="taiLaiThongTinKyLuatSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKyLuatSinhVien" method="refresh">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Thêm mới Thông tin kỷ luật sinh viên -->
+		<action name="themMoiThongTinKyLuatSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKyLuatSinhVien" method="addNew">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- Lưu Thông tin kỷ luật sinh viên -->
+		<action name="luuDuLieuThongTinKyLuatSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKyLuatSinhVien" method="saveOrUpdate">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiết Thông tin kỷ luật sinh viên -->
+		<action name="xemChiTietThongTinKyLuatSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKyLuatSinhVien" method="viewDetail">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiết và chỉnh sửa Thông tin kỷ luật sinh viên -->
+		<action name="xemChiTietVaChinhSuaThongTinKyLuatSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKyLuatSinhVien" method="viewDetailAndEdit">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xóa Thông tin kỷ luật sinh viên -->
+		<action name="deleteThongTinKyLuatSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKyLuatSinhVien" method="delete">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- kết thúc xử lý Thông tin kỷ luật sinh viên -->
+		
+		<!-- Xử lý Thông tin sinh viên -->
+		<!-- Tìm kiếm Thông tin sinh viên -->
+		<action name="timKiemThongTinSinhVien"
+			class="eAdviser.controller.Controller_ThongTinSinhVien" method="search">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Tải lại Thông tin sinh viên -->
+		<action name="taiLaiThongTinSinhVien"
+			class="eAdviser.controller.Controller_ThongTinSinhVien" method="refresh">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Thêm mới Thông tin kỷ sinh viên -->
+		<action name="themMoiThongTinSinhVien"
+			class="eAdviser.controller.Controller_ThongTinSinhVien" method="addNew">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- Lưu Thông tin sinh viên -->
+		<action name="luuDuLieuThongTinSinhVien"
+			class="eAdviser.controller.Controller_ThongTinSinhVien" method="saveOrUpdate">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiết Thông tin sinh viên -->
+		<action name="xemChiTietThongTinSinhVien"
+			class="eAdviser.controller.Controller_ThongTinSinhVien" method="viewDetail">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiết và chỉnh sửa Thông tin sinh viên -->
+		<action name="xemChiTietVaChinhSuaThongTinSinhVien"
+			class="eAdviser.controller.Controller_ThongTinSinhVien" method="viewDetailAndEdit">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xóa Thông tin sinh viên -->
+		<action name="deleteThongTinSinhVien"
+			class="eAdviser.controller.Controller_ThongTinSinhVien" method="delete">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- kết thúc xử lý Thông tin sinh viên -->
+		
+		
+		<!-- Xử lý Thông tin sinh viên khó khăn -->
+		<!-- Tìm kiếm Thông tin sinh viên khó khăn-->
+		<action name="timKiemThongTinSinhVienKhoKhan"
+			class="eAdviser.controller.Controller_ThongTinSinhVienKhoKhan" method="search">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Tải lại Thông tin sinh viên khó khăn -->
+		<action name="taiLaiThongTinSinhVienKhoKhan"
+			class="eAdviser.controller.Controller_ThongTinSinhVienKhoKhan" method="refresh">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Thêm mới Thông tin sinh viên khó khăn -->
+		<action name="themMoiThongTinSinhVienKhoKhan"
+			class="eAdviser.controller.Controller_ThongTinSinhVienKhoKhan" method="addNew">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- Lưu Thông tin sinh viên khó khăn -->
+		<action name="luuDuLieuThongTinSinhVienKhoKhan"
+			class="eAdviser.controller.Controller_ThongTinSinhVienKhoKhan" method="saveOrUpdate">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiết Thông tin sinh viên khó khăn -->
+		<action name="xemChiTietThongTinSinhVienKhoKhan"
+			class="eAdviser.controller.Controller_ThongTinSinhVienKhoKhan" method="viewDetail">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiết và chỉnh sửa Thông tin sinh viên khó khăn -->
+		<action name="xemChiTietVaChinhSuaThongTinSinhVienKhoKhan"
+			class="eAdviser.controller.Controller_ThongTinSinhVienKhoKhan" method="viewDetailAndEdit">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xóa Thông tin sinh viên khó khăn -->
+		<action name="deleteThongTinSinhVienKhoKhan"
+			class="eAdviser.controller.Controller_ThongTinSinhVienKhoKhan" method="delete">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- kết thúc xử lý Thông tin sinh viên khó khăn -->
+		
+		
+		<!-- Xử lý Thông báo kết quả học tập và rèn luyện -->
+		<!-- Tìm kiếm Thông báo kết quả học tập và rèn luyện-->
+		<action name="timKiemThongBaoKetQuaHocTapVaRenLuyen"
+			class="eAdviser.controller.Controller_ThongBaoKetQuaHocTapVaRenLuyen" method="search">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Tải lại Thông báo kết quả học tập và rèn luyện -->
+		<action name="taiLaiThongBaoKetQuaHocTapVaRenLuyen"
+			class="eAdviser.controller.Controller_ThongBaoKetQuaHocTapVaRenLuyen" method="refresh">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Thêm mới Thông báo kết quả học tập và rèn luyện -->
+		<action name="themMoiThongBaoKetQuaHocTapVaRenLuyen"
+			class="eAdviser.controller.Controller_ThongBaoKetQuaHocTapVaRenLuyen" method="addNew">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- Lưu Thông báo kết quả học tập và rèn luyện -->
+		<action name="luuDuLieuThongBaoKetQuaHocTapVaRenLuyen"
+			class="eAdviser.controller.Controller_ThongBaoKetQuaHocTapVaRenLuyen" method="saveOrUpdate">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiết Thông báo kết quả học tập và rèn luyện -->
+		<action name="xemChiTietThongBaoKetQuaHocTapVaRenLuyen"
+			class="eAdviser.controller.Controller_ThongBaoKetQuaHocTapVaRenLuyen" method="viewDetail">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xem chi tiết và chỉnh sửa Thông báo kết quả học tập và rèn luyện -->
+		<action name="xemChiTietVaChinhSuaThongBaoKetQuaHocTapVaRenLuyen"
+			class="eAdviser.controller.Controller_ThongBaoKetQuaHocTapVaRenLuyen" method="viewDetailAndEdit">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+
+		<!-- Xóa Thông báo kết quả học tập và rèn luyện -->
+		<action name="deleteThongBaoKetQuaHocTapVaRenLuyen"
+			class="eAdviser.controller.Controller_ThongBaoKetQuaHocTapVaRenLuyen" method="delete">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<!-- kết thúc xử lý Thông báo kết quả học tập và rèn luyện -->
+		
 	</package>
 </struts>

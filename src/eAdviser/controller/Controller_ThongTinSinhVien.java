@@ -196,8 +196,8 @@ public class Controller_ThongTinSinhVien extends ThongTinSinhVien implements ZEC
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		String maobj = request.getParameter("maobj");
-		BienBanSinhHoatLop obj = new BienBanSinhHoatLop();
-		obj.setMaBienBanSinhHoatLop(maobj);
+		ThongTinSinhVien obj = new ThongTinSinhVien();
+		obj.setMaThongTinSinhVien(maobj);
 		if (dao.delete(obj)) {
 			session.setAttribute("msg", "Xóa dữ liệu thành công");
 			session.setAttribute("p", duongDanTrang);
@@ -213,7 +213,7 @@ public class Controller_ThongTinSinhVien extends ThongTinSinhVien implements ZEC
 		HttpSession session = request.getSession();
 		String column = getTimKiemTheo();
 		String key = getTuKhoa();
-		ArrayList<BienBanSinhHoatLop> arr = dao.listByColumnLike(column, key);
+		ArrayList<ThongTinSinhVien> arr = dao.listByColumnLike(column, key);
 		session.setAttribute("arr", arr);
 		session.setAttribute("checkTimKiem", "true");
 		session.setAttribute("p", duongDanTrang);

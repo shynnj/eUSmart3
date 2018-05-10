@@ -1,4 +1,5 @@
 package eAdviser.controller;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,48 +8,32 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import eAdviser.model.BienBanSinhHoatLop;
 import eAdviser.model.CoVanHocTap;
+import eAdviser.model.PhanCongCoVanHocTap;
 import eAdviser.model.SoCoVanHocTap;
-import eAdviser.model.ThongTinSinhVien;
-import eAdviser.model.ThongTinSinhVienKhoKhan;
-import eAdviser.modelDao.DAO_BienBanSinhHoatLop;
+import eAdviser.model.ThongBaoKetQuaHocTapVaRenLuyen;
+import eAdviser.modelDao.DAO_CoVanHocTap;
+import eAdviser.modelDao.DAO_PhanCongCoVanHocTap;
 import eAdviser.modelDao.DAO_SoCoVanHocTap;
-import eAdviser.modelDao.DAO_ThongTinSinhVien;
-import eAdviser.modelDao.DAO_ThongTinSinhVienKhoKhan;
+import eAdviser.modelDao.DAO_ThongBaoKetQuaHocTapVaRenLuyen;
 import eCore.controller.ZEController;
 import eCore.dao.ObjectDAO;
-import eCore.model.DonVi;
 import eCore.model.SinhVien;
 import eCore.modelDao.DAO_SinhVien;
-import eCore.util.Util_Date;
 
-public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan implements ZEController{
+public class Controller_ThongBaoKetQuaHocTapVaRenLuyen extends ThongBaoKetQuaHocTapVaRenLuyen implements ZEController {
 
-	ObjectDAO dao=new DAO_ThongTinSinhVienKhoKhan();
-	
+	ObjectDAO dao = new DAO_ThongBaoKetQuaHocTapVaRenLuyen();
 	String timKiemTheo;
 	String tuKhoa;
-	String duongDanTrang = "eAdviser/pages/thongtinsinhvienkhokhans.jsp";
-	String duongDanTrangView = "eAdviser/pages/thongtinsinhvienkhokhan.jsp";
-	String tenCotTimDoiTuong = "maThongTinSinhVienKhoKhan";
+	String duongDanTrang = "eAdviser/pages/thongbaoketquahoctapvarenluyens.jsp";
+	String duongDanTrangView = "eAdviser/pages/thongbaoketquahoctapvarenluyen.jsp";
+	String tenCotTimDoiTuong = "maThongBaoKetQuaHocTapVaRenLuyen";
 	String maObj;
+	String maCoVanHocTap;
 	String maSoCoVanHocTap;
 	String maSinhVien;
-	String s_thoiGianGhiNhan;
-	
-	
-	public String getS_thoiGianGhiNhan() {
-		return s_thoiGianGhiNhan;
-	}
 
-	public void setS_thoiGianGhiNhan(String s_thoiGianGhiNhan) {
-		this.s_thoiGianGhiNhan = s_thoiGianGhiNhan;
-	}
-
-	public Date getThoiGianGhiNhan() {
-		return Util_Date.stringToDate(getS_thoiGianGhiNhan());
-	}
 	public String getTimKiemTheo() {
 		return timKiemTheo;
 	}
@@ -97,6 +82,23 @@ public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan 
 		this.maObj = maObj;
 	}
 
+	public String getMaCoVanHocTap() {
+		return maCoVanHocTap;
+	}
+
+	public void setMaCoVanHocTap(String maCoVanHocTap) {
+		this.maCoVanHocTap = maCoVanHocTap;
+	}
+	
+	public CoVanHocTap getCoVanHocTap() {
+		ObjectDAO dao_CoVanHocTap = new DAO_CoVanHocTap();
+		ArrayList<CoVanHocTap> list_coVanHocTap = dao_CoVanHocTap.listByColumns("maCoVanHocTap", getMaCoVanHocTap());
+		if (list_coVanHocTap.size() > 0)
+			return list_coVanHocTap.get(0);
+		else
+			return null;
+	}
+
 	public String getMaSoCoVanHocTap() {
 		return maSoCoVanHocTap;
 	}
@@ -104,6 +106,7 @@ public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan 
 	public void setMaSoCoVanHocTap(String maSoCoVanHocTap) {
 		this.maSoCoVanHocTap = maSoCoVanHocTap;
 	}
+	
 	public SoCoVanHocTap getSoCoVanHocTap() {
 		ObjectDAO dao_soCoVanHocTap = new DAO_SoCoVanHocTap();
 		ArrayList<SoCoVanHocTap> list = dao_soCoVanHocTap.listByColumns("maSoCoVanHocTap", getMaSoCoVanHocTap());
@@ -112,7 +115,7 @@ public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan 
 		else
 			return null;
 	}
-
+	
 	public String getMaSinhVien() {
 		return maSinhVien;
 	}
@@ -120,7 +123,7 @@ public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan 
 	public void setMaSinhVien(String maSinhVien) {
 		this.maSinhVien = maSinhVien;
 	}
-
+	
 	public SinhVien getSinhVien(){
 		ObjectDAO dao_sinhVien = new DAO_SinhVien();
 		ArrayList<SinhVien> list_sinhvien = dao_sinhVien.listByColumns("maSinhVien", getMaSinhVien());
@@ -145,12 +148,12 @@ public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan 
 	public String viewDetail() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
-		
+
 		String maobj = request.getParameter("maobj");
-		
+
 		session.setAttribute("mode", "viewDetail");
 
-		ArrayList<ThongTinSinhVienKhoKhan> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
+		ArrayList<ThongBaoKetQuaHocTapVaRenLuyen> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
 		if (arr.size() > 0) {
 			session.setAttribute("obj", arr.get(0));
 			session.setAttribute("p", duongDanTrangView);
@@ -168,7 +171,7 @@ public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan 
 
 		String maobj = request.getParameter("maobj");
 		session.setAttribute("mode", "viewDetailAndEdit");
-		ArrayList<ThongTinSinhVienKhoKhan> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
+		ArrayList<ThongBaoKetQuaHocTapVaRenLuyen> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
 		if (arr.size() > 0) {
 			session.setAttribute("obj", arr.get(0));
 			session.setAttribute("p", duongDanTrangView);
@@ -183,15 +186,19 @@ public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 
-		ThongTinSinhVienKhoKhan obj = new ThongTinSinhVienKhoKhan();
+		ThongBaoKetQuaHocTapVaRenLuyen obj = new ThongBaoKetQuaHocTapVaRenLuyen();
+		obj.coVanHocTap = getCoVanHocTap();
 		obj.soCoVanHocTap=getSoCoVanHocTap();
-		obj.sinhVien = getSinhVien();
-		obj.maThongTinSinhVienKhoKhan = getMaThongTinSinhVienKhoKhan();
-		obj.hoanCanhGiaDinh = getHoanCanhGiaDinh();
-		obj.lyDo=getLyDo();
-		obj.deXuat= getDeXuat();
-		obj.thoiGianGhiNhan=getThoiGianGhiNhan();
-		obj.moTa=getMoTa();
+		obj.sinhVien=getSinhVien();
+		obj.maThongBaoKetQuaHocTapVaRenLuyen = getMaThongBaoKetQuaHocTapVaRenLuyen();
+		obj.hocKy = getHocKy();
+		obj.namHoc = getNamHoc();
+		obj.ketQuaHocTap=getKetQuaHocTap();
+		obj.xepLoaiHocTap=getXepLoaiHocTap();
+		obj.ketQuaRenLuyen=getKetQuaRenLuyen();
+		obj.xepLoaiRenLuyen=getXepLoaiRenLuyen();
+		obj.thongBaoCuThe=getThongBaoCuThe();
+		obj.moTa = getMoTa();
 		obj.ghiChu = getGhiChu();
 		obj.thoiGianCapNhat = new Date();
 		if (dao.saveOrUpdate(obj)) {
@@ -210,8 +217,8 @@ public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		String maobj = request.getParameter("maobj");
-		ThongTinSinhVienKhoKhan obj = new ThongTinSinhVienKhoKhan();
-		obj.setMaThongTinSinhVienKhoKhan(maobj);
+		ThongBaoKetQuaHocTapVaRenLuyen obj = new ThongBaoKetQuaHocTapVaRenLuyen();
+		obj.setMaThongBaoKetQuaHocTapVaRenLuyen(maobj);
 		if (dao.delete(obj)) {
 			session.setAttribute("msg", "Xóa dữ liệu thành công");
 			session.setAttribute("p", duongDanTrang);
@@ -227,7 +234,7 @@ public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan 
 		HttpSession session = request.getSession();
 		String column = getTimKiemTheo();
 		String key = getTuKhoa();
-		ArrayList<ThongTinSinhVienKhoKhan> arr = dao.listByColumnLike(column, key);
+		ArrayList<ThongBaoKetQuaHocTapVaRenLuyen> arr = dao.listByColumnLike(column, key);
 		session.setAttribute("arr", arr);
 		session.setAttribute("checkTimKiem", "true");
 		session.setAttribute("p", duongDanTrang);
@@ -257,6 +264,4 @@ public class Controller_ThongTinSinhVienKhoKhan extends ThongTinSinhVienKhoKhan 
 		return null;
 	}
 
-	
-	
 }

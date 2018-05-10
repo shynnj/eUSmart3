@@ -1,3 +1,5 @@
+<%@page import="eAdviser.model.ThongTinSinhVienKhoKhan"%>
+<%@page import="eAdviser.model.ThongTinKhenThuongSinhVien"%>
 <%@page import="eCore.model.SinhVien"%>
 <%@page import="eCore.modelDao.DAO_SinhVien"%>
 <%@page import="eAdviser.modelDao.DAO_SoCoVanHocTap"%>
@@ -18,13 +20,13 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String tenLop = "ThongTinSinhVien";
-	String tenTrang = "Quản lý thông tin sinh viên";
-	String trangDanhSach = "index.jsp?p=eAdviser/pages/thongtinsinhviens.jsp";
-	String[] tk_value = { "soCoVanHocTap", "sinhVien", "maThongTinSinhVien", "doiTuongChinhSach", "canBoLop",
-			"email", "dienThoaiDiDong", "dienThoaiGiaDinh", "diaChiBaoTin" };
-	String[] tk_show = { "Sổ cố vấn học tập", "Sinh viên", "Mã thông tin sinh viên", "Đối tượng chính sách",
-			"Cán bộ lớp", "Email", "Điện thoại di động", "Điện thoại gia đình", "Địa chỉ báo tin" };
+	String tenLop = "ThongTinSinhVienKhoKhan";
+	String tenTrang = "Quản lý thông tin  sinh viên khó khăn";
+	String trangDanhSach = "index.jsp?p=eAdviser/pages/thongtinsinhvienkhokhans.jsp";
+	String[] tk_value = { "soCoVanHocTap", "sinhVien", "maThongTinSinhVienKhoKhan", "hoanCanhGiaDinh",
+			"lyDo","deXuat","thoiGianGhiNhan" };
+	String[] tk_show = { "Sổ cố vấn học tập", "Sinh viên", "Mã thông tin sinh viên khó khăn","Hoàn cảnh gia đình",
+			"Lý do", "Đề xuất","Thời gian ghi nhận" };
 %>
 <%@ include file="../../ePartial/code-header.jsp"%>
 
@@ -39,10 +41,10 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	ThongTinSinhVien obj = null;
+	ThongTinSinhVienKhoKhan obj = null;
 	if (session.getAttribute("obj") != null) {
-		if (session.getAttribute("obj") instanceof ThongTinSinhVien) {
-			obj = (ThongTinSinhVien) session.getAttribute("obj");
+		if (session.getAttribute("obj") instanceof ThongTinSinhVienKhoKhan) {
+			obj = (ThongTinSinhVienKhoKhan) session.getAttribute("obj");
 		}
 	}
 %>
@@ -107,12 +109,12 @@
 												if (obj != null && obj.getSinhVien() != null
 														&& obj.getSinhVien().getMaSinhVien().equals(sv.getMaSinhVien())) {
 										%>
-										<option value="<%=sv.maSinhVien%>" selected="selected"><%=sv.getHoDem()+" "+sv.getTen()%>
+										<option value="<%=sv.maSinhVien%>" selected="selected"><%=sv.getHoDem() + " " + sv.getTen()%>
 										</option>
 										<%
 											} else {
 										%>
-										<option value="<%=sv.maSinhVien%>"><%=sv.getHoDem()+" "+sv.getTen()%>
+										<option value="<%=sv.maSinhVien%>"><%=sv.getHoDem() + " " + sv.getTen()%>
 										</option>
 										<%
 											}
@@ -121,51 +123,30 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label>Mã thông tin sinh viên</label> <input class="form-control"
-										name="maThongTinSinhVien"
-										value="<%=(obj != null ? obj.getMaThongTinSinhVien() : "")%>"
+									<label>Mã thông tin sinh viên khó khăn</label> <input
+										class="form-control" name="maThongTinSinhVienKhoKhan"
+										value="<%=(obj != null ? obj.getMaThongTinSinhVienKhoKhan() : "")%>"
 										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Đối tượng chính sách</label> <input
-										class="form-control" name="doiTuongChinhSach"
-										value="<%=(obj != null ? obj.getDoiTuongChinhSach() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
+									<label>Lý do</label> <textarea class="form-control"
+										name="lyDo" 								
+										<%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getLyDo() : "")%></textarea>
 								</div>
 								<div class="form-group">
-									<label>Cán bộ lớp</label> <input
-										class="form-control" name="canBoLop"
-										value="<%=(obj != null ? obj.getCanBoLop() : "")%>"
+									<label>Đề xuất</label> <textarea class="form-control"
+										name="deXuat" 								
+										<%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getDeXuat() : "")%></textarea>
+								</div>
+								<div class="form-group">
+									<label>Thời gian ghi nhận</label> <input type="date" class="form-control"
+										name="s_thoiGianGhiNhan"
+										value="<%=(obj != null ? Util_Date.dateToString(obj.getThoiGianGhiNhan()) : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 							</div>
-								
-							<div class="col-lg-6">
-								<div class="form-group">
-									<label>Email</label> <input
-										class="form-control" name="email"
-										value="<%=(obj != null ? obj.getEmail() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Điện thoại di động</label> <input
-										class="form-control" name="dienThoaiDiDong"
-										value="<%=(obj != null ? obj.getDienThoaiDiDong() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Điện thoại gia đình</label> <input
-										class="form-control" name="dienThoaiGiaDinh"
-										value="<%=(obj != null ? obj.getDienThoaiGiaDinh() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Địa chỉ báo tin</label> <input
-										class="form-control" name="diaChiBaoTin"
-										value="<%=(obj != null ? obj.getDiaChiBaoTin() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
-								</div>
-							</div>
+
+							
 						</div>
 						<div class="row">
 							<div class="col-lg-12">

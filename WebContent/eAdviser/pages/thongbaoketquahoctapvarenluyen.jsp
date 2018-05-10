@@ -1,10 +1,13 @@
+<%@page import="eAdviser.model.ThongBaoKetQuaHocTapVaRenLuyen"%>
 <%@page import="eCore.model.SinhVien"%>
 <%@page import="eCore.modelDao.DAO_SinhVien"%>
-<%@page import="eAdviser.modelDao.DAO_SoCoVanHocTap"%>
-<%@page import="eAdviser.model.ThongTinSinhVien"%>
 <%@page import="eCore.util.Util_Date"%>
+<%@page import="eCore.model.NamHoc"%>
+<%@page import="eCore.modelDao.DAO_NamHoc"%>
 <%@page import="eAdviser.model.SoCoVanHocTap"%>
-<%@page import="eCore.modelDao.DAO_Lop"%>
+<%@page import="eAdviser.modelDao.DAO_SoCoVanHocTap"%>
+<%@page import="eAdviser.modelDao.DAO_CoVanHocTap"%>
+<%@page import="eAdviser.model.PhanCongCoVanHocTap"%>
 <%@page import="eCore.model.NhanVien"%>
 <%@page import="eCore.modelDao.DAO_NhanVien"%>
 <%@page import="eAdviser.model.CoVanHocTap"%>
@@ -18,13 +21,15 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	String tenLop = "ThongTinSinhVien";
-	String tenTrang = "Quản lý thông tin sinh viên";
-	String trangDanhSach = "index.jsp?p=eAdviser/pages/thongtinsinhviens.jsp";
-	String[] tk_value = { "soCoVanHocTap", "sinhVien", "maThongTinSinhVien", "doiTuongChinhSach", "canBoLop",
-			"email", "dienThoaiDiDong", "dienThoaiGiaDinh", "diaChiBaoTin" };
-	String[] tk_show = { "Sổ cố vấn học tập", "Sinh viên", "Mã thông tin sinh viên", "Đối tượng chính sách",
-			"Cán bộ lớp", "Email", "Điện thoại di động", "Điện thoại gia đình", "Địa chỉ báo tin" };
+	String tenLop = "ThongBaoKetQuaHocTapVaRenLuyen";
+	String tenTrang = "Quản lý thông báo kết quả và rèn luyện";
+	String trangDanhSach = "index.jsp?p=eAdviser/pages/thongbaoketquahoctapvarenluyens.jsp";
+	String[] tk_value = { "coVanHocTap", "soCoVanHocTap", "sinhVien", "maThongBaoKetQuaHocTapVaRenLuyen",
+			"hocKy", "namHoc", "ketQuaHocTap", "xepLoaiHocTap", "ketQuaRenLuyen", "xepLoaiRenLuyen",
+			"thongBaoCuThe" };
+	String[] tk_show = { "Cố vấn học tập", "Sổ cố vấn học tập", "Sinh viên", "Học kỳ", "Năm học",
+			"Kết quả học tập", "Xếp loại học tập", "Kết quả rèn luyện", "Xếp loại rèn luyện",
+			"Thông báo cụ thể" };
 %>
 <%@ include file="../../ePartial/code-header.jsp"%>
 
@@ -39,12 +44,9 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	ThongTinSinhVien obj = null;
-	if (session.getAttribute("obj") != null) {
-		if (session.getAttribute("obj") instanceof ThongTinSinhVien) {
-			obj = (ThongTinSinhVien) session.getAttribute("obj");
-		}
-	}
+	ThongBaoKetQuaHocTapVaRenLuyen obj = session.getAttribute("obj") != null
+			? (ThongBaoKetQuaHocTapVaRenLuyen) session.getAttribute("obj")
+			: null;
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -77,22 +79,32 @@
 								<div class="form-group">
 									<label>Sổ cố vấn học tập</label> <select class="form-control"
 										name="maSoCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
+										<option value=""></option>
 										<%
-											ObjectDAO objdao = new DAO_SoCoVanHocTap();
-											ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objdao.listAll();
+											ObjectDAO objdaoSoCoVanHocTap = new DAO_SoCoVanHocTap();
+											ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objdaoSoCoVanHocTap.listAll();
 											for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
-												if (obj != null && obj.getSoCoVanHocTap() != null
-														&& obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap())) {
 										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>" selected="selected"><%=scvht.getTenSoCoVanHocTap()%>
-										</option>
-										<%
-											} else {
-										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>"><%=scvht.getTenSoCoVanHocTap()%>
-										</option>
+										<option value="<%=scvht.maSoCoVanHocTap%>"
+											<%=obj != null && obj.getSoCoVanHocTap().maSoCoVanHocTap.equals(scvht.maSoCoVanHocTap) ? "selected"
+								: ""%>><%=scvht.tenSoCoVanHocTap%></option>
 										<%
 											}
+										%>
+									</select>
+								</div>
+								<div class="form-group">
+									<label>Cố vấn học tập</label> <select class="form-control"
+										name="maCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
+										<option value=""></option>
+										<%
+											ObjectDAO objdaoCoVanHocTap = new DAO_CoVanHocTap();
+											ArrayList<CoVanHocTap> listCoVanHocTap = objdaoCoVanHocTap.listAll();
+											for (CoVanHocTap cvht : listCoVanHocTap) {
+										%>
+										<option value="<%=cvht.maCoVanHocTap%>"
+											<%=obj != null && obj.getCoVanHocTap().maCoVanHocTap.equals(cvht.maCoVanHocTap) ? "selected" : ""%>><%=cvht.nhanVien.tenNhanVien%></option>
+										<%
 											}
 										%>
 									</select>
@@ -100,69 +112,63 @@
 								<div class="form-group">
 									<label>Sinh viên</label> <select class="form-control"
 										name="maSinhVien" <%=(modeView ? " disabled " : "")%>>
+										<option value=""></option>
 										<%
-											ObjectDAO objdaosv = new DAO_SinhVien();
-											ArrayList<SinhVien> listSinhVien = objdaosv.listAll();
+											ObjectDAO objdaoSinhVien = new DAO_SinhVien();
+											ArrayList<SinhVien> listSinhVien = objdaoSinhVien.listAll();
 											for (SinhVien sv : listSinhVien) {
-												if (obj != null && obj.getSinhVien() != null
-														&& obj.getSinhVien().getMaSinhVien().equals(sv.getMaSinhVien())) {
 										%>
-										<option value="<%=sv.maSinhVien%>" selected="selected"><%=sv.getHoDem()+" "+sv.getTen()%>
-										</option>
+										<option value="<%=sv.maSinhVien%>"
+											<%=obj != null && obj.getSinhVien().maSinhVien.equals(sv.maSinhVien) ? "selected"
+								: ""%>><%=sv.hoDem +" "+sv.ten%></option>
 										<%
-											} else {
-										%>
-										<option value="<%=sv.maSinhVien%>"><%=sv.getHoDem()+" "+sv.getTen()%>
-										</option>
-										<%
-											}
 											}
 										%>
 									</select>
 								</div>
 								<div class="form-group">
-									<label>Mã thông tin sinh viên</label> <input class="form-control"
-										name="maThongTinSinhVien"
-										value="<%=(obj != null ? obj.getMaThongTinSinhVien() : "")%>"
-										<%=(modeView || modeEdit ? " readonly " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Đối tượng chính sách</label> <input
-										class="form-control" name="doiTuongChinhSach"
-										value="<%=(obj != null ? obj.getDoiTuongChinhSach() : "")%>"
+									<label>Học kỳ</label> <input class="form-control"
+										name="hocKy"
+										value="<%=(obj != null ? obj.getHocKy() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Cán bộ lớp</label> <input
-										class="form-control" name="canBoLop"
-										value="<%=(obj != null ? obj.getCanBoLop() : "")%>"
+									<label>Năm học</label> <input class="form-control"
+										name="namHoc"
+										value="<%=(obj != null ? obj.getNamHoc() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
-							</div>
 								
+							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Email</label> <input
-										class="form-control" name="email"
-										value="<%=(obj != null ? obj.getEmail() : "")%>"
+									<label>Kết quả học tập</label> <input class="form-control"
+										name="ketQuaHocTap"
+										value="<%=(obj != null ? obj.getKetQuaHocTap() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Điện thoại di động</label> <input
-										class="form-control" name="dienThoaiDiDong"
-										value="<%=(obj != null ? obj.getDienThoaiDiDong() : "")%>"
+									<label>Xếp loại học tập</label> <input class="form-control"
+										name="xepLoaiHocTap"
+										value="<%=(obj != null ? obj.getXepLoaiHocTap() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Điện thoại gia đình</label> <input
-										class="form-control" name="dienThoaiGiaDinh"
-										value="<%=(obj != null ? obj.getDienThoaiGiaDinh() : "")%>"
+									<label>Kết quả rèn luyện</label> <input class="form-control"
+										name="ketQuaRenLuyen"
+										value="<%=(obj != null ? obj.getKetQuaRenLuyen() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Địa chỉ báo tin</label> <input
-										class="form-control" name="diaChiBaoTin"
-										value="<%=(obj != null ? obj.getDiaChiBaoTin() : "")%>"
+									<label>Xếp loại rèn luyện</label> <input class="form-control"
+										name="xepLoaiRenLuyen"
+										value="<%=(obj != null ? obj.getKetQuaRenLuyen() : "")%>"
+										<%=(modeView ? " disabled " : "")%>>
+								</div>
+								<div class="form-group">
+									<label>Thông báo cụ thể</label> <input class="form-control"
+										name="thongBaoCuThe"
+										value="<%=(obj != null ? obj.getThongBaoCuThe() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 							</div>

@@ -74,26 +74,28 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Thuộc Sổ cố vấn học tập</label> <select
+									<label>Thuộc Sổ cố vấn học tập</label> 
+									<select
 										class="form-control" name="maSoCoVanHocTap"
 										<%=(modeView ? " disabled " : "")%>>
 										<%
 											ObjectDAO objdao = new DAO_SoCoVanHocTap();
 											ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objdao.listAll();
 											for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
-												if(obj != null && obj.getSoCoVanHocTap() != null && obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap()))
-												{
+												if (obj != null && obj.getSoCoVanHocTap() != null
+														&& obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap())) {
 										%>
 										<option value="<%=scvht.maSoCoVanHocTap%>" selected="selected"><%=scvht.getTenSoCoVanHocTap()%>
 										</option>
 										<%
-											}
-												else {
-													%>
+											} else {
+										%>
 										<option value="<%=scvht.maSoCoVanHocTap%>"><%=scvht.getTenSoCoVanHocTap()%>
 										</option>
-										<%} 
-											}%>
+										<%
+											}
+											}
+										%>
 									</select>
 								</div>
 								<div class="form-group">
@@ -103,13 +105,19 @@
 											ObjectDAO objdaoCoVanHocTap = new DAO_CoVanHocTap();
 											ArrayList<CoVanHocTap> listCoVanHocTap = objdaoCoVanHocTap.listAll();
 											for (CoVanHocTap cvht : listCoVanHocTap) {
+												if (obj != null && obj.getCoVanHocTap() != null
+														&& obj.getCoVanHocTap().getMaCoVanHocTap().equals(cvht.getMaCoVanHocTap())) {
 										%>
-										<option value="<%=cvht.maCoVanHocTap%>"
-											<%=obj != null && obj.getCoVanHocTap().getNhanVien().getTenNhanVien().equals(cvht.maCoVanHocTap)
-						? "selected"
-						: ""%>><%=cvht.getNhanVien().tenNhanVien%>
+										<option value="<%=cvht.maCoVanHocTap%>" selected="selected"><%=cvht.getNhanVien().tenNhanVien%>
 										</option>
 										<%
+											} else {
+										%>
+										<option value="<%=cvht.maCoVanHocTap%>"><%=cvht.getNhanVien().tenNhanVien%>
+										</option>
+
+										<%
+											}
 											}
 										%>
 									</select>
