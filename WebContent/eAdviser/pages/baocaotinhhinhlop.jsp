@@ -74,8 +74,7 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Thuộc Sổ cố vấn học tập</label> 
-									<select
+									<label>Thuộc Sổ cố vấn học tập</label> <select
 										class="form-control" name="maSoCoVanHocTap"
 										<%=(modeView ? " disabled " : "")%>>
 										<%

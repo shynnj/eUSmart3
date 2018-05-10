@@ -34,8 +34,13 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	SoCoVanHocTap obj = session.getAttribute("obj") != null ? (SoCoVanHocTap) session.getAttribute("obj")
-			: null;
+
+	SoCoVanHocTap obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof SoCoVanHocTap) {
+			obj = (SoCoVanHocTap) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -66,16 +71,25 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Lớp</label> <select class="form-control" name="maLop"
+									<label>Lớp</label> <select
+										class="form-control" name="maLop"
 										<%=(modeView ? " disabled " : "")%>>
 										<%
-											ObjectDAO objdao = new DAO_Lop();
-											ArrayList<Lop> listLop = objdao.listAll();
+											ObjectDAO objdaoLop = new DAO_Lop();
+											ArrayList<Lop> listLop = objdaoLop.listAll();
 											for (Lop l : listLop) {
+												if (obj != null && obj.getLop() != null
+														&& obj.getLop().getMaLop().equals(l.getMaLop())) {
 										%>
-										<option value="<%=l.maLop%>"
-											<%=obj != null && obj.getLop().maLop.equals(l.maLop) ? "selected" : ""%>><%=l.tenLop%></option>
+										<option value="<%=l.maLop%>" selected="selected"><%=l.getTenLop()%>
+										</option>
 										<%
+											} else {
+										%>
+										<option value="<%=l.maLop%>"><%=l.getTenLop()%>
+										</option>
+										<%
+											}
 											}
 										%>
 									</select>

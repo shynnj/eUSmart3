@@ -38,9 +38,12 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	BienBanSinhHoatLop obj = session.getAttribute("obj") != null
-			? (BienBanSinhHoatLop) session.getAttribute("obj")
-			: null;
+	BienBanSinhHoatLop obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof BienBanSinhHoatLop) {
+			obj = (BienBanSinhHoatLop) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -71,18 +74,26 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Sổ cố vấn học tập</label> <select class="form-control"
-										name="maSoCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
+									<label>Thuộc Sổ cố vấn học tập</label> 
+									<select
+										class="form-control" name="maSoCoVanHocTap"
+										<%=(modeView ? " disabled " : "")%>>
 										<%
 											ObjectDAO objdao = new DAO_SoCoVanHocTap();
 											ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objdao.listAll();
 											for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
+												if (obj != null && obj.getSoCoVanHocTap() != null
+														&& obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap())) {
 										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>"
-											<%=obj != null && obj.getSoCoVanHocTap().maSoCoVanHocTap.equals(scvht.maSoCoVanHocTap) ? "selected"
-								: ""%>><%=scvht.tenSoCoVanHocTap%>
+										<option value="<%=scvht.maSoCoVanHocTap%>" selected="selected"><%=scvht.getTenSoCoVanHocTap()%>
 										</option>
 										<%
+											} else {
+										%>
+										<option value="<%=scvht.maSoCoVanHocTap%>"><%=scvht.getTenSoCoVanHocTap()%>
+										</option>
+										<%
+											}
 											}
 										%>
 									</select>

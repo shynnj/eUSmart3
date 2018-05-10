@@ -30,7 +30,12 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	CoVanHocTap obj = session.getAttribute("obj") != null ? (CoVanHocTap) session.getAttribute("obj") : null;
+	CoVanHocTap obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof CoVanHocTap) {
+			obj = (CoVanHocTap) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -69,15 +74,22 @@
 								<div class="form-group">
 									<label>Nhân viên</label> <select class="form-control"
 										name="maNhanVien" <%=(modeView ? " disabled " : "")%>>
-										<option value=""></option>
 										<%
 											ObjectDAO objdao = new DAO_NhanVien();
-											ArrayList<NhanVien> listNhanVien= objdao.listAll();
+											ArrayList<NhanVien> listNhanVien = objdao.listAll();
 											for (NhanVien nv : listNhanVien) {
+												if (obj != null && obj.getNhanVien() != null
+														&& obj.getNhanVien().getMaNhanVien().equals(nv.getMaNhanVien())) {
 										%>
-										<option value="<%=nv.maNhanVien%>" <%=obj != null && obj.getNhanVien().maNhanVien.equals(nv.maNhanVien) ? "selected" : ""%>
-										><%=nv.tenNhanVien%></option>
+										<option value="<%=nv.maNhanVien%>" selected="selected"><%=nv.getTenNhanVien()%>
+										</option>
 										<%
+											} else {
+										%>
+										<option value="<%=nv.maNhanVien%>"><%=nv.getTenNhanVien()%>
+										</option>
+										<%
+											}
 											}
 										%>
 									</select>

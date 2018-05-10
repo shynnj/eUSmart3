@@ -44,9 +44,12 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	ThongBaoKetQuaHocTapVaRenLuyen obj = session.getAttribute("obj") != null
-			? (ThongBaoKetQuaHocTapVaRenLuyen) session.getAttribute("obj")
-			: null;
+	ThongBaoKetQuaHocTapVaRenLuyen obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof ThongBaoKetQuaHocTapVaRenLuyen) {
+			obj = (ThongBaoKetQuaHocTapVaRenLuyen) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -77,18 +80,25 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Sổ cố vấn học tập</label> <select class="form-control"
-										name="maSoCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
-										<option value=""></option>
+									<label>Sổ cố vấn học tập</label> <select
+										class="form-control" name="maSoCoVanHocTap"
+										<%=(modeView ? " disabled " : "")%>>
 										<%
 											ObjectDAO objdaoSoCoVanHocTap = new DAO_SoCoVanHocTap();
 											ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objdaoSoCoVanHocTap.listAll();
 											for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
+												if (obj != null && obj.getSoCoVanHocTap() != null
+														&& obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap())) {
 										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>"
-											<%=obj != null && obj.getSoCoVanHocTap().maSoCoVanHocTap.equals(scvht.maSoCoVanHocTap) ? "selected"
-								: ""%>><%=scvht.tenSoCoVanHocTap%></option>
+										<option value="<%=scvht.maSoCoVanHocTap%>" selected="selected"><%=scvht.getTenSoCoVanHocTap()%>
+										</option>
 										<%
+											} else {
+										%>
+										<option value="<%=scvht.maSoCoVanHocTap%>"><%=scvht.getTenSoCoVanHocTap()%>
+										</option>
+										<%
+											}
 											}
 										%>
 									</select>
@@ -96,39 +106,52 @@
 								<div class="form-group">
 									<label>Cố vấn học tập</label> <select class="form-control"
 										name="maCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
-										<option value=""></option>
 										<%
 											ObjectDAO objdaoCoVanHocTap = new DAO_CoVanHocTap();
 											ArrayList<CoVanHocTap> listCoVanHocTap = objdaoCoVanHocTap.listAll();
 											for (CoVanHocTap cvht : listCoVanHocTap) {
+												if (obj != null && obj.getCoVanHocTap() != null
+														&& obj.getCoVanHocTap().getMaCoVanHocTap().equals(cvht.getMaCoVanHocTap())) {
 										%>
-										<option value="<%=cvht.maCoVanHocTap%>"
-											<%=obj != null && obj.getCoVanHocTap().maCoVanHocTap.equals(cvht.maCoVanHocTap) ? "selected" : ""%>><%=cvht.nhanVien.tenNhanVien%></option>
+										<option value="<%=cvht.maCoVanHocTap%>" selected="selected"><%=cvht.getNhanVien().tenNhanVien%>
+										</option>
 										<%
+											} else {
+										%>
+										<option value="<%=cvht.maCoVanHocTap%>"><%=cvht.getNhanVien().tenNhanVien%>
+										</option>
+
+										<%
+											}
 											}
 										%>
 									</select>
 								</div>
 								<div class="form-group">
-									<label>Sinh viên</label> <select class="form-control"
+									<label>Sinh viên</label><select class="form-control"
 										name="maSinhVien" <%=(modeView ? " disabled " : "")%>>
-										<option value=""></option>
 										<%
-											ObjectDAO objdaoSinhVien = new DAO_SinhVien();
-											ArrayList<SinhVien> listSinhVien = objdaoSinhVien.listAll();
+											ObjectDAO objdaosv = new DAO_SinhVien();
+											ArrayList<SinhVien> listSinhVien = objdaosv.listAll();
 											for (SinhVien sv : listSinhVien) {
+												if (obj != null && obj.getSinhVien() != null
+														&& obj.getSinhVien().getMaSinhVien().equals(sv.getMaSinhVien())) {
 										%>
-										<option value="<%=sv.maSinhVien%>"
-											<%=obj != null && obj.getSinhVien().maSinhVien.equals(sv.maSinhVien) ? "selected"
-								: ""%>><%=sv.hoDem +" "+sv.ten%></option>
+										<option value="<%=sv.maSinhVien%>" selected="selected"><%=sv.getHoDem() + " " + sv.getTen()%>
+										</option>
 										<%
+											} else {
+										%>
+										<option value="<%=sv.maSinhVien%>"><%=sv.getHoDem() + " " + sv.getTen()%>
+										</option>
+										<%
+											}
 											}
 										%>
 									</select>
 								</div>
 								<div class="form-group">
-									<label>Học kỳ</label> <input class="form-control"
-										name="hocKy"
+									<label>Học kỳ</label> <input class="form-control" name="hocKy"
 										value="<%=(obj != null ? obj.getHocKy() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
@@ -138,7 +161,7 @@
 										value="<%=(obj != null ? obj.getNamHoc() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
-								
+
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">

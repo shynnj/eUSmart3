@@ -29,9 +29,12 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	NhomPhanQuyen obj = session.getAttribute("obj") != null
-			? (NhomPhanQuyen) session.getAttribute("obj")
-			: null;
+	NhomPhanQuyen obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof NhomPhanQuyen) {
+			obj = (NhomPhanQuyen) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">

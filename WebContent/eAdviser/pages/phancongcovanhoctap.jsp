@@ -18,11 +18,13 @@
 	pageEncoding="UTF-8"%>
 
 <%
-String tenLop = "PhanCongCoVanHocTap";
-String tenTrang = "Quản lý phân công cố vấn học tập";
-String trangDanhSach = "index.jsp?p=eAdviser/pages/phancongcovanhoctaps.jsp";
-String[] tk_value = { "coVanHocTap", "soCoVanHocTap", "namHoc", "maPhanCong", "thoiGianBatDau","thoiGianKetThuc" };
-String[] tk_show = { "Cố vấn học tập", "Sổ cố vấn học tập", "Năm học", "Mã phân công", "Thời gian bắt đầu","Thời gian kết thúc" };
+	String tenLop = "PhanCongCoVanHocTap";
+	String tenTrang = "Quản lý phân công cố vấn học tập";
+	String trangDanhSach = "index.jsp?p=eAdviser/pages/phancongcovanhoctaps.jsp";
+	String[] tk_value = { "coVanHocTap", "soCoVanHocTap", "namHoc", "maPhanCong", "thoiGianBatDau",
+			"thoiGianKetThuc" };
+	String[] tk_show = { "Cố vấn học tập", "Sổ cố vấn học tập", "Năm học", "Mã phân công", "Thời gian bắt đầu",
+			"Thời gian kết thúc" };
 %>
 <%@ include file="../../ePartial/code-header.jsp"%>
 
@@ -37,7 +39,12 @@ String[] tk_show = { "Cố vấn học tập", "Sổ cố vấn học tập", "N
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	PhanCongCoVanHocTap obj = session.getAttribute("obj") != null ? (PhanCongCoVanHocTap) session.getAttribute("obj") : null;
+	PhanCongCoVanHocTap obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof PhanCongCoVanHocTap) {
+			obj = (PhanCongCoVanHocTap) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -66,108 +73,128 @@ String[] tk_show = { "Cố vấn học tập", "Sổ cố vấn học tập", "N
 				<div class="panel-body">
 					<div class="row" style="padding: 10px">
 						<div class="row">
-							<div class="col-lg-6">
-								<div class="form-group">
-									<label>Cố vấn học tập</label> <select class="form-control"
-										name="maCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
-										<option value=""></option>
-										<%
-											ObjectDAO objdaoCoVanHocTap = new DAO_CoVanHocTap();
-											ArrayList<CoVanHocTap> listCoVanHocTap= objdaoCoVanHocTap.listAll();
-											for (CoVanHocTap cvht : listCoVanHocTap) {
-										%>
-										<option value="<%=cvht.maCoVanHocTap%>" <%=obj != null && obj.getCoVanHocTap().maCoVanHocTap.equals(cvht.maCoVanHocTap) ? "selected" : ""%>
-										><%=cvht.nhanVien.tenNhanVien%></option>
-										<%
-											}
-										%>
-									</select>
-								</div>
-								<div class="form-group">
-									<label>Sổ cố vấn học tập</label> <select class="form-control"
-										name="maSoCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
-										<option value=""></option>
-										<%
-											ObjectDAO objdaoSoCoVanHocTap = new DAO_SoCoVanHocTap();
-											ArrayList<SoCoVanHocTap> listSoCoVanHocTap= objdaoSoCoVanHocTap.listAll();
-											for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
-										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>" <%=obj != null && obj.getSoCoVanHocTap().maSoCoVanHocTap.equals(scvht.maSoCoVanHocTap) ? "selected" : ""%>
-										><%=scvht.tenSoCoVanHocTap%></option>
-										<%
-											}
-										%>
-									</select>
-								</div>
-								<div class="form-group">
-									<label>Năm học</label> <select class="form-control"
-										name="maNamHoc" <%=(modeView ? " disabled " : "")%>>
-										<option value=""></option>
-										<%
-											ObjectDAO objdaoNamHoc = new DAO_NamHoc();
-											ArrayList<NamHoc> listNamHoc= objdaoNamHoc.listAll();
-											for (NamHoc nh : listNamHoc) {
-										%>
-										<option value="<%=nh.maNamHoc%>" <%=obj != null && obj.getNamHoc().getMaNamHoc().equals(nh.maNamHoc) ? "selected" : ""%>
-										><%=nh.tenNamHoc%></option>
-										<%
-											}
-										%>
-									</select>
-								</div>
-								<div class="form-group">
-									<label>Mã phân công</label> <input class="form-control"
-										name="maPhanCong"
-										value="<%=(obj != null ? obj.getMaPhanCong() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
-								</div>
+							<div class="form-group">
+								<label>Cố vấn học tập</label> <select class="form-control"
+									name="maNhanVien" <%=(modeView ? " disabled " : "")%>>
+									<%
+										ObjectDAO objCoVanHocTap = new DAO_CoVanHocTap();
+										ArrayList<CoVanHocTap> listCoVanHocTap = objCoVanHocTap.listAll();
+										for (CoVanHocTap cvht : listCoVanHocTap) {
+											if (obj != null && obj.getCoVanHocTap() != null && obj.getCoVanHocTap().getNhanVien().getMaNhanVien()
+													.equals(cvht.getNhanVien().getMaNhanVien())) {
+									%>
+									<option value="<%=cvht.maCoVanHocTap%>" selected="selected"><%=cvht.getNhanVien().getTenNhanVien()%>
+									</option>
+									<%
+										} else {
+									%>
+									<option value="<%=cvht.maCoVanHocTap%>"><%=cvht.getNhanVien().getTenNhanVien()%>
+									</option>
+									<%
+										}
+										}
+									%>
+								</select>
 							</div>
-							<div class="col-lg-6">
-								<div class="form-group">
-									<label>Thời gian bắt đầu</label> <input type="date" class="form-control"
-										name="s_thoiGianBatDau"
-										value="<%=(obj != null ? Util_Date.dateToString(obj.getThoiGianBatDau()) : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Thời gian kết thúc</label> <input type="date" class="form-control"
-										name="s_thoiGianKetThuc"
-										value="<%=(obj != null ? Util_Date.dateToString(obj.getThoiGianKetThuc()) : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
-								</div>
+							<div class="form-group">
+								<label>Sổ cố vấn học tập</label> <select class="form-control"
+									name="maSoCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
+									<%
+										ObjectDAO objSoCoVanHocTap = new DAO_SoCoVanHocTap();
+										ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objSoCoVanHocTap.listAll();
+										for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
+											if (obj != null && obj.getSoCoVanHocTap() != null
+													&& obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap())) {
+									%>
+									<option value="<%=scvht.maSoCoVanHocTap%>" selected="selected"><%=scvht.getTenSoCoVanHocTap()%>
+									</option>
+									<%
+										} else {
+									%>
+									<option value="<%=scvht.maSoCoVanHocTap%>"><%=scvht.getTenSoCoVanHocTap()%>
+									</option>
+									<%
+										}
+										}
+									%>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Năm học</label> <select class="form-control"
+									name="maNamHoc" <%=(modeView ? " disabled " : "")%>>
+									<%
+										ObjectDAO objNamHoc = new DAO_NamHoc();
+										ArrayList<NamHoc> listNamHoc = objNamHoc.listAll();
+										for (NamHoc nh : listNamHoc) {
+											if (obj != null && obj.getNamHoc() != null
+													&& obj.getNamHoc().getMaNamHoc().equals(nh.getMaNamHoc())) {
+									%>
+									<option value="<%=nh.maNamHoc%>" selected="selected"><%=nh.getTenNamHoc()%>
+									</option>
+									<%
+										} else {
+									%>
+									<option value="<%=nh.maNamHoc%>"><%=nh.getTenNamHoc()%>
+									</option>
+									<%
+										}
+										}
+									%>
+								</select>
+							</div>
+							<div class="form-group">
+								<label>Mã phân công</label> <input class="form-control"
+									name="maPhanCong"
+									value="<%=(obj != null ? obj.getMaPhanCong() : "")%>"
+									<%=(modeView ? " disabled " : "")%>>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label>Thời gian bắt đầu</label> <input type="date"
+									class="form-control" name="s_thoiGianBatDau"
+									value="<%=(obj != null ? Util_Date.dateToString(obj.getThoiGianBatDau()) : "")%>"
+									<%=(modeView ? " disabled " : "")%>>
+							</div>
+							<div class="form-group">
+								<label>Thời gian kết thúc</label> <input type="date"
+									class="form-control" name="s_thoiGianKetThuc"
+									value="<%=(obj != null ? Util_Date.dateToString(obj.getThoiGianKetThuc()) : "")%>"
+									<%=(modeView ? " disabled " : "")%>>
+							</div>
 
-							</div>
 						</div>
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="form-group">
-									<label>Mô tả</label>
-									<textarea class="form-control" cols="80" id="editor1" rows="5"
-										name="moTa" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getMoTa() : "")%></textarea>
-								</div>
-								<div class="form-group">
-									<label>Ghi chú</label>
-									<textarea class="form-control" cols="80" id="editor2" rows="5"
-										name="ghiChu" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getGhiChu() : "")%></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="panel-footer" style="text-align: left;">
-							<div class="col-md-5"></div>
-							<div class="col-md-7">
-								<%@ include file="../../ePartial/processform.jsp"%>
-							</div>
-						</div>
-						<!-- /.col-lg-6 (nested) -->
-						<!-- /.col-lg-6 (nested) -->
 					</div>
-					<!-- /.row (nested) -->
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label>Mô tả</label>
+								<textarea class="form-control" cols="80" id="editor1" rows="5"
+									name="moTa" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getMoTa() : "")%></textarea>
+							</div>
+							<div class="form-group">
+								<label>Ghi chú</label>
+								<textarea class="form-control" cols="80" id="editor2" rows="5"
+									name="ghiChu" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getGhiChu() : "")%></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer" style="text-align: left;">
+						<div class="col-md-5"></div>
+						<div class="col-md-7">
+							<%@ include file="../../ePartial/processform.jsp"%>
+						</div>
+					</div>
+					<!-- /.col-lg-6 (nested) -->
+					<!-- /.col-lg-6 (nested) -->
 				</div>
-				<!-- /.panel-body -->
+				<!-- /.row (nested) -->
 			</div>
-			<!-- /.panel -->
+			<!-- /.panel-body -->
 		</div>
-		<!-- /.col-lg-12 -->
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
 	</div>
 	<!-- /.row -->
 </form>

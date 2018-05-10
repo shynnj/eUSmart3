@@ -29,7 +29,13 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	TaiKhoan obj = session.getAttribute("obj") != null ? (TaiKhoan) session.getAttribute("obj") : null;
+
+	TaiKhoan obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof TaiKhoan) {
+			obj = (TaiKhoan) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">
