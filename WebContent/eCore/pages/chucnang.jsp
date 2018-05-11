@@ -25,7 +25,12 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	ChucNang obj = session.getAttribute("obj") != null ? (ChucNang) session.getAttribute("obj") : null;
+	ChucNang obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof ChucNang) {
+			obj = (ChucNang) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -82,7 +87,7 @@
 										<%=(modeView ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Chức năng cha</label> <select class="form-control"
+									<label>Chức năng cha</label>  <select class="form-control"
 										name="maChucNangCha" <%=(modeView ? " disabled " : "")%>>
 										<option value=""></option>
 										<%

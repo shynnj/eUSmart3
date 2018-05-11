@@ -26,7 +26,12 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	Lop obj = session.getAttribute("obj") != null ? (Lop) session.getAttribute("obj") : null;
+	Lop obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof Lop) {
+			obj = (Lop) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -81,8 +86,8 @@
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Đơn vị quản lý</label> <select class="form-control"
-										name="maNamHoc" <%=(modeView ? " disabled " : "")%>>
+									<label>Đơn vị quản lý</label>  <select class="form-control"
+										name="maDonVi" <%=(modeView ? " disabled " : "")%>>
 										<option value=""></option>
 										<%
 											ObjectDAO objdao = new DAO_DonVi();

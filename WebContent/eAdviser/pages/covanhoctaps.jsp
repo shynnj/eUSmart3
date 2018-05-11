@@ -11,6 +11,7 @@
 <%
 	String tenLop = "CoVanHocTap";
 	String tenTrang = "Quản lý Cố vấn học tập";
+	String trangDanhSach = "index.jsp?p=eAdviser/pages/covanhoctaps.jsp";
 	String[] tk_value = { "maCoVanHocTap", "nhanVien", "dienThoaiCoQuan", "diaChiGuiThu", "diDong" };
 	String[] tk_show = { "Mã Cố vấn học tập", "Nhân viên", "Điện thoại cơ quan", "Địa chỉ gửi thư", "Di động" };
 %>
@@ -25,7 +26,7 @@
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
 		if (listTemp.size() > 0) {
-	if (listTemp.get(0) instanceof CoVanHocTap) {
+			if (listTemp.get(0) instanceof CoVanHocTap) {
 				list = (ArrayList<CoVanHocTap>) listTemp;
 			} else {
 				session.setAttribute("checkTimKiem", null);
@@ -71,11 +72,15 @@
 						for (CoVanHocTap obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
 							String maDoiTuong = obj.getMaCoVanHocTap();
-							String tenDoiTuong = obj.getNhanVien().getTenNhanVien();
+							String tenDoiTuong ="";
+							if (obj.getNhanVien() != null && obj.getNhanVien().getTenNhanVien() != null) {
+								 tenDoiTuong = obj.getNhanVien().getTenNhanVien();
+							}
 					%>
 					<tr class="odd gradeX">
 						<td><%=obj.getMaCoVanHocTap()%></td>
-						<td><%=obj.getNhanVien() == null ? "" : obj.getNhanVien().getTenNhanVien()%></td>
+						<td><%=obj.getNhanVien() != null && obj.getNhanVien().getTenNhanVien()!=null
+						? obj.getNhanVien().getTenNhanVien() : ""%></td>
 						<td><%=obj.getDienThoaiCoQuan()%></td>
 						<td><%=obj.getDiaChiGuiThu()%></td>
 						<td><%=obj.getDiDong()%></td>
