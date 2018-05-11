@@ -268,8 +268,8 @@
 					<li><a href="#"><i class="fa fa-gear fa-fw"></i> Cài đặt
 							tài khoản</a></li>
 					<li class="divider"></li>
-					<li><a href="dangXuat.action"><i
-							class="fa fa-sign-out fa-fw"></i> Đăng xuất</a></li>
+					<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
+							Đăng xuất</a></li>
 				</ul> <!-- /.dropdown-user --></li>
 			<!-- /.dropdown -->
 		</ul>
@@ -376,7 +376,7 @@
 			});
 		});
 	</script>
-	<ckeditor:replace replace="noiDung" basePath="content/ckeditor/" />
+	<!-- 	<ckeditor:replaceAll basePath="content/ckeditor/" /> -->
 </body>
 
 </html>

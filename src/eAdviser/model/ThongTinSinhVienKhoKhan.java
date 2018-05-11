@@ -14,18 +14,18 @@ public class ThongTinSinhVienKhoKhan implements Comparable<ThongTinSinhVienKhoKh
 
 	@Id
 	public	String maThongTinSinhVienKhoKhan;
-	
+	@ManyToOne
+	public	SinhVien sinhVien;
 	public	String hoanCanhGiaDinh;
 	public	String lyDo;
-	public String deXuat;
+	String deXuat;
 	public Date thoiGianGhiNhan;
 	public	String moTa;
 	public	String ghiChu;
 	public	Date thoiGianCapNhat;
 	@ManyToOne
 	public	SoCoVanHocTap soCoVanHocTap;
-	@ManyToOne
-	public	SinhVien sinhVien;
+	
 	public ThongTinSinhVienKhoKhan() {
 	}
 

@@ -6,6 +6,6 @@ import eCore.dao.ObjectDAO;
 
 public class DAO_ThongTinSinhVienKhoKhan extends ObjectDAO<ThongTinSinhVienKhoKhan> {
 	public DAO_ThongTinSinhVienKhoKhan() {
-		 this.table="ThongTinSinhVienKhoKhan";
+		 this.table="ThongTinSinhVien";
 	}
 }

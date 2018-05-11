@@ -34,12 +34,7 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	NhanVien obj = null;
-	if (session.getAttribute("obj") != null) {
-		if (session.getAttribute("obj") instanceof NhanVien) {
-			obj = (NhanVien) session.getAttribute("obj");
-		}
-	}
+	NhanVien obj = session.getAttribute("obj") != null ? (NhanVien) session.getAttribute("obj") : null;
 %>
 
 <script>
@@ -83,25 +78,6 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Đơn vị quản lý</label> <select class="form-control"
-										name="maDonVi" <%=(modeView ? " disabled " : "")%>>
-										<option value=""></option>
-										<%
-											ObjectDAO objdao = new DAO_DonVi();
-											ArrayList<DonVi> listDonVi = objdao.listAll();
-											for (DonVi dv : listDonVi) {
-										%>
-										<option value="<%=dv.maDonVi%> "
-											<%=obj != null && obj.getDonVi() != null && obj.getDonVi().maDonVi.equals(dv.maDonVi) ? "selected"
-								: ""%>>
-											<%=dv.tenDonVi%>
-										</option>
-										<%
-											}
-										%>
-									</select>
-								</div>
-								<div class="form-group">
 									<label>Mã nhân viên</label> <input class="form-control"
 										id="maNhanVien" name="maNhanVien"
 										onblur="thayDoiMyFileFileName()"
@@ -121,8 +97,7 @@
 										type="<%=(modeView ? "hidden" : "file")%>"><img
 										src="<%=obj != null && obj.getHinhAnh() != null && modeView ? "eCore/images/nhanviens/" + obj.getHinhAnh()
 					: ""%>"
-										height="<%=modeView ? 350 : 1%>"
-										width="<%=modeView ? 350 : 1%>">
+										height="<%=modeView ? 350 : 1%>" width="<%=modeView ? 350 : 1%>">
 								</div>
 								<div class="form-group">
 									<label>Ngày sinh</label> <input class="form-control"
@@ -130,6 +105,8 @@
 										value="<%=(obj != null && obj.getNgaySinh() != null ? Util_Date.dateToString(obj.getNgaySinh()) : "")%>"
 										<%=(modeView ? " readonly " : "")%>>
 								</div>
+							</div>
+							<div class="col-lg-6">
 								<div class="form-group">
 									<label>Giới tính</label> <select class="form-control"
 										name="gioiTinh">
@@ -251,7 +228,6 @@
 										value="<%=(obj != null && obj.getHeSo() != null ? obj.getHeSo() : "")%>"
 										<%=(modeView ? " readonly " : "")%>>
 								</div>
-
 								<div class="form-group">
 									<label>Ngày hưởng</label> <input class="form-control"
 										name="s_ngayHuong" type="date"
@@ -294,9 +270,6 @@
 										value="<%=(obj != null && obj.getTinHoc() != null ? obj.getTinHoc() : "")%>"
 										<%=(modeView ? " readonly " : "")%>>
 								</div>
-							</div>
-							<div class="col-lg-6">
-
 								<div class="form-group">
 									<label>Ngày vào đảng dự bị</label> <input class="form-control"
 										name="s_ngayVaoDangDuBi" type="date"
@@ -484,7 +457,25 @@
 										value="<%=(obj != null && obj.getDiaChiBaoTin() != null ? obj.getDiaChiBaoTin() : "")%>"
 										<%=(modeView ? " readonly " : "")%>>
 								</div>
-
+								<div class="form-group">
+									<label>Đơn vị quản lý</label> <select class="form-control"
+										name="maDonVi" <%=(modeView ? " disabled " : "")%>>
+										<option value=""></option>
+										<%
+											ObjectDAO objdao = new DAO_DonVi();
+											ArrayList<DonVi> listDonVi = objdao.listAll();
+											for (DonVi dv : listDonVi) {
+										%>
+										<option value="<%=dv.maDonVi%> "
+											<%=obj != null && obj.getDonVi() != null && obj.getDonVi().maDonVi.equals(dv.maDonVi) ? "selected"
+								: ""%>>
+											<%=dv.tenDonVi%>
+										</option>
+										<%
+											}
+										%>
+									</select>
+								</div>
 							</div>
 						</div>
 						<div class="row">

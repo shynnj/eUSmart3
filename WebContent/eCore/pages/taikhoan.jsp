@@ -5,7 +5,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="eCore.modelDao.DAO_TaiKhoan"%>
 <%@page import="eCore.dao.ObjectDAO"%>
-<%@page import="eCore.util.Util_Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -29,13 +28,7 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-
-	TaiKhoan obj = null;
-	if (session.getAttribute("obj") != null) {
-		if (session.getAttribute("obj") instanceof TaiKhoan) {
-			obj = (TaiKhoan) session.getAttribute("obj");
-		}
-	}
+	TaiKhoan obj = session.getAttribute("obj") != null ? (TaiKhoan) session.getAttribute("obj") : null;
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -83,17 +76,17 @@
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Họ và tên</label> <input class="form-control" name="hoVaTen"
+									<label>Họ và tên</label> <input class="form-control" name="anhDaiDien"
 										value="<%=(obj != null ? obj.getHoVaTen() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Câu hỏi bí mật</label> <input class="form-control" name="cauHoiBiMat"
+									<label>Câu hỏi bí mật</label> <input class="form-control" name="anhDaiDien"
 										value="<%=(obj != null ? obj.getCauHoiBiMat() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Trả lời câu hỏi bí mật</label> <input class="form-control" name="traLoiCauHoiBiMat"
+									<label>Trả lời câu hỏi bí mật</label> <input class="form-control" name="anhDaiDien"
 										value="<%=(obj != null ? obj.getTraLoiCauHoiBiMat() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
@@ -101,37 +94,37 @@
 							<div class="col-lg-6">
 								<div class="form-group">
 									<label>Ngày tạo</label> <input class="form-control"
-										name="ngayTao" type="date"
-										value="<%=(obj != null ? Util_Date.dateToString(obj.getNgayTao()) : "")%>"
+										name="ngayTao"
+										value="<%=(obj != null ? obj.getNgayTao() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
 									<label>Thời gian cập nhật</label> <input class="form-control"
-										name="ngayCapNhatMatKhau" type="date"
-										value="<%=(obj != null ? Util_Date.dateToString(obj.getThoiGianCapNhat()) : "")%>"
+										name="ngayCapNhatMatKhau"
+										value="<%=(obj != null ? obj.getThoiGianCapNhat() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
 									<label>Ngày cập nhật mật khẩu</label> <input class="form-control"
-										name="ngayCapNhatMatKhau" type="date"
-										value="<%=(obj != null ? Util_Date.dateToString(obj.getNgayCapNhatMatKhau()) : "")%>"
+										name="ngayCapNhatMatKhau"
+										value="<%=(obj != null ? obj.getNgayCapNhatMatKhau() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
 									<label>Loại tài khoản</label> <input class="form-control"
-										name="loaiTaiKhoan"
+										name="ngayCapNhatMatKhau"
 										value="<%=(obj != null ? obj.getLoaiTaiKhoan() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
 									<label>Trạng thái hoạt động</label> <input class="form-control"
-										name="trangThaiHoatDong"
+										name="ngayCapNhatMatKhau"
 										value="<%=(obj != null ? obj.isTrangThaiHoatDong() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
 									<label>Email</label> <input class="form-control"
-										name="email"
+										name="ngayCapNhatMatKhau"
 										value="<%=(obj != null ? obj.getEmail() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>

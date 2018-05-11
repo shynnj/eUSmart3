@@ -30,11 +30,9 @@ public class ThongTinKyLuatSinhVien implements Comparable<ThongTinKyLuatSinhVien
 		return this.maThongTinKyLuatSinhVien.compareTo(o.maThongTinKyLuatSinhVien);
 	}
 
-	public ThongTinKyLuatSinhVien() {
-	}
-
 	public ThongTinKyLuatSinhVien(String maThongTinKyLuatSinhVien, SinhVien sinhVien, String noiDungKyLuat,
 			Date thoiGianKyLuat, String moTa, String ghiChu, Date thoiGianCapNhat, SoCoVanHocTap soCoVanHocTap) {
+		super();
 		this.maThongTinKyLuatSinhVien = maThongTinKyLuatSinhVien;
 		this.sinhVien = sinhVien;
 		this.noiDungKyLuat = noiDungKyLuat;

@@ -28,12 +28,7 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	HocKy obj = null;
-	if (session.getAttribute("obj") != null) {
-		if (session.getAttribute("obj") instanceof HocKy) {
-			obj = (HocKy) session.getAttribute("obj");
-		}
-	}
+	HocKy obj = session.getAttribute("obj") != null ? (HocKy) session.getAttribute("obj") : null;
 %>
 <div class="row">
 	<div class="col-lg-12">

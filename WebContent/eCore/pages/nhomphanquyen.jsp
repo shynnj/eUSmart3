@@ -29,12 +29,9 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	NhomPhanQuyen obj = null;
-	if (session.getAttribute("obj") != null) {
-		if (session.getAttribute("obj") instanceof NhomPhanQuyen) {
-			obj = (NhomPhanQuyen) session.getAttribute("obj");
-		}
-	}
+	NhomPhanQuyen obj = session.getAttribute("obj") != null
+			? (NhomPhanQuyen) session.getAttribute("obj")
+			: null;
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -77,7 +74,7 @@
 										<%=(modeView ? " readonly " : "")%>> <input hidden>
 								</div>
 								<div class="form-group">
-									<label>Chức năng </label> <br>
+									<label>Chức năng </label>
 									<%
 										String ls_MaChucNang = "";
 										Set<ChucNang> chucNangSet = new HashSet<>();

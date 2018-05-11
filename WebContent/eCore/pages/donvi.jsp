@@ -27,12 +27,7 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	DonVi obj = null;
-	if (session.getAttribute("obj") != null) {
-		if (session.getAttribute("obj") instanceof DonVi) {
-			obj = (DonVi) session.getAttribute("obj");
-		}
-	}
+	DonVi obj = session.getAttribute("obj") != null ? (DonVi) session.getAttribute("obj") : null;
 %>
 <div class="row">
 	<div class="col-lg-12">
