@@ -13,7 +13,7 @@
 <%
 	String tenLop = "CoVanHocTap";
 	String tenTrang = "Quản lý Cố vấn học tập";
-	String trangDanhSach = "index.jsp?p=eCore/pages/covanhoctaps.jsp";
+	String trangDanhSach = "index.jsp?p=eAdviser/pages/covanhoctaps.jsp";
 	String[] tk_value = { "maCoVanHocTap", "nhanVien", "dienThoaiCoQuan", "diaChiGuiThu", "diDong" };
 	String[] tk_show = { "Mã Cố vấn học tập", "Nhân viên", "Điện thoại cơ quan", "Địa chỉ gửi thư", "Di động" };
 %>
@@ -30,7 +30,12 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	CoVanHocTap obj = session.getAttribute("obj") != null ? (CoVanHocTap) session.getAttribute("obj") : null;
+	CoVanHocTap obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof CoVanHocTap) {
+			obj = (CoVanHocTap) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -68,17 +73,23 @@
 								</div>
 								<div class="form-group">
 									<label>Nhân viên</label> <select class="form-control"
-										name="nhanVien" <%=(modeView ? " disabled " : "")%>>
-										<option value=""></option>
+										name="maNhanVien" <%=(modeView ? " disabled " : "")%>>
 										<%
 											ObjectDAO objdao = new DAO_NhanVien();
-											ArrayList<NhanVien> listNhanVien= objdao.listAll();
+											ArrayList<NhanVien> listNhanVien = objdao.listAll();
 											for (NhanVien nv : listNhanVien) {
+												if (obj != null && obj.getNhanVien() != null
+														&& obj.getNhanVien().getMaNhanVien().equals(nv.getMaNhanVien())) {
 										%>
-										<option value="<%=nv.maNhanVien%>">
-											<%=nv.tenNhanVien%>
+										<option value="<%=nv.maNhanVien%>" selected="selected"><%=nv.getTenNhanVien()%>
 										</option>
 										<%
+											} else {
+										%>
+										<option value="<%=nv.maNhanVien%>"><%=nv.getTenNhanVien()%>
+										</option>
+										<%
+											}
 											}
 										%>
 									</select>

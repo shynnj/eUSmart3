@@ -35,7 +35,13 @@
 	boolean modeView = mode.equals("viewDetail");
 	boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	SinhVien obj = session.getAttribute("obj") != null ? (SinhVien) session.getAttribute("obj") : null;
+
+	SinhVien obj = null;
+	if (session.getAttribute("obj") != null) {
+		if (session.getAttribute("obj") instanceof SinhVien) {
+			obj = (SinhVien) session.getAttribute("obj");
+		}
+	}
 %>
 <div class="row">
 	<div class="col-lg-12">

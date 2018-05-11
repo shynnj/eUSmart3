@@ -18,6 +18,7 @@ import eCore.model.TaiKhoanNhanVien;
 import eCore.model.Lop;
 import eCore.model.NhomPhanQuyen;
 import eCore.modelDao.DAO_TaiKhoan;
+import eCore.util.Util_Date;
 import eCore.modelDao.DAO_Lop;
 
 public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
@@ -29,6 +30,37 @@ public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
 	String duongDanTrangView = "eCore/pages/taikhoan.jsp";
 	String tenCotTimDoiTuong = "maDangNhap";
 	String maObj;
+	String s_ngayTao;
+	String s_thoiGianCapNhat;
+	String s_ngayCapNhatMatKhau;
+
+	public String getS_ngayTao() {
+		return s_ngayTao;
+	}
+
+	public void setS_ngayTao(String s_ngayTao) {
+		this.s_ngayTao = s_ngayTao;
+	}
+
+	public String getS_thoiGianCapNhat() {
+		return s_thoiGianCapNhat;
+	}
+
+	public void setS_thoiGianCapNhat(String s_thoiGianCapNhat) {
+		this.s_thoiGianCapNhat = s_thoiGianCapNhat;
+	}
+
+	public String getS_ngayCapNhatMatKhau() {
+		return s_ngayCapNhatMatKhau;
+	}
+
+	public void setS_ngayCapNhatMatKhau(String s_ngayCapNhatMatKhau) {
+		this.s_ngayCapNhatMatKhau = s_ngayCapNhatMatKhau;
+	}
+	
+	public Date makeStringToDate(String date) {
+		return Util_Date.stringToDate(date);
+	}
 
 	public String getTimKiemTheo() {
 		return timKiemTheo;
@@ -107,13 +139,20 @@ public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
 	public String saveOrUpdate() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
+		String loaiTK = getLoaiTaiKhoan();
+		System.out.println(loaiTK);
+		TaiKhoan obj;
+		if (loaiTK.equals("Nhân Viên")||loaiTK.equals("Nhan vien")) {
+			obj = new TaiKhoanNhanVien();
+		} else {
+			obj = new TaiKhoanSinhVien();
+		}
 
-		TaiKhoanNhanVien obj = new TaiKhoanNhanVien();
 		obj.anhDaiDien = getAnhDaiDien();
 		obj.maDangNhap = getMaDangNhap();
 		obj.matKhau = getMatKhau();
-		obj.ngayTao = getNgayTao();
-		obj.ngayCapNhatMatKhau =getNgayCapNhatMatKhau();
+		obj.ngayTao = makeStringToDate(getS_ngayTao());
+		obj.ngayCapNhatMatKhau = makeStringToDate(getS_ngayCapNhatMatKhau());
 		obj.cauHoiBiMat = getCauHoiBiMat();
 		obj.traLoiCauHoiBiMat = getTraLoiCauHoiBiMat();
 		obj.trangThaiHoatDong = isTrangThaiHoatDong();
