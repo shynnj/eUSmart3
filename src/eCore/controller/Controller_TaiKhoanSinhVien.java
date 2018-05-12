@@ -15,52 +15,31 @@ import eCore.dao.ObjectDAO;
 import eCore.model.TaiKhoan;
 import eCore.model.TaiKhoanSinhVien;
 import eCore.model.TaiKhoanNhanVien;
+import eCore.model.DonVi;
 import eCore.model.Lop;
+import eCore.model.NhanVien;
 import eCore.model.NhomPhanQuyen;
+import eCore.model.SinhVien;
 import eCore.modelDao.DAO_TaiKhoan;
+import eCore.modelDao.DAO_TaiKhoanSinhVien;
 import eCore.util.Util_Date;
+import eCore.util.Util_MD5;
 import eCore.modelDao.DAO_Lop;
+import eCore.modelDao.DAO_NhomPhanQuyen;
+import eCore.modelDao.DAO_SinhVien;
 
-public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
-	ObjectDAO dao = new DAO_TaiKhoan();
+public class Controller_TaiKhoanSinhVien extends TaiKhoanSinhVien implements ZEController {
+	ObjectDAO dao = new DAO_TaiKhoanSinhVien();
 
 	String timKiemTheo;
 	String tuKhoa;
-	String duongDanTrang = "eCore/pages/taikhoans.jsp";
-	String duongDanTrangView = "eCore/pages/taikhoan.jsp";
+	String duongDanTrang = "eCore/pages/taikhoansinhviens.jsp";
+	String duongDanTrangView = "eCore/pages/taikhoansinhvien.jsp";
 	String tenCotTimDoiTuong = "maDangNhap";
 	String maObj;
+	String maSinhVien;
 	String s_ngayTao;
-	String s_thoiGianCapNhat;
-	String s_ngayCapNhatMatKhau;
-
-	public String getS_ngayTao() {
-		return s_ngayTao;
-	}
-
-	public void setS_ngayTao(String s_ngayTao) {
-		this.s_ngayTao = s_ngayTao;
-	}
-
-	public String getS_thoiGianCapNhat() {
-		return s_thoiGianCapNhat;
-	}
-
-	public void setS_thoiGianCapNhat(String s_thoiGianCapNhat) {
-		this.s_thoiGianCapNhat = s_thoiGianCapNhat;
-	}
-
-	public String getS_ngayCapNhatMatKhau() {
-		return s_ngayCapNhatMatKhau;
-	}
-
-	public void setS_ngayCapNhatMatKhau(String s_ngayCapNhatMatKhau) {
-		this.s_ngayCapNhatMatKhau = s_ngayCapNhatMatKhau;
-	}
-	
-	public Date makeStringToDate(String date) {
-		return Util_Date.stringToDate(date);
-	}
+	String maNhomPhanQuyen;
 
 	public String getTimKiemTheo() {
 		return timKiemTheo;
@@ -86,7 +65,60 @@ public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
 		this.maObj = maObj;
 	}
 
+	public String getMaSinhVien() {
+		return maSinhVien;
+	}
 
+	public void setMaSinhVien(String maSinhVien) {
+		this.maSinhVien = maSinhVien;
+	}
+
+	public SinhVien getSinhVien() {
+		ObjectDAO dao_sinhVien = new DAO_SinhVien();
+		ArrayList<SinhVien> list = dao_sinhVien.listByColumns("maSinhVien", getMaSinhVien());
+		if (list.size() > 0)
+			return list.get(0);
+		else
+			return null;
+	}
+
+	public String getS_ngayTao() {
+		return s_ngayTao;
+	}
+
+	public void setS_ngayTao(String s_ngayTao) {
+		this.s_ngayTao = s_ngayTao;
+	}
+
+	public Date getNgayTao() {
+		return Util_Date.stringToDate(getS_ngayTao());
+	}
+	
+	public String getMaNhomPhanQuyen() {
+		return maNhomPhanQuyen;
+	}
+
+	public void setMaNhomPhanQuyen(String maNhomPhanQuyen) {
+		this.maNhomPhanQuyen = maNhomPhanQuyen;
+	}
+	
+	public NhomPhanQuyen getNhomPhanQuyen() {
+		ObjectDAO dao_nhomPhanQuyen = new DAO_NhomPhanQuyen();
+		ArrayList<NhomPhanQuyen> list = dao_nhomPhanQuyen.listByColumns("maNhomPhanQuyen", getMaNhomPhanQuyen());
+		if (list.size() > 0)
+			return list.get(0);
+		else
+			return null;
+	}
+	
+	public String getKiemTraMatKhau() {
+		ArrayList<TaiKhoanSinhVien> list = dao.listByColumns("maDangNhap", getMaDangNhap());
+		if (list.size() > 0)
+			return list.get(0).getMatKhau();
+		else
+			return "";
+	}
+	
 	@Override
 	public String addNew() {
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -102,12 +134,12 @@ public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
 	public String viewDetail() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
-		
+
 		String maobj = request.getParameter("maobj");
-		
+
 		session.setAttribute("mode", "viewDetail");
 
-		ArrayList<TaiKhoan> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
+		ArrayList<TaiKhoanSinhVien> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
 		if (arr.size() > 0) {
 			session.setAttribute("obj", arr.get(0));
 			session.setAttribute("p", duongDanTrangView);
@@ -125,7 +157,7 @@ public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
 
 		String maobj = request.getParameter("maobj");
 		session.setAttribute("mode", "viewDetailAndEdit");
-		ArrayList<TaiKhoan> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
+		ArrayList<TaiKhoanSinhVien> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
 		if (arr.size() > 0) {
 			session.setAttribute("obj", arr.get(0));
 			session.setAttribute("p", duongDanTrangView);
@@ -139,20 +171,16 @@ public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
 	public String saveOrUpdate() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
-		String loaiTK = getLoaiTaiKhoan();
-		System.out.println(loaiTK);
-		TaiKhoan obj;
-		if (loaiTK.equals("Nh�n Vi�n")||loaiTK.equals("Nhan vien")) {
-			obj = new TaiKhoanNhanVien();
-		} else {
-			obj = new TaiKhoanSinhVien();
-		}
-
+		TaiKhoanSinhVien obj = new TaiKhoanSinhVien();
 		obj.anhDaiDien = getAnhDaiDien();
 		obj.maDangNhap = getMaDangNhap();
-		obj.matKhau = getMatKhau();
-		obj.ngayTao = makeStringToDate(getS_ngayTao());
-		obj.ngayCapNhatMatKhau = makeStringToDate(getS_ngayCapNhatMatKhau());
+		if (!getMatKhau().equals(getKiemTraMatKhau())) {
+			obj.matKhau = Util_MD5.md5(getMatKhau());
+		}else {
+			obj.matKhau=getKiemTraMatKhau();
+		}
+		obj.ngayTao = getNgayTao();
+		obj.ngayCapNhatMatKhau = new Date();
 		obj.cauHoiBiMat = getCauHoiBiMat();
 		obj.traLoiCauHoiBiMat = getTraLoiCauHoiBiMat();
 		obj.trangThaiHoatDong = isTrangThaiHoatDong();
@@ -162,6 +190,7 @@ public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
 		obj.ghiChu = getGhiChu();
 		obj.thoiGianCapNhat = new Date();
 		obj.nhomPhanQuyen = getNhomPhanQuyen();
+		obj.sinhVien = getSinhVien();
 		if (dao.saveOrUpdate(obj)) {
 			session.setAttribute("msg", "Cập nhật dữ liệu thành công.");
 			session.setAttribute("obj", obj);
@@ -172,14 +201,13 @@ public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
 			return "FAIL";
 		}
 	}
-	
 
 	@Override
 	public String delete() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		String maobj = request.getParameter("maobj");
-		TaiKhoanNhanVien obj = new TaiKhoanNhanVien();
+		TaiKhoanSinhVien obj = new TaiKhoanSinhVien();
 		obj.setMaDangNhap(maobj);
 		if (dao.delete(obj)) {
 			session.setAttribute("msg", "Xóa dữ liệu thành công.");
@@ -196,7 +224,7 @@ public class Controller_TaiKhoan extends TaiKhoan implements ZEController {
 		HttpSession session = request.getSession();
 		String column = getTimKiemTheo();
 		String key = getTuKhoa();
-		ArrayList<TaiKhoan> arr = dao.listByColumnLike(column, key);
+		ArrayList<TaiKhoanSinhVien> arr = dao.listByColumnLike(column, key);
 		session.setAttribute("arr", arr);
 		session.setAttribute("checkTimKiem", "true");
 		session.setAttribute("p", duongDanTrang);

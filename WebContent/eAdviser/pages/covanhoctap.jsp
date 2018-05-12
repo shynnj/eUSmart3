@@ -68,7 +68,7 @@
 								<div class="form-group">
 									<label>Mã Cố vấn học tập</label> <input class="form-control"
 										name="maCoVanHocTap"
-										value="<%=(obj != null ? obj.getMaCoVanHocTap() : "")%>"
+										value="<%=(obj != null ? obj.getMaCoVanHocTap() : "C"+ System.currentTimeMillis())%>"
 										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">
