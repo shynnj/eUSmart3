@@ -7,7 +7,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class TaiKhoanNhanVien extends TaiKhoan {
 	@OneToOne(fetch = FetchType.EAGER)
-	NhanVien nhanVien;
+	public NhanVien nhanVien;
 
 	public TaiKhoanNhanVien() {
 	}

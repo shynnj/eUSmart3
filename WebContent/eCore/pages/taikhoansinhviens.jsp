@@ -1,3 +1,6 @@
+<%@page import="eCore.model.TaiKhoanSinhVien"%>
+<%@page import="eCore.modelDao.DAO_TaiKhoanSinhVien"%>
+<%@page import="eCore.util.Util_Date"%>
 <%@page import="eCore.modelDao.DAO_TaiKhoan"%>
 <%@page import="eCore.model.TaiKhoan"%>
 <%@page import="java.util.ArrayList"%>
@@ -5,13 +8,12 @@
 <%@page import="eCore.modelDao.DAO_Lop"%>
 <%@page import="eCore.model.Lop"%>
 <%@page import="eCore.dao.ObjectDAO"%>
-<%@page import="eCore.util.Util_Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
-	String tenLop = "TaiKhoan";
-	String tenTrang = "Quản lý tài khoản";
+	String tenLop = "TaiKhoanSinhVien";
+	String tenTrang = "Quản lý Tài Khoản Sinh Viên";
 	String[] tk_value = { "maDangNhap", "ngayTao", "cauHoiBiMat", "loaiTaiKhoan", "hoVaTen", "email" };
 	String[] tk_show = { "Mã đăng nhập", "Ngày tạo", "Câu hỏi bí mật", "Loại tài khoản", "Họ và tên", "Email" };
 %>
@@ -19,21 +21,21 @@
 <%@ include file="../../ePartial/code-header.jsp"%>
 
 <%
-	ObjectDAO<TaiKhoan> dao = new DAO_TaiKhoan();
+	ObjectDAO<TaiKhoanSinhVien> dao = new DAO_TaiKhoanSinhVien();
 
-	ArrayList<TaiKhoan> list = new ArrayList<TaiKhoan>();
+	ArrayList<TaiKhoanSinhVien> list = new ArrayList<TaiKhoanSinhVien>();
 
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
 		if (listTemp.size() > 0) {
-			if (listTemp.get(0) instanceof TaiKhoan) {
-				list = (ArrayList<TaiKhoan>) listTemp;
+			if (listTemp.get(0) instanceof TaiKhoanSinhVien) {
+				list = (ArrayList<TaiKhoanSinhVien>) listTemp;
 			} else {
 				session.setAttribute("checkTimKiem", null);
 				list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 			}
 		} else
-			list = new ArrayList<TaiKhoan>();
+			list = new ArrayList<TaiKhoanSinhVien>();
 	} else {
 		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
 	}
@@ -74,7 +76,7 @@
 				</thead>
 				<tbody>
 					<%
-						for (TaiKhoan obj : list) {
+						for (TaiKhoanSinhVien obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
 							String maDoiTuong = obj.getMaDangNhap();
 							String tenDoiTuong = obj.getHoVaTen();
@@ -82,14 +84,15 @@
 					<tr class="odd gradeX">
 						<td><%=obj.getAnhDaiDien()%></td>
 						<td><%=obj.getMaDangNhap()%></td>
-						<td><%=obj.getNgayTao() !=null ? Util_Date.dateToString2(obj.getNgayTao()) : ""%></td>
-						<td><%=obj.getNgayCapNhatMatKhau() !=null ? Util_Date.dateToString2(obj.getNgayCapNhatMatKhau()) : ""%></td>
-						<td><%=obj.getCauHoiBiMat() !=null ? obj.getCauHoiBiMat() : ""%></td>
-						<td><%=obj.getLoaiTaiKhoan() !=null ? obj.getLoaiTaiKhoan() : ""%></td>
+						<td><%=obj.getNgayTao() != null ? Util_Date.dateToString2(obj.getNgayTao()) : ""%></td>
+						<td><%=obj.getNgayCapNhatMatKhau() != null ? Util_Date.dateToString2(obj.getNgayCapNhatMatKhau())
+						: ""%></td>
+						<td><%=obj.getCauHoiBiMat() != null ? obj.getCauHoiBiMat() : ""%></td>
+						<td><%=obj.getLoaiTaiKhoan() != null ? obj.getLoaiTaiKhoan() : ""%></td>
 						<td><%=obj.isTrangThaiHoatDong()%></td>
-						<td><%=obj.getEmail() !=null ? obj.getEmail() : ""%></td>
-						<td><%=obj.getHoVaTen() !=null ? obj.getHoVaTen() : ""%></td>
-						
+						<td><%=obj.getEmail() != null ? obj.getEmail() : ""%></td>
+						<td><%=obj.getHoVaTen() != null ? obj.getHoVaTen() : ""%></td>
+
 						<td style="text-align: center;"><%@ include
 								file="../../ePartial/menupullcuadoituong.jsp"%></td>
 					</tr>
