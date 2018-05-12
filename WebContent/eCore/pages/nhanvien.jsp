@@ -294,6 +294,42 @@
 										value="<%=(obj != null && obj.getTinHoc() != null ? obj.getTinHoc() : "")%>"
 										<%=(modeView ? " readonly " : "")%>>
 								</div>
+								<div class="form-group">
+									<label>Nhận xét đánh giá của cơ quan</label>
+									<textarea class="form-control" cols="80" id="editor1" rows="5"
+										name="nhanXetDanhGiaCuaCoQuan"
+										<%=(modeView ? " disabled " : "")%>><%=(obj != null && obj.getNhanXetDanhGiaCuaCoQuan() != null ? obj.getNhanXetDanhGiaCuaCoQuan() : "")%></textarea>
+								</div>
+								<div class="form-group">
+									<label>Email</label> <input class="form-control" name="email"
+										value="<%=(obj != null && obj.getEmail() != null ? obj.getEmail() : "")%>"
+										<%=(modeView ? " readonly " : "")%>>
+								</div>
+								<div class="form-group">
+									<label>Số điện thoại di động</label> <input
+										class="form-control" name="soDienThoaiDiDong"
+										value="<%=(obj != null && obj.getSoDienThoaiDiDong() != null ? obj.getSoDienThoaiDiDong() : "")%>"
+										<%=(modeView ? " readonly " : "")%>>
+								</div>
+								<div class="form-group">
+									<label>Số điện thoại cơ quan</label> <input
+										class="form-control" name="soDienThoaiCoQuan"
+										value="<%=(obj != null && obj.getSoDienThoaiCoQuan() != null ? obj.getSoDienThoaiCoQuan() : "")%>"
+										<%=(modeView ? " readonly " : "")%>>
+								</div>
+								<div class="form-group">
+									<label>Địa chỉ liên hệ</label> <input class="form-control"
+										name="diaChiLienHe"
+										value="<%=(obj != null && obj.getDiaChiLienHe() != null ? obj.getDiaChiLienHe() : "")%>"
+										<%=(modeView ? " readonly " : "")%>>
+								</div>
+								<div class="form-group">
+									<label>Địa chỉ báo tin</label> <input class="form-control"
+										name="diaChiBaoTin"
+										value="<%=(obj != null && obj.getDiaChiBaoTin() != null ? obj.getDiaChiBaoTin() : "")%>"
+										<%=(modeView ? " readonly " : "")%>>
+								</div>
+
 							</div>
 							<div class="col-lg-6">
 
@@ -448,41 +484,6 @@
 									<textarea class="form-control" cols="80" id="editor1" rows="5"
 										name="hoanCanhKinhTeGiaDinh"
 										<%=(modeView ? " disabled " : "")%>><%=(obj != null && obj.getHoanCanhKinhTeGiaDinh() != null ? obj.getHoanCanhKinhTeGiaDinh() : "")%></textarea>
-								</div>
-								<div class="form-group">
-									<label>Nhận xét đánh giá của cơ quan</label>
-									<textarea class="form-control" cols="80" id="editor1" rows="5"
-										name="nhanXetDanhGiaCuaCoQuan"
-										<%=(modeView ? " disabled " : "")%>><%=(obj != null && obj.getNhanXetDanhGiaCuaCoQuan() != null ? obj.getNhanXetDanhGiaCuaCoQuan() : "")%></textarea>
-								</div>
-								<div class="form-group">
-									<label>Email</label> <input class="form-control" name="email"
-										value="<%=(obj != null && obj.getEmail() != null ? obj.getEmail() : "")%>"
-										<%=(modeView ? " readonly " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Số điện thoại di động</label> <input
-										class="form-control" name="soDienThoaiDiDong"
-										value="<%=(obj != null && obj.getSoDienThoaiDiDong() != null ? obj.getSoDienThoaiDiDong() : "")%>"
-										<%=(modeView ? " readonly " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Số điện thoại cơ quan</label> <input
-										class="form-control" name="soDienThoaiCoQuan"
-										value="<%=(obj != null && obj.getSoDienThoaiCoQuan() != null ? obj.getSoDienThoaiCoQuan() : "")%>"
-										<%=(modeView ? " readonly " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Địa chỉ liên hệ</label> <input class="form-control"
-										name="diaChiLienHe"
-										value="<%=(obj != null && obj.getDiaChiLienHe() != null ? obj.getDiaChiLienHe() : "")%>"
-										<%=(modeView ? " readonly " : "")%>>
-								</div>
-								<div class="form-group">
-									<label>Địa chỉ báo tin</label> <input class="form-control"
-										name="diaChiBaoTin"
-										value="<%=(obj != null && obj.getDiaChiBaoTin() != null ? obj.getDiaChiBaoTin() : "")%>"
-										<%=(modeView ? " readonly " : "")%>>
 								</div>
 
 							</div>
