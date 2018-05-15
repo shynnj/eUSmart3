@@ -125,7 +125,7 @@
 								<div class="form-group">
 									<label>Mã thông tin sinh viên khó khăn</label> <input
 										class="form-control" name="maThongTinSinhVienKhoKhan"
-										value="<%=(obj != null ? obj.getMaThongTinSinhVienKhoKhan() : "")%>"
+										value="<%=(obj != null ? obj.getMaThongTinSinhVienKhoKhan() : "TK" + System.currentTimeMillis())%>"
 										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">

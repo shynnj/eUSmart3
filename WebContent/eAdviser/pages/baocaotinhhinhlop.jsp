@@ -1,3 +1,5 @@
+<%@page import="eCore.modelDao.DAO_TaiKhoanNhanVien"%>
+<%@page import="eCore.model.TaiKhoanNhanVien"%>
 <%@page import="eAdviser.model.BaoCaoTinhHinhLop"%>
 <%@page import="eAdviser.modelDao.DAO_CoVanHocTap"%>
 <%@page import="eAdviser.model.SoCoVanHocTap"%>
@@ -15,7 +17,18 @@
 <%@page import="eCore.model.ChucNang"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script src="content/css_scripts/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				document.getElementById("session").value = sessionStorage
+						.getItem("soCoVanHocTap");
+				if (sessionStorage.getItem("soCoVanHocTap") == null)
+					alert("Bạn hãy chọn sổ cố vấn học tập");
+			}
 
+	);
+</script>
 <%
 	String tenLop = "BaoCaoTinhHinhLop";
 	String tenTrang = "Quản lý báo cáo tình hình lớp";
@@ -74,57 +87,30 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Thuộc Sổ cố vấn học tập</label> <select
-										class="form-control" name="maSoCoVanHocTap"
-										<%=(modeView ? " disabled " : "")%>>
-										<%
-											ObjectDAO objdao = new DAO_SoCoVanHocTap();
-											ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objdao.listAll();
-											for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
-												if (obj != null && obj.getSoCoVanHocTap() != null
-														&& obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap())) {
-										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>" selected="selected"><%=scvht.getTenSoCoVanHocTap()%>
-										</option>
-										<%
-											} else {
-										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>"><%=scvht.getTenSoCoVanHocTap()%>
-										</option>
-										<%
-											}
-											}
-										%>
-									</select>
+									<label>Thuộc Sổ cố vấn học tập</label><input readonly
+										class="form-control" name="maSoCoVanHocTap" id="session"
+										value="">
 								</div>
 								<div class="form-group">
-									<label>Cố vấn học tập</label> <select class="form-control"
-										name="maCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
-										<%
-											ObjectDAO objdaoCoVanHocTap = new DAO_CoVanHocTap();
-											ArrayList<CoVanHocTap> listCoVanHocTap = objdaoCoVanHocTap.listAll();
-											for (CoVanHocTap cvht : listCoVanHocTap) {
-												if (obj != null && obj.getCoVanHocTap() != null
-														&& obj.getCoVanHocTap().getMaCoVanHocTap().equals(cvht.getMaCoVanHocTap())) {
-										%>
-										<option value="<%=cvht.maCoVanHocTap%>" selected="selected"><%=cvht.getNhanVien().tenNhanVien%>
-										</option>
-										<%
-											} else {
-										%>
-										<option value="<%=cvht.maCoVanHocTap%>"><%=cvht.getNhanVien().tenNhanVien%>
-										</option>
+									<label>Cố vấn học tập</label>
+									<%
+										String maDangNhap1 = session.getAttribute("maDangNhap").toString();
+										ObjectDAO<TaiKhoanNhanVien> dao_TaiKhoanNhanVien = new DAO_TaiKhoanNhanVien();
+										ArrayList<TaiKhoanNhanVien> list_TaiKhoanNhanVien = dao_TaiKhoanNhanVien.listByColumns("maDangNhap",
+												maDangNhap1);
+										TaiKhoanNhanVien nv = new TaiKhoanNhanVien();
+										if (list_TaiKhoanNhanVien.size() > 0)
+											nv = list_TaiKhoanNhanVien.get(0);
+									%>
 
-										<%
-											}
-											}
-										%>
-									</select>
+									<input readonly class="form-control" name="maCoVanHocTap"
+										<%=(modeView ? " disabled " : "")%>
+										value="<%=nv.getHoVaTen()%>"> </select>
 								</div>
 								<div class="form-group">
 									<label>Mã báo cáo tình hình lớp</label> <input
 										class="form-control" name="maBaoCaoTinhHinhLop"
-										value="<%=(obj != null ? obj.getMaBaoCaoTinhHinhLop() : "")%>"
+										value="<%=(obj != null ? obj.getMaBaoCaoTinhHinhLop() : "BC" + System.currentTimeMillis())%>"
 										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 
@@ -134,10 +120,6 @@
 										value="<%=(obj != null ? obj.getTenBaoCaoTinhHinhLop() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
-
-							</div>
-							<div class="col-lg-6">
-
 								<div class="form-group">
 									<label>Học kỳ</label> <input class="form-control" name="hocKy"
 										value="<%=(obj != null ? obj.getHocKy() : "")%>"
@@ -149,6 +131,11 @@
 										value="<%=(obj != null ? obj.getNamHoc() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
+
+							</div>
+							<div class="col-lg-6">
+
+
 								<div class="form-group">
 									<label>Tình hình chung</label> <input class="form-control"
 										name="tinhHinhChung"

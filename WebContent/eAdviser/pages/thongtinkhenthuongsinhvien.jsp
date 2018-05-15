@@ -17,7 +17,19 @@
 <%@page import="eCore.model.ChucNang"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<script src="content/css_scripts/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				document.getElementById("session").value = sessionStorage
+						.getItem("soCoVanHocTap");
+				if(sessionStorage
+						.getItem("soCoVanHocTap")==null)
+					alert("Bạn hãy chọn sổ cố vấn học tập");
+			}
+				
+	);
+</script>
 <%
 	String tenLop = "ThongTinKhenThuongSinhVien";
 	String tenTrang = "Quản lý thông tin khen thưởng sinh viên";
@@ -124,7 +136,7 @@
 								<div class="form-group">
 									<label>Mã thông tin khen thưởng sinh viên</label> <input
 										class="form-control" name="maThongTinKhenThuongSinhVien"
-										value="<%=(obj != null ? obj.getMaThongTinKhenThuongSinhVien() : "")%>"
+										value="<%=(obj != null ? obj.getMaThongTinKhenThuongSinhVien() : "KT" + System.currentTimeMillis())%>"
 										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">

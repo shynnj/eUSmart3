@@ -76,7 +76,7 @@
 							<div class="col-lg-6">
 								<div class="form-group">
 									<label>Cố vấn học tập</label> <select class="form-control"
-										name="maNhanVien" <%=(modeView ? " disabled " : "")%>>
+										name="maCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
 										<%
 											ObjectDAO objCoVanHocTap = new DAO_CoVanHocTap();
 											ArrayList<CoVanHocTap> listCoVanHocTap = objCoVanHocTap.listAll();
@@ -147,7 +147,7 @@
 								<div class="form-group">
 									<label>Mã phân công</label> <input class="form-control"
 										name="maPhanCong"
-										value="<%=(obj != null ? obj.getMaPhanCong() : "")%>"
+										value="<%=(obj != null ? obj.getMaPhanCong() : "PC"+ System.currentTimeMillis())%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">

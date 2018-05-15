@@ -1,3 +1,5 @@
+<%@page import="eCore.modelDao.DAO_TaiKhoanNhanVien"%>
+<%@page import="eCore.model.TaiKhoanNhanVien"%>
 <%@page import="eAdviser.model.ThongBaoKetQuaHocTapVaRenLuyen"%>
 <%@page import="eCore.model.SinhVien"%>
 <%@page import="eCore.modelDao.DAO_SinhVien"%>
@@ -20,6 +22,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<script src="content/css_scripts/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				document.getElementById("session").value = sessionStorage
+						.getItem("soCoVanHocTap");
+				if (sessionStorage.getItem("soCoVanHocTap") == null)
+					alert("Bạn hãy chọn sổ cố vấn học tập");
+			}
+
+	);
+</script>
 <%
 	String tenLop = "ThongBaoKetQuaHocTapVaRenLuyen";
 	String tenTrang = "Quản lý thông báo kết quả và rèn luyện";
@@ -27,9 +41,9 @@
 	String[] tk_value = { "coVanHocTap", "soCoVanHocTap", "sinhVien", "maThongBaoKetQuaHocTapVaRenLuyen",
 			"hocKy", "namHoc", "ketQuaHocTap", "xepLoaiHocTap", "ketQuaRenLuyen", "xepLoaiRenLuyen",
 			"thongBaoCuThe" };
-	String[] tk_show = { "Cố vấn học tập", "Sổ cố vấn học tập", "Sinh viên", "Học kỳ", "Năm học",
-			"Kết quả học tập", "Xếp loại học tập", "Kết quả rèn luyện", "Xếp loại rèn luyện",
-			"Thông báo cụ thể" };
+	String[] tk_show = { "Cố vấn học tập", "Sổ cố vấn học tập", "Sinh viên",
+			"Mã thông báo kết quả học tập và rèn luyện", "Học kỳ", "Năm học", "Kết quả học tập",
+			"Xếp loại học tập", "Kết quả rèn luyện", "Xếp loại rèn luyện", "Thông báo cụ thể" };
 %>
 <%@ include file="../../ePartial/code-header.jsp"%>
 
@@ -80,58 +94,39 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Sổ cố vấn học tập</label> <select
-										class="form-control" name="maSoCoVanHocTap"
-										<%=(modeView ? " disabled " : "")%>>
-										<%
-											ObjectDAO objdaoSoCoVanHocTap = new DAO_SoCoVanHocTap();
-											ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objdaoSoCoVanHocTap.listAll();
-											for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
-												if (obj != null && obj.getSoCoVanHocTap() != null
-														&& obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap())) {
-										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>" selected="selected"><%=scvht.getTenSoCoVanHocTap()%>
-										</option>
-										<%
-											} else {
-										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>"><%=scvht.getTenSoCoVanHocTap()%>
-										</option>
-										<%
-											}
-											}
-										%>
-									</select>
+									<label>Thuộc Sổ cố vấn học tập</label><input readonly
+										class="form-control" name="maSoCoVanHocTap" id="session">
 								</div>
 								<div class="form-group">
-									<label>Cố vấn học tập</label> <select class="form-control"
-										name="maCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
-										<%
-											ObjectDAO objdaoCoVanHocTap = new DAO_CoVanHocTap();
-											ArrayList<CoVanHocTap> listCoVanHocTap = objdaoCoVanHocTap.listAll();
-											for (CoVanHocTap cvht : listCoVanHocTap) {
-												if (obj != null && obj.getCoVanHocTap() != null
-														&& obj.getCoVanHocTap().getMaCoVanHocTap().equals(cvht.getMaCoVanHocTap())) {
-										%>
-										<option value="<%=cvht.maCoVanHocTap%>" selected="selected"><%=cvht.getNhanVien().tenNhanVien%>
-										</option>
-										<%
-											} else {
-										%>
-										<option value="<%=cvht.maCoVanHocTap%>"><%=cvht.getNhanVien().tenNhanVien%>
-										</option>
+									<label>Cố vấn học tập</label>
+									<%
+										String maDangNhap1 = session.getAttribute("maDangNhap").toString();
+										ObjectDAO<TaiKhoanNhanVien> dao_TaiKhoanNhanVien = new DAO_TaiKhoanNhanVien();
+										ArrayList<TaiKhoanNhanVien> list_TaiKhoanNhanVien = dao_TaiKhoanNhanVien.listByColumns("maDangNhap",
+												maDangNhap1);
+										TaiKhoanNhanVien nv = new TaiKhoanNhanVien();
+										if (list_TaiKhoanNhanVien.size() > 0)
+											nv = list_TaiKhoanNhanVien.get(0);
+									%>
 
-										<%
-											}
-											}
-										%>
-									</select>
+									<input readonly class="form-control" name="maCoVanHocTap"
+										<%=(modeView ? " disabled " : "")%>
+										value="<%=nv.getHoVaTen()%>"> </select>
 								</div>
 								<div class="form-group">
 									<label>Sinh viên</label><select class="form-control"
 										name="maSinhVien" <%=(modeView ? " disabled " : "")%>>
 										<%
 											ObjectDAO objdaosv = new DAO_SinhVien();
+											// 											String maSoCoVanHocTap = session.getAttribute("maSoCoVanHocTap").toString();
+											// 											ObjectDAO<SoCoVanHocTap> dao_SoCoVanHocTap = new DAO_SoCoVanHocTap();
+											// 											ArrayList<SoCoVanHocTap> list_SoCoVanHocTap = dao_SoCoVanHocTap.listByColumns("maSoCoVanHocTap", maSoCoVanHocTap);
+											// 											String maLop = "";
+											// 											if(list_SoCoVanHocTap.size()>0)
+											// 												maLop = list_SoCoVanHocTap.get(0).getLop().getMaLop();
+
+											// 											ArrayList<SinhVien> listSinhVien = objdaosv.listByColumns("maLop", maLop);
+
 											ArrayList<SinhVien> listSinhVien = objdaosv.listAll();
 											for (SinhVien sv : listSinhVien) {
 												if (obj != null && obj.getSinhVien() != null
@@ -149,6 +144,12 @@
 											}
 										%>
 									</select>
+								</div>
+								<div class="form-group">
+									<label>Mã thông báo kết quả học tập và rèn luyện</label> <input
+										class="form-control" name="maThongBaoKetQuaHocTapVaRenLuyen"
+										value="<%=(obj != null ? obj.maThongBaoKetQuaHocTapVaRenLuyen : "KQ" + System.currentTimeMillis())%>"
+										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
 									<label>Học kỳ</label> <input class="form-control" name="hocKy"

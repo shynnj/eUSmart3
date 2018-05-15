@@ -29,13 +29,22 @@
 	} else {
 %>
 <div class="row pull-right">
-	<div class="col-md-4" style="padding: 1px">
-		<a href="<%=trangDanhSach%>" class="btn btn-default"> <img
-			src="content/images/back-32.png" width="16px" height="16px"></img>
-			&nbsp; Quay về trang danh sách
-		</a>
-	</div>
+	<!-- 	<div class="col-md-4" style="padding: 1px"> -->
+	<%-- 		<a href="<%=trangDanhSach%>" class="btn btn-default"> <img --%>
+	<!-- 			src="content/images/back-32.png" width="16px" height="16px"></img> -->
+	<!-- 			&nbsp; Quay về trang danh sách -->
+	<!-- 		</a> -->
+	<!-- 	</div> -->
+
+	<a href="<%=trangDanhSach%>" class="btn btn-default"> <img
+		src="content/images/back-32.png" width="16px" height="16px"></img>
+		&nbsp; Quay về trang danh sách
+	</a> <a href="#" class="btn btn-default"> <img
+		src="content/images/report-32.png" width="16px" height="16px"></img>
+		&nbsp;In tập tin
+	</a>
 </div>
+
 <%
 	}
 %>

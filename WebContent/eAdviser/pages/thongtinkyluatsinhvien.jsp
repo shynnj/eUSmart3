@@ -19,6 +19,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<script src="content/css_scripts/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				document.getElementById("session").value = sessionStorage
+						.getItem("soCoVanHocTap");
+				if(sessionStorage
+						.getItem("soCoVanHocTap")==null)
+					alert("Bạn hãy chọn sổ cố vấn học tập");
+			}
+				
+	);
+</script>
 <%
 	String tenLop = "ThongTinKyLuatSinhVien";
 	String tenTrang = "Quản lý thông tin kỷ luật sinh viên";
@@ -125,7 +138,7 @@
 								<div class="form-group">
 									<label>Mã thông tin kỷ luật sinh viên</label> <input
 										class="form-control" name="maThongTinKyLuatSinhVien"
-										value="<%=(obj != null ? obj.getMaThongTinKyLuatSinhVien() : "")%>"
+										value="<%=(obj != null ? obj.getMaThongTinKyLuatSinhVien() : "KL" + System.currentTimeMillis())%>"
 										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">

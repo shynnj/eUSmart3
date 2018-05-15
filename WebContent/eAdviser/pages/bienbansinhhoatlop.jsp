@@ -13,6 +13,21 @@
 <%@page import="eCore.model.ChucNang"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script src="content/css_scripts/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				document.getElementById("session").value = sessionStorage
+						.getItem("soCoVanHocTap");
+				if(sessionStorage
+						.getItem("soCoVanHocTap")==null)
+					alert("Bạn hãy chọn sổ cố vấn học tập");
+			}
+				
+	);
+</script>
+
+
 
 <%
 	String tenLop = "BienBanSinhHoatLop";
@@ -74,34 +89,12 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Thuộc Sổ cố vấn học tập</label> 
-									<select
-										class="form-control" name="maSoCoVanHocTap"
-										<%=(modeView ? " disabled " : "")%>>
-										<%
-											ObjectDAO objdao = new DAO_SoCoVanHocTap();
-											ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objdao.listAll();
-											for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
-												if (obj != null && obj.getSoCoVanHocTap() != null
-														&& obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap())) {
-										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>" selected="selected"><%=scvht.getTenSoCoVanHocTap()%>
-										</option>
-										<%
-											} else {
-										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>"><%=scvht.getTenSoCoVanHocTap()%>
-										</option>
-										<%
-											}
-											}
-										%>
-									</select>
+									<label>Thuộc Sổ cố vấn học tập</label><input readonly class="form-control" name="maSoCoVanHocTap" id="session"> 
 								</div>
 								<div class="form-group">
 									<label>Mã biên bản sinh hoạt lớp</label> <input
 										class="form-control" name="maBienBanSinhHoatLop"
-										value="<%=(obj != null ? obj.getMaBienBanSinhHoatLop() : "")%>"
+										value="<%=(obj != null ? obj.getMaBienBanSinhHoatLop() : "B" + System.currentTimeMillis())%>"
 										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 
