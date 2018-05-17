@@ -90,10 +90,13 @@
 						data-target="#timKiemModal" id="nutTimKiem"> <img
 						src="content/images/search-32.png" width="16px" height="16px" />
 						&nbsp; Tìm kiếm
-					</a> <a class="btn   btn-default" style="text-align: left;"
-						id="nutBaoCao"> <img src="content/images/report-32.png"
-						width="16px" height="16px" /> &nbsp; Báo cáo
-					</a>
+					</a> 
+					
+					
+<!-- 					<a class="btn   btn-default" style="text-align: left;" -->
+<!-- 						id="nutBaoCao"> <img src="content/images/report-32.png" -->
+<!-- 						width="16px" height="16px" /> &nbsp; Báo cáo -->
+<!-- 					</a> -->
 
 
 

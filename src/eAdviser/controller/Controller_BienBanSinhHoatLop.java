@@ -134,30 +134,33 @@ public class Controller_BienBanSinhHoatLop extends BienBanSinhHoatLop implements
 		HttpSession session = request.getSession();
 
 		BienBanSinhHoatLop obj = new BienBanSinhHoatLop();
-		obj.soCoVanHocTap=getSoCoVanHocTap();
-		obj.maBienBanSinhHoatLop = getMaBienBanSinhHoatLop();
-		obj.tenBienBanSinhHoatLop = getTenBienBanSinhHoatLop();
-		obj.chuTriCuocHop = getChuTriCuocHop();
-		obj.thuKyCuocHop=getThuKyCuocHop();
-		obj.diaDiem = getDiaDiem();
-		obj.thoiGian=getThoiGian();
-		obj.soLuongThamGia=getSoLuongThamGia();
-		obj.soLuongVang=getSoLuongVang();
-		obj.danhSachVangMat=getDanhSachVangMat();
-		obj.noiDung=getNoiDung();
-		obj.deXuat=getDeXuat();
-		obj.moTa=getMoTa();
-		obj.ghiChu = getGhiChu();
-		obj.thoiGianCapNhat = new Date();
-		if (dao.saveOrUpdate(obj)) {
-			session.setAttribute("msg", "Cập nhật dữ liệu thành công");
-			session.setAttribute("obj", obj);
-			session.setAttribute("mode", "viewDetailAndEdit");
-			session.setAttribute("p", duongDanTrangView);
-			return "SUCCESS";
-		} else {
-			return "FAIL";
+		if(!getMaSoCoVanHocTap().equals("null") && !getMaSoCoVanHocTap().equals("")) {
+			obj.soCoVanHocTap=getSoCoVanHocTap();
+			obj.maBienBanSinhHoatLop = getMaBienBanSinhHoatLop();
+			obj.tenBienBanSinhHoatLop = getTenBienBanSinhHoatLop();
+			obj.chuTriCuocHop = getChuTriCuocHop();
+			obj.thuKyCuocHop=getThuKyCuocHop();
+			obj.diaDiem = getDiaDiem();
+			obj.thoiGian=getThoiGian();
+			obj.soLuongThamGia=getSoLuongThamGia();
+			obj.soLuongVang=getSoLuongVang();
+			obj.danhSachVangMat=getDanhSachVangMat();
+			obj.noiDung=getNoiDung();
+			obj.deXuat=getDeXuat();
+			obj.moTa=getMoTa();
+			obj.ghiChu = getGhiChu();
+			obj.thoiGianCapNhat = new Date();
+			if (dao.saveOrUpdate(obj)) {
+				session.setAttribute("msg", "Cập nhật dữ liệu thành công");
+				session.setAttribute("obj", obj);
+				session.setAttribute("mode", "viewDetailAndEdit");
+				session.setAttribute("p", duongDanTrangView);
+				return "SUCCESS";
+			} else {
+				return "FAIL";
+			}
 		}
+		return "FAIL";
 	}
 
 	@Override

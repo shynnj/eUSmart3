@@ -48,7 +48,7 @@ public class Controller_XacThuc {
 			String md5 = Util_MD5.md5(getMatKhau());
 			if (obj.getMatKhau().equals(md5)) {
 				session.setAttribute("maDangNhap", obj.getMaDangNhap());
-				session.setAttribute("chucNangs", Util_Menu.getMenu(session.getAttribute("maDangNhap") + ""));
+				session.setAttribute("chucNangs", Util_Menu.getMenu2(session.getAttribute("maDangNhap") + ""));
 				return "SUCCESS";
 			}
 		}

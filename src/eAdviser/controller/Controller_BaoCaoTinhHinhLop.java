@@ -18,7 +18,7 @@ import eAdviser.modelDao.DAO_SoCoVanHocTap;
 import eCore.controller.ZEController;
 import eCore.dao.ObjectDAO;
 
-public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements ZEController{
+public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements ZEController {
 
 	ObjectDAO dao = new DAO_BaoCaoTinhHinhLop();
 	String timKiemTheo;
@@ -29,74 +29,90 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 	String maObj;
 	String maCoVanHocTap;
 	String maSoCoVanHocTap;
+
 	public String getTimKiemTheo() {
 		return timKiemTheo;
 	}
+
 	public void setTimKiemTheo(String timKiemTheo) {
 		this.timKiemTheo = timKiemTheo;
 	}
+
 	public String getTuKhoa() {
 		return tuKhoa;
 	}
+
 	public void setTuKhoa(String tuKhoa) {
 		this.tuKhoa = tuKhoa;
 	}
+
 	public String getDuongDanTrang() {
 		return duongDanTrang;
 	}
+
 	public void setDuongDanTrang(String duongDanTrang) {
 		this.duongDanTrang = duongDanTrang;
 	}
+
 	public String getDuongDanTrangView() {
 		return duongDanTrangView;
 	}
+
 	public void setDuongDanTrangView(String duongDanTrangView) {
 		this.duongDanTrangView = duongDanTrangView;
 	}
+
 	public String getTenCotTimDoiTuong() {
 		return tenCotTimDoiTuong;
 	}
+
 	public void setTenCotTimDoiTuong(String tenCotTimDoiTuong) {
 		this.tenCotTimDoiTuong = tenCotTimDoiTuong;
 	}
+
 	public String getMaObj() {
 		return maObj;
 	}
+
 	public void setMaObj(String maObj) {
 		this.maObj = maObj;
 	}
-	
+
 	public String getMaCoVanHocTap() {
 		return maCoVanHocTap;
 	}
+
 	public void setMaCoVanHocTap(String maCoVanHocTap) {
 		this.maCoVanHocTap = maCoVanHocTap;
 	}
+
 	public CoVanHocTap getCoVanHocTap() {
 		ObjectDAO<CoVanHocTap> objdao_covanhoctap = new DAO_CoVanHocTap();
 		ArrayList<CoVanHocTap> list = objdao_covanhoctap.listByColumns("maCoVanHocTap", getMaCoVanHocTap());
-		if(list.size()>0)
+		if (list.size() > 0)
 			return list.get(0);
 		else
 			return null;
 	}
-	
+
 	public String getMaSoCoVanHocTap() {
 		return maSoCoVanHocTap;
 	}
+
 	public void setMaSoCoVanHocTap(String maSoCoVanHocTap) {
 		this.maSoCoVanHocTap = maSoCoVanHocTap;
 	}
-	
+
 	public SoCoVanHocTap getSoCoVanHocTap() {
 		ObjectDAO<SoCoVanHocTap> objdao_socovanhoctap = new DAO_SoCoVanHocTap();
-		ArrayList<SoCoVanHocTap> list_SoCoVanHocTap = objdao_socovanhoctap.listByColumns("maSoCoVanHocTap", getMaSoCoVanHocTap());
-		if(list_SoCoVanHocTap.size()>0)
+		ArrayList<SoCoVanHocTap> list_SoCoVanHocTap = objdao_socovanhoctap.listByColumns("maSoCoVanHocTap",
+				getMaSoCoVanHocTap());
+		if (list_SoCoVanHocTap.size() > 0)
 			return list_SoCoVanHocTap.get(0);
 		else
 			return null;
 	}
-	
+
 	@Override
 	public String addNew() {
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -112,9 +128,9 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 	public String viewDetail() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
-		
+
 		String maobj = request.getParameter("maobj");
-		
+
 		session.setAttribute("mode", "viewDetail");
 
 		ArrayList<BaoCaoTinhHinhLop> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
@@ -149,33 +165,35 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 	public String saveOrUpdate() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
-
-		BaoCaoTinhHinhLop obj = new BaoCaoTinhHinhLop();
-		obj.soCoVanHocTap=getSoCoVanHocTap();
-		obj.coVanHocTap = getCoVanHocTap();
-		obj.maBaoCaoTinhHinhLop = getMaBaoCaoTinhHinhLop();
-		obj.tenBaoCaoTinhHinhLop = getTenBaoCaoTinhHinhLop();
-		obj.hocKy=getHocKy();
-		obj.namHoc = getNamHoc();
-		obj.soSinhVienTrongLop=getSoSinhVienTrongLop();
-		obj.tinhHinhChung=getTinhHinhChung();
-		obj.tuTuongChinhTri=getTuTuongChinhTri();
-		obj.ketQuaHocTap=getKetQuaHocTap();
-		obj.ketQuaRenLuyen=getKetQuaRenLuyen();
-		obj.ketQuaCacHoatDongKhac=getKetQuaCacHoatDongKhac();
-		obj.kienNghiDeXuat=getKienNghiDeXuat();
-		obj.moTa=getMoTa();
-		obj.ghiChu = getGhiChu();
-		obj.thoiGianCapNhat = new Date();
-		if (dao.saveOrUpdate(obj)) {
-			session.setAttribute("msg", "Cập nhật dữ liệu thành công");
-			session.setAttribute("obj", obj);
-			session.setAttribute("mode", "viewDetailAndEdit");
-			session.setAttribute("p", duongDanTrangView);
-			return "SUCCESS";
-		} else {
-			return "FAIL";
+		if (!getMaSoCoVanHocTap().equals("null") && !getMaSoCoVanHocTap().equals("")) {
+			BaoCaoTinhHinhLop obj = new BaoCaoTinhHinhLop();
+			obj.soCoVanHocTap = getSoCoVanHocTap();
+			obj.coVanHocTap = getCoVanHocTap();
+			obj.maBaoCaoTinhHinhLop = getMaBaoCaoTinhHinhLop();
+			obj.tenBaoCaoTinhHinhLop = getTenBaoCaoTinhHinhLop();
+			obj.hocKy = getHocKy();
+			obj.namHoc = getNamHoc();
+			obj.soSinhVienTrongLop = getSoSinhVienTrongLop();
+			obj.tinhHinhChung = getTinhHinhChung();
+			obj.tuTuongChinhTri = getTuTuongChinhTri();
+			obj.ketQuaHocTap = getKetQuaHocTap();
+			obj.ketQuaRenLuyen = getKetQuaRenLuyen();
+			obj.ketQuaCacHoatDongKhac = getKetQuaCacHoatDongKhac();
+			obj.kienNghiDeXuat = getKienNghiDeXuat();
+			obj.moTa = getMoTa();
+			obj.ghiChu = getGhiChu();
+			obj.thoiGianCapNhat = new Date();
+			if (dao.saveOrUpdate(obj)) {
+				session.setAttribute("msg", "Cập nhật dữ liệu thành công");
+				session.setAttribute("obj", obj);
+				session.setAttribute("mode", "viewDetailAndEdit");
+				session.setAttribute("p", duongDanTrangView);
+				return "SUCCESS";
+			} else {
+				return "FAIL";
+			}
 		}
+		return "FAIL";
 	}
 
 	@Override
@@ -230,5 +248,4 @@ public class Controller_BaoCaoTinhHinhLop extends BaoCaoTinhHinhLop implements Z
 		return null;
 	}
 
-	
 }

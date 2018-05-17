@@ -91,7 +91,7 @@
 										ArrayList<ChucNang> listChucNang = objdao.listAll();
 										for (ChucNang cn : listChucNang) {
 									%>
-									<input  onclick="checkedFunction(this)" type="checkbox"
+									<input onclick="checkedFunction(this)" type="checkbox"
 										id="<%=cn.getMaChucNang()%>" value="<%=cn.getMaChucNang()%>"
 										<%=(modeView ? " disabled " : "")%>
 										<%=ls_MaChucNang.contains(cn.getMaChucNang()) ? "checked" : ""%>><%=cn.getTenHienThi()%><br>
@@ -125,6 +125,7 @@
 										<textarea class="form-control" cols="80" id="editor1" rows="5"
 											name="moTa" <%=(modeView ? " readonly " : "")%>><%=(obj != null ? obj.getMoTa() + "" : "")%></textarea>
 									</div>
+
 									<div class="form-group">
 										<label>Ghi chú</label>
 										<textarea class="form-control" cols="80" id="editor2" rows="5"
@@ -139,9 +140,7 @@
 								</div>
 							</div>
 							<!-- /.col-lg-6 (nested) -->
-							<!-- /.col-lg-6 (nested) -->
 						</div>
-						<!-- /.row (nested) -->
 					</div>
 					<!-- /.panel-body -->
 				</div>

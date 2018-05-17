@@ -141,7 +141,6 @@
 <script>
 	document.getElementById("nutThemMoi").style.display = "none";
 	document.getElementById("nutNhapLieuExcel").style.display = "none";
-	document.getElementById("nutBaoCao").style.display = "none";
 
 	function chon(dt) {
 		// 		alert(dt.id);
@@ -152,7 +151,7 @@
 	}
 	function bochon(dt) {
 		sessionStorage.setItem("soCoVanHocTap", null);
-		document.getElementById("sessionChonSo").value = null;
+// 		document.getElementById("sessionChonSo").value = "null";
 		alert("Hủy chọn" + dt.id);
 	}
 </script>

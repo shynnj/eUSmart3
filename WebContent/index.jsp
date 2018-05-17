@@ -38,9 +38,9 @@
 	href="content/css_scripts/bootstrap/css/sbadmin2-sidebar-toggle.css"
 	rel="stylesheet" type="text/css">
 
-<!-- Custom Fonts -->
-<link href="content/css_scripts/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
 .block {
@@ -78,214 +78,49 @@
 	}
 %>
 <body>
-	<div id="wrapper">
-		<!-- Navigation -->
-		<nav class="navbar navbar-default navbar-static-top" role="navigation"
-			style="margin-bottom: 0">
+
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target=".navbar-collapse">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
 				<span class="sr-only">Toggle navigation</span> <span
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp"> <img
-				style="vertical-align: middle; display: inline-block;"
-				src="content/images/logo.png" width="35px" height="35px"></img> <span
-				style="vertical-align: middle; display: inline-block;">&nbsp;
-					UTC2Smart University 1.0</span>
-			</a>
+
 		</div>
-		<!-- /.navbar-header -->
+		<div id="navbar" class="collapse navbar-collapse ">
+			<ul class="nav  navbar-nav navbar-dark bg-primary text-white">
+				<li class="dropdown" style="color: white;"><a
+					class="dropdown-toggle" style="color: white;"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false" href="index.jsp"> <img
+						src="content/images/logo.png" width="35px" height="35px"></img>
+						UTCC2Smart 1.0
+				</a></li>
 
-		<ul class="nav navbar-top-links navbar-right">
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> <i class="fa fa-envelope fa-fw"></i>
-					<i class="fa fa-caret-down"></i>
-			</a>
-				<ul class="dropdown-menu dropdown-messages">
-					<li><a href="#">
-							<div>
-								<strong>John Smith</strong> <span class="pull-right text-muted">
-									<em>Yesterday</em>
-								</span>
-							</div>
-							<div>Lorem ipsum dolor sit amet, consectetur adipiscing
-								elit. Pellentesque eleifend...</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<strong>John Smith</strong> <span class="pull-right text-muted">
-									<em>Yesterday</em>
-								</span>
-							</div>
-							<div>Lorem ipsum dolor sit amet, consectetur adipiscing
-								elit. Pellentesque eleifend...</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<strong>John Smith</strong> <span class="pull-right text-muted">
-									<em>Yesterday</em>
-								</span>
-							</div>
-							<div>Lorem ipsum dolor sit amet, consectetur adipiscing
-								elit. Pellentesque eleifend...</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a class="text-center" href="#"> <strong>Read
-								All Messages</strong> <i class="fa fa-angle-right"></i>
-					</a></li>
-				</ul> <!-- /.dropdown-messages --></li>
-			<!-- /.dropdown -->
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> <i class="fa fa-tasks fa-fw"></i>
-					<i class="fa fa-caret-down"></i>
-			</a>
-				<ul class="dropdown-menu dropdown-tasks">
-					<li><a href="#">
-							<div>
-								<p>
-									<strong>Task 1</strong> <span class="pull-right text-muted">40%
-										Complete</span>
-								</p>
-								<div class="progress progress-striped active">
-									<div class="progress-bar progress-bar-success"
-										role="progressbar" aria-valuenow="40" aria-valuemin="0"
-										aria-valuemax="100" style="width: 40%">
-										<span class="sr-only">40% Complete (success)</span>
-									</div>
-								</div>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<p>
-									<strong>Task 2</strong> <span class="pull-right text-muted">20%
-										Complete</span>
-								</p>
-								<div class="progress progress-striped active">
-									<div class="progress-bar progress-bar-info" role="progressbar"
-										aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
-										style="width: 20%">
-										<span class="sr-only">20% Complete</span>
-									</div>
-								</div>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<p>
-									<strong>Task 3</strong> <span class="pull-right text-muted">60%
-										Complete</span>
-								</p>
-								<div class="progress progress-striped active">
-									<div class="progress-bar progress-bar-warning"
-										role="progressbar" aria-valuenow="60" aria-valuemin="0"
-										aria-valuemax="100" style="width: 60%">
-										<span class="sr-only">60% Complete (warning)</span>
-									</div>
-								</div>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<p>
-									<strong>Task 4</strong> <span class="pull-right text-muted">80%
-										Complete</span>
-								</p>
-								<div class="progress progress-striped active">
-									<div class="progress-bar progress-bar-danger"
-										role="progressbar" aria-valuenow="80" aria-valuemin="0"
-										aria-valuemax="100" style="width: 80%">
-										<span class="sr-only">80% Complete (danger)</span>
-									</div>
-								</div>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a class="text-center" href="#"> <strong>See
-								All Tasks</strong> <i class="fa fa-angle-right"></i>
-					</a></li>
-				</ul> <!-- /.dropdown-tasks --></li>
-			<!-- /.dropdown -->
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> <i class="fa fa-bell fa-fw"></i>
-					<i class="fa fa-caret-down"></i>
-			</a>
-				<ul class="dropdown-menu dropdown-alerts">
-					<li><a href="#">
-							<div>
-								<i class="fa fa-comment fa-fw"></i> New Comment <span
-									class="pull-right text-muted small">4 minutes ago</span>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<i class="fa fa-twitter fa-fw"></i> 3 New Followers <span
-									class="pull-right text-muted small">12 minutes ago</span>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<i class="fa fa-envelope fa-fw"></i> Message Sent <span
-									class="pull-right text-muted small">4 minutes ago</span>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<i class="fa fa-tasks fa-fw"></i> New Task <span
-									class="pull-right text-muted small">4 minutes ago</span>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a href="#">
-							<div>
-								<i class="fa fa-upload fa-fw"></i> Server Rebooted <span
-									class="pull-right text-muted small">4 minutes ago</span>
-							</div>
-					</a></li>
-					<li class="divider"></li>
-					<li><a class="text-center" href="#"> <strong>See
-								All Alerts</strong> <i class="fa fa-angle-right"></i>
-					</a></li>
-				</ul> <!-- /.dropdown-alerts --></li>
-			<!-- /.dropdown -->
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
-					<i class="fa fa-caret-down"></i>
-			</a>
-				<ul class="dropdown-menu dropdown-user">
-					<li><a href="#"><i class="fa fa-user fa-fw"></i> Thông tin
-							người dùng</a></li>
-					<li><a href="#"><i class="fa fa-gear fa-fw"></i> Cài đặt
-							tài khoản</a></li>
-					<li class="divider"></li>
-					<li><a href="dangXuat.action"><i
-							class="fa fa-sign-out fa-fw"></i> Đăng xuất</a></li>
-				</ul> <!-- /.dropdown-user --></li>
-			<!-- /.dropdown -->
-		</ul>
-		<!-- /.navbar-top-links -->
+				<%=session.getAttribute("chucNangs")%>
 
-		<div class="navbar-default sidebar" role="navigation">
-			<div class="sidebar-nav navbar-collapse">
-				<ul class="nav" id="side-menu">
-					<%=session.getAttribute("chucNangs")%>
-				</ul>
-			</div>
-			<!-- /.sidebar-collapse -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					style="color: white;" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false" href=index.jsp?p=><i
+						class="fa fa-user"></i> <span class="masked"> Tài khoản</a>
+					<ul class="dropdown-menu">
+						<li><a href=dangXuat.action><i class="fa fa-users"></i>
+								&nbsp;&nbsp;Đăng xuất </a>
+					</ul></li>
+			</ul>
 		</div>
-		<!-- /.navbar-static-side --> </nav>
-
-		<div id="page-wrapper">
+		<!--/.nav-collapse -->
+	</div>
+	</nav>
+	
+	<div class="container" style="padding: 10px; padding-top: 70px; ">
+		<div class="starter-template"
+			style="padding: 10px; background: white;">
 			<%
 				String p = request.getParameter("p") + "";
 				if (p.equals("null")) {
@@ -293,16 +128,27 @@
 				} else {
 					session.setAttribute("p", p);
 				}
-				if (!p.equals("null")) {
+				if (p != null && !p.equals("null")) {
+					if (!p.startsWith("http://")) {
 			%>
 			<jsp:include page="<%=p%>"></jsp:include>
 			<%
+				} else {
+			%>
+			<iframe src=<%=p%> width="100%" height="600px"></iframe>
+			<%
+				}
 				}
 			%>
 		</div>
-		<!-- /#page-wrapper -->
-
 	</div>
+	<div class="footer">
+		<div class="container">
+			<p class="text-muted">@ ThS. Le Nhat Tung - 2018.</p>
+		</div>
+	</div>
+	<!-- /#page-wrapper -->
+
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->
@@ -345,7 +191,6 @@
 		$(document).ready(function() {
 			$('#dataTables-example').DataTable({
 				responsive : true,
-				sorting: false,
 				searching : false,
 				info : false,
 				paging : false,
@@ -376,7 +221,7 @@
 			});
 		});
 	</script>
-	<ckeditor:replace replace="noiDung" basePath="content/ckeditor/" />
+	<!-- 	<ckeditor:replaceAll basePath="content/ckeditor/" /> -->
 </body>
 
 </html>
