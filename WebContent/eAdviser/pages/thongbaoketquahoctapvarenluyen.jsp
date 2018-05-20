@@ -21,19 +21,19 @@
 <%@page import="eCore.model.ChucNang"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	if (session.getAttribute("maSo") == null) {
+%>
 
-<script src="content/css_scripts/jquery/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(
-			function() {
-				document.getElementById("session").value = sessionStorage
-						.getItem("soCoVanHocTap");
-				if (sessionStorage.getItem("soCoVanHocTap") == null)
-					alert("Bạn hãy chọn sổ cố vấn học tập");
-			}
-
-	);
+	alert("Bạn hãy chọn sổ cố vấn học tập.");
+	window.location="index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
 </script>
+<%
+	} else {
+%>	
+	
 <%
 	String tenLop = "ThongBaoKetQuaHocTapVaRenLuyen";
 	String tenTrang = "Quản lý thông báo kết quả và rèn luyện";
@@ -94,8 +94,9 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Thuộc Sổ cố vấn học tập</label><input readonly
-										class="form-control" name="maSoCoVanHocTap" id="session">
+									<label>Thuộc Sổ cố vấn học tập</label> <input readonly
+										class="form-control" name="maSoCoVanHocTap"
+										value="<%=session.getAttribute("maSo").toString()%>">
 								</div>
 								<div class="form-group">
 									<label>Cố vấn học tập</label>
@@ -114,36 +115,10 @@
 										value="<%=nv.getHoVaTen()%>"> </select>
 								</div>
 								<div class="form-group">
-									<label>Sinh viên</label><select class="form-control"
-										name="maSinhVien" <%=(modeView ? " disabled " : "")%>>
-										<%
-											ObjectDAO objdaosv = new DAO_SinhVien();
-											// 											String maSoCoVanHocTap = session.getAttribute("maSoCoVanHocTap").toString();
-											// 											ObjectDAO<SoCoVanHocTap> dao_SoCoVanHocTap = new DAO_SoCoVanHocTap();
-											// 											ArrayList<SoCoVanHocTap> list_SoCoVanHocTap = dao_SoCoVanHocTap.listByColumns("maSoCoVanHocTap", maSoCoVanHocTap);
-											// 											String maLop = "";
-											// 											if(list_SoCoVanHocTap.size()>0)
-											// 												maLop = list_SoCoVanHocTap.get(0).getLop().getMaLop();
-
-											// 											ArrayList<SinhVien> listSinhVien = objdaosv.listByColumns("maLop", maLop);
-
-											ArrayList<SinhVien> listSinhVien = objdaosv.listAll();
-											for (SinhVien sv : listSinhVien) {
-												if (obj != null && obj.getSinhVien() != null
-														&& obj.getSinhVien().getMaSinhVien().equals(sv.getMaSinhVien())) {
-										%>
-										<option value="<%=sv.maSinhVien%>" selected="selected"><%=sv.getHoDem() + " " + sv.getTen()%>
-										</option>
-										<%
-											} else {
-										%>
-										<option value="<%=sv.maSinhVien%>"><%=sv.getHoDem() + " " + sv.getTen()%>
-										</option>
-										<%
-											}
-											}
-										%>
-									</select>
+									<label>Mã sinh viên</label> <input class="form-control"
+										name="maSinhVien"
+										value="<%=(obj != null ? obj.getSinhVien().getMaSinhVien() : "")%>"
+										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">
 									<label>Mã thông báo kết quả học tập và rèn luyện</label> <input
@@ -162,7 +137,6 @@
 										value="<%=(obj != null ? obj.getNamHoc() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
-
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
@@ -230,3 +204,6 @@
 	</div>
 	<!-- /.row -->
 </form>
+<%
+	}
+%>

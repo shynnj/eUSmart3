@@ -34,6 +34,8 @@ public class Controller_SoCoVanHocTap extends SoCoVanHocTap implements ZEControl
 	String maLop;
 	String s_ngayBD;
 	String s_ngayKT;
+	
+	
 
 	public String getS_ngayBD() {
 		return s_ngayBD;
@@ -248,5 +250,8 @@ public class Controller_SoCoVanHocTap extends SoCoVanHocTap implements ZEControl
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	
 
 }

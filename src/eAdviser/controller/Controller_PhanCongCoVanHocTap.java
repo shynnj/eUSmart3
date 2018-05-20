@@ -1,9 +1,12 @@
 package eAdviser.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -19,6 +22,7 @@ import eCore.dao.ObjectDAO;
 import eCore.model.NamHoc;
 import eCore.modelDao.DAO_NamHoc;
 import eCore.util.Util_Date;
+
 
 public class Controller_PhanCongCoVanHocTap extends PhanCongCoVanHocTap implements ZEController {
 
@@ -214,8 +218,8 @@ public class Controller_PhanCongCoVanHocTap extends PhanCongCoVanHocTap implemen
 
 		PhanCongCoVanHocTap obj = new PhanCongCoVanHocTap();
 		obj.coVanHocTap = getCoVanHocTap();
-		obj.soCoVanHocTap=getSoCoVanHocTap();
-		obj.namHoc=getNamHoc();
+		obj.soCoVanHocTap = getSoCoVanHocTap();
+		obj.namHoc = getNamHoc();
 		obj.maPhanCong = getMaPhanCong();
 		obj.thoiGianBatDau = getThoiGianBatDau();
 		obj.thoiGianKetThuc = getThoiGianKetThuc();
@@ -283,6 +287,22 @@ public class Controller_PhanCongCoVanHocTap extends PhanCongCoVanHocTap implemen
 	public String exportData() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String chonSo() throws IOException {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse respone = ServletActionContext.getResponse();
+		HttpSession session = request.getSession();
+		session.setAttribute("maSo", getMaSoCoVanHocTap());
+		respone.sendRedirect("index.jsp?p=eAdviser/pages/congtaccovanhoctaps.jsp");
+		return "SUCCESS";
+	}
+	
+	public String boChonSo() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession session = request.getSession();
+		session.setAttribute("maSo",null);
+		return "SUCCESS";
 	}
 
 }

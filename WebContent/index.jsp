@@ -109,7 +109,7 @@
 					aria-haspopup="true" aria-expanded="false" href=index.jsp?p=><i
 						class="fa fa-user"></i> <span class="masked"> Tài khoản</a>
 					<ul class="dropdown-menu">
-						<li><a href=dangXuat.action><i class="fa fa-users"></i>
+						<li><a href=dangXuat.action><i class="fa fa-sign-out"></i>
 								&nbsp;&nbsp;Đăng xuất </a>
 					</ul></li>
 			</ul>

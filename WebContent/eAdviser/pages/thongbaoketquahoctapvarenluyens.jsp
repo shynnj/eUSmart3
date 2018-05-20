@@ -86,7 +86,7 @@
 						for (ThongBaoKetQuaHocTapVaRenLuyen obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
 							String maDoiTuong = obj.getMaThongBaoKetQuaHocTapVaRenLuyen();
-							String tenDoiTuong = "";
+							String tenDoiTuong = obj.getMaThongBaoKetQuaHocTapVaRenLuyen();
 							if (obj.getCoVanHocTap() != null && obj.getCoVanHocTap().getNhanVien().getTenNhanVien() != null) {
 								tenDoiTuong = obj.getCoVanHocTap().getNhanVien().getTenNhanVien();
 							}

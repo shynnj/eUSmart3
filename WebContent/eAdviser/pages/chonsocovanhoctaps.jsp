@@ -112,12 +112,26 @@
 						? obj.getNamHoc().getTenNamHoc()
 						: ""%></td>
 						<td style="text-align: center;">
-								<button class="btn btn-default"
-									onclick="chon(this)"
-									id=<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>>Chọn</button>
-							<button class="btn btn-default" onclick="bochon(this)"
-								id=<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>>Bỏ
-								chọn</button>
+							<!-- 							<form action="chonSoCoVanHocTap.action"> --> <!-- 								<button class="btn btn-default" onclick="chon(this)" -->
+							<%-- 									id=<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>>Chọn</button> --%>
+							<!-- 							</form> --> <!-- 							<form> --> <!-- 								<button class="btn btn-default" onclick="bochon(this)" -->
+							<%-- 									id=<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>>Bỏ --%>
+							<!-- 									chọn</button> --> <!-- 							</form> -->
+
+
+
+							<form class="pull-left" action="chonSoCoVanHocTap.action">
+								<input name="maSoCoVanHocTap" hidden=""
+									value="<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>">
+								<button class="btn btn-default" type="submit" onclick="chonSo(this)" 
+								id="<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>">Chọn</button>
+							</form>
+							<form class="pull-left" action="boChonSoCoVanHocTap.action">
+								<input name="maSoCoVanHocTap" hidden=""
+									value="<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>">
+								<button class="btn btn-default" type="submit" onclick="boChonSo(this)"
+								id="<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>">Bỏ chọn</button>
+							</form>
 						</td>
 					</tr>
 					<%
@@ -142,17 +156,11 @@
 	document.getElementById("nutThemMoi").style.display = "none";
 	document.getElementById("nutNhapLieuExcel").style.display = "none";
 
-	function chon(dt) {
-		// 		alert(dt.id);
-		sessionStorage.setItem("soCoVanHocTap", dt.id);
-// 		document.getElementById("sessionChonSo").value = "123";
-		alert(dt.id);
-		window.location.href = "index.jsp?p=eAdviser/pages/congtaccovanhoctaps.jsp";
+	function chonSo(that){
+		alert("Bạn đã chọn sổ" + that.id);
 	}
-	function bochon(dt) {
-		sessionStorage.setItem("soCoVanHocTap", null);
-// 		document.getElementById("sessionChonSo").value = "null";
-		alert("Hủy chọn" + dt.id);
+	function boChonSo(that){
+		alert("Bạn đã hủy chọn sổ" + that.id);
 	}
 </script>
 

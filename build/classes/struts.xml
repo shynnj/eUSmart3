@@ -1053,6 +1053,28 @@
 			<result name="FAIL">/index.jsp</result>
 		</action>
 		<!-- kết thúc xử lý Thông báo kết quả học tập và rèn luyện -->
-
+		
+		
+		
+		
+		
+	<!-- chọn sổ cố vấn học tập -->
+		<action name="chonSoCoVanHocTap"
+			class="eAdviser.controller.Controller_PhanCongCoVanHocTap"
+			method="chonSo">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		<action name="boChonSoCoVanHocTap"
+			class="eAdviser.controller.Controller_PhanCongCoVanHocTap"
+			method="boChonSo">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
+		
+		
+		
+		
+		
 	</package>
 </struts>

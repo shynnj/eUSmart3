@@ -16,18 +16,21 @@
 <%@page import="eCore.model.ChucNang"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script src="content/css_scripts/jquery/jquery.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(
-			function() {
-				document.getElementById("session").value = sessionStorage
-						.getItem("soCoVanHocTap");
-				if (sessionStorage.getItem("soCoVanHocTap") == null)
-					alert("Bạn hãy chọn sổ cố vấn học tập");
-			}
+	
+<%
+	if (session.getAttribute("maSo") == null) {
+%>
 
-	);
+<script type="text/javascript">
+	alert("Bạn hãy chọn sổ cố vấn học tập.");
+	window.location="index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
 </script>
+<%
+	} else {
+%>	
+	
+	
+	
 <%
 	String tenLop = "ThongTinSinhVien";
 	String tenTrang = "Quản lý thông tin sinh viên";
@@ -86,8 +89,9 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Thuộc Sổ cố vấn học tập</label><input readonly
-										class="form-control" name="maSoCoVanHocTap" id="session">
+									<label>Thuộc Sổ cố vấn học tập</label> <input readonly
+										class="form-control" name="maSoCoVanHocTap"
+										value="<%=session.getAttribute("maSo").toString()%>">
 								</div>
 								<div class="form-group">
 									<label>Mã thông tin sinh viên</label> <input readonly
@@ -96,9 +100,9 @@
 										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Họ tên sinh viên</label> <input class="form-control"
+									<label>Mã sinh viên</label> <input class="form-control"
 										name="maSinhVien"
-										value="<%=(obj != null ? obj.getSinhVien().getHoDem() + " " + obj.getSinhVien().getTen() : "")%>"
+										value="<%=(obj != null ? obj.getSinhVien().getMaSinhVien() : "")%>"
 										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
 
@@ -175,3 +179,6 @@
 	</div>
 	<!-- /.row -->
 </form>
+<%
+}
+%>

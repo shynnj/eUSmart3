@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="eAdviser.model.ThongTinSinhVienKhoKhan"%>
 <%@page import="eAdviser.model.ThongTinKhenThuongSinhVien"%>
 <%@page import="eCore.model.SinhVien"%>
@@ -18,7 +19,17 @@
 <%@page import="eCore.model.ChucNang"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	if (session.getAttribute("maSo") == null) {
+%>
 
+<script type="text/javascript">
+	alert("Bạn hãy chọn sổ cố vấn học tập.");
+	window.location="index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
+</script>
+<%
+	} else {
+%>
 <%
 	String tenLop = "ThongTinSinhVienKhoKhan";
 	String tenTrang = "Quản lý thông tin  sinh viên khó khăn";
@@ -77,51 +88,17 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Sổ cố vấn học tập</label> <select class="form-control"
-										name="maSoCoVanHocTap" <%=(modeView ? " disabled " : "")%>>
-										<%
-											ObjectDAO objdao = new DAO_SoCoVanHocTap();
-											ArrayList<SoCoVanHocTap> listSoCoVanHocTap = objdao.listAll();
-											for (SoCoVanHocTap scvht : listSoCoVanHocTap) {
-												if (obj != null && obj.getSoCoVanHocTap() != null
-														&& obj.getSoCoVanHocTap().getMaSoCoVanHocTap().equals(scvht.getMaSoCoVanHocTap())) {
-										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>" selected="selected"><%=scvht.getTenSoCoVanHocTap()%>
-										</option>
-										<%
-											} else {
-										%>
-										<option value="<%=scvht.maSoCoVanHocTap%>"><%=scvht.getTenSoCoVanHocTap()%>
-										</option>
-										<%
-											}
-											}
-										%>
-									</select>
+									<label>Thuộc sổ cố vấn học tập</label> 
+									<input readonly class="form-control" name="maSoCoVanHocTap"
+										 value="<%=session.getAttribute("maSo").toString()%>">
 								</div>
 								<div class="form-group">
-									<label>Sinh viên</label> <select class="form-control"
-										name="maSinhVien" <%=(modeView ? " disabled " : "")%>>
-										<%
-											ObjectDAO objdaosv = new DAO_SinhVien();
-											ArrayList<SinhVien> listSinhVien = objdaosv.listAll();
-											for (SinhVien sv : listSinhVien) {
-												if (obj != null && obj.getSinhVien() != null
-														&& obj.getSinhVien().getMaSinhVien().equals(sv.getMaSinhVien())) {
-										%>
-										<option value="<%=sv.maSinhVien%>" selected="selected"><%=sv.getHoDem() + " " + sv.getTen()%>
-										</option>
-										<%
-											} else {
-										%>
-										<option value="<%=sv.maSinhVien%>"><%=sv.getHoDem() + " " + sv.getTen()%>
-										</option>
-										<%
-											}
-											}
-										%>
-									</select>
+									<label>Mã sinh viên</label> <input class="form-control"
+										name="maSinhVien"
+										value="<%=(obj != null ? obj.getSinhVien().getMaSinhVien() : "")%>"
+										<%=(modeView || modeEdit ? " readonly " : "")%>>
 								</div>
+
 								<div class="form-group">
 									<label>Mã thông tin sinh viên khó khăn</label> <input
 										class="form-control" name="maThongTinSinhVienKhoKhan"
@@ -141,7 +118,7 @@
 								<div class="form-group">
 									<label>Thời gian ghi nhận</label> <input type="date" class="form-control"
 										name="s_thoiGianGhiNhan"
-										value="<%=(obj != null ? Util_Date.dateToString(obj.getThoiGianGhiNhan()) : "")%>"
+										value="<%=(obj != null ? Util_Date.dateToString(obj.getThoiGianGhiNhan()) : Util_Date.dateToString(new Date()))%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 							</div>
@@ -181,3 +158,6 @@
 	</div>
 	<!-- /.row -->
 </form>
+<%
+	}
+%>
