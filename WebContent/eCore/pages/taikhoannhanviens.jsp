@@ -63,13 +63,13 @@
 					<tr>
 						<th>Ảnh đại diện</th>
 						<th>Mã đăng nhập</th>
+						<th>Họ và tên</th>
 						<th>Ngày tạo</th>
 						<th>Ngày cập nhật mật khẩu</th>
 						<th>Câu hỏi bí mật</th>
 						<th>Loại tài khoản</th>
-						<th>Trạng thái hoạt động</th>
 						<th>Email</th>
-						<th>Họ và tên</th>
+						<th>Trạng thái hoạt động</th>
 						<th>Xử lí</th>
 
 					</tr>
@@ -84,13 +84,13 @@
 					<tr class="odd gradeX">
 						<td><%=obj.getAnhDaiDien()%></td>
 						<td><%=obj.getMaDangNhap()%></td>
+						<td><%=obj.getHoVaTen() !=null ? obj.getHoVaTen() : ""%></td>
 						<td><%=obj.getNgayTao() !=null ? Util_Date.dateToString2(obj.getNgayTao()) : ""%></td>
 						<td><%=obj.getNgayCapNhatMatKhau() !=null ? Util_Date.dateToString2(obj.getNgayCapNhatMatKhau()) : ""%></td>
 						<td><%=obj.getCauHoiBiMat() !=null ? obj.getCauHoiBiMat() : ""%></td>
 						<td><%=obj.getLoaiTaiKhoan() !=null ? obj.getLoaiTaiKhoan() : ""%></td>
-						<td><%=obj.isTrangThaiHoatDong()%></td>
 						<td><%=obj.getEmail() !=null ? obj.getEmail() : ""%></td>
-						<td><%=obj.getHoVaTen() !=null ? obj.getHoVaTen() : ""%></td>
+						<td><%=obj.isTrangThaiHoatDong()%></td>
 
 						<td style="text-align: center;"><%@ include
 								file="../../ePartial/menupullcuadoituong.jsp"%></td>

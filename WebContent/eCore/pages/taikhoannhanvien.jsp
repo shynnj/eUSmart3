@@ -112,6 +112,12 @@
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
+									<label>Loại tài khoản</label> <input class="form-control"
+										name="loaiTaiKhoan"
+										value="<%=(obj != null ? obj.getLoaiTaiKhoan() : "")%>"
+										<%=(modeView ? " disabled " : "")%>>
+								</div>
+								<div class="form-group">
 									<label>Email</label> <input class="form-control" name="email"
 										value="<%=(obj != null ? obj.getEmail() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>

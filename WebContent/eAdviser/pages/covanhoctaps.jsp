@@ -10,7 +10,7 @@
 
 <%
 	String tenLop = "CoVanHocTap";
-	String tenTrang = "Quản lý Cố vấn học tập";
+	String tenTrang = "Quản lý thông tin cố vấn học tập";
 	String trangDanhSach = "index.jsp?p=eAdviser/pages/covanhoctaps.jsp";
 	String[] tk_value = { "maCoVanHocTap", "nhanVien", "dienThoaiCoQuan", "diaChiGuiThu", "diDong" };
 	String[] tk_show = { "Mã Cố vấn học tập", "Nhân viên", "Điện thoại cơ quan", "Địa chỉ gửi thư", "Di động" };

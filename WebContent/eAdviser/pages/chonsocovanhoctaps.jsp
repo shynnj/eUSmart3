@@ -19,7 +19,7 @@
 
 <%
 	String tenLop = "PhanCongCoVanHocTap";
-	String tenTrang = "Quản lý phân công cố vấn học tập";
+	String tenTrang = "Chọn sổ cố vấn học tập";
 	String trangDanhSach = "index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
 	String[] tk_value = {"coVanHocTap", "soCoVanHocTap", "namHoc", "maPhanCong", "thoiGianBatDau",
 			"thoiGianKetThuc"};
@@ -98,7 +98,7 @@
 						for (PhanCongCoVanHocTap obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
 							String maDoiTuong = obj.getMaPhanCong();
-							String tenDoiTuong = "";
+							String tenDoiTuong = obj.getMaPhanCong();
 							if (obj.getCoVanHocTap() != null && obj.getCoVanHocTap().getNhanVien().getTenNhanVien() != null) {
 								tenDoiTuong = obj.getCoVanHocTap().getNhanVien().getTenNhanVien();
 							}
@@ -157,10 +157,10 @@
 	document.getElementById("nutNhapLieuExcel").style.display = "none";
 
 	function chonSo(that){
-		alert("Bạn đã chọn sổ" + that.id);
+		alert("Bạn đã chọn sổ "+ that.id);
 	}
 	function boChonSo(that){
-		alert("Bạn đã hủy chọn sổ" + that.id);
+		alert("Bạn đã hủy chọn sổ "+ that.id);
 	}
 </script>
 

@@ -197,6 +197,7 @@ public class Controller_TaiKhoanNhanVien extends TaiKhoanNhanVien implements ZEC
 		obj.cauHoiBiMat = getCauHoiBiMat();
 		obj.traLoiCauHoiBiMat = getTraLoiCauHoiBiMat();
 		obj.trangThaiHoatDong = isTrangThaiHoatDong();
+		obj.loaiTaiKhoan=getLoaiTaiKhoan();
 		obj.email = getEmail();
 		obj.hoVaTen = getHoVaTen();
 		obj.moTa = getMoTa();

@@ -23,7 +23,7 @@
 
 <script type="text/javascript">
 	alert("Bạn hãy chọn sổ cố vấn học tập.");
-	window.location="index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
+	window.location = "index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
 </script>
 <%
 	} else {
@@ -33,32 +33,32 @@
 
 <%
 	String tenLop = "BaoCaoTinhHinhLop";
-	String tenTrang = "Quản lý báo cáo tình hình lớp";
-	String trangDanhSach = "index.jsp?p=eAdviser/pages/baocaotinhhinhlops.jsp";
-	String[] tk_value = { "soCoVanHocTap", "coVanHocTap", "maBaoCaoTinhHinhLop", "tenBaoCaoTinhHinhLop",
-			"hocKy", "namHoc", "soSinhVienTrongLop", "tinhHinhChung" };
-	String[] tk_show = { "thuộc Sổ cố vấn học tập", "Cố vấn học tập", "Mã báo cáo tình hình lớp",
-			"Tên báo cáo tình hình lớp", "Học kỳ", "Năm học", "Số sinh viên trong lớp", "Tình hình chung" };
+		String tenTrang = "Quản lý báo cáo tình hình lớp";
+		String trangDanhSach = "index.jsp?p=eAdviser/pages/baocaotinhhinhlops.jsp";
+		String[] tk_value = { "soCoVanHocTap", "coVanHocTap", "maBaoCaoTinhHinhLop", "tenBaoCaoTinhHinhLop",
+				"hocKy", "namHoc", "soSinhVienTrongLop", "tinhHinhChung" };
+		String[] tk_show = { "thuộc Sổ cố vấn học tập", "Cố vấn học tập", "Mã báo cáo tình hình lớp",
+				"Tên báo cáo tình hình lớp", "Học kỳ", "Năm học", "Số sinh viên trong lớp", "Tình hình chung" };
 %>
 <%@ include file="../../ePartial/code-header.jsp"%>
 
 <%
 	String mode = session.getAttribute("mode") + "";
-	String tenTrangChiTiet = "";
-	tenTrangChiTiet = mode.equals("addNew") ? "Thêm mới" : tenTrangChiTiet;
-	tenTrangChiTiet = mode.equals("viewDetail") ? "Xem thông tin chi tiết" : tenTrangChiTiet;
-	tenTrangChiTiet = mode.equals("viewDetailAndEdit") ? "Chỉnh sửa thông tin" : tenTrangChiTiet;
-	tenTrangChiTiet = mode.equals("null") ? "" : tenTrangChiTiet;
+		String tenTrangChiTiet = "";
+		tenTrangChiTiet = mode.equals("addNew") ? "Thêm mới" : tenTrangChiTiet;
+		tenTrangChiTiet = mode.equals("viewDetail") ? "Xem thông tin chi tiết" : tenTrangChiTiet;
+		tenTrangChiTiet = mode.equals("viewDetailAndEdit") ? "Chỉnh sửa thông tin" : tenTrangChiTiet;
+		tenTrangChiTiet = mode.equals("null") ? "" : tenTrangChiTiet;
 
-	boolean modeView = mode.equals("viewDetail");
-	boolean modeEdit = mode.equals("viewDetailAndEdit");
+		boolean modeView = mode.equals("viewDetail");
+		boolean modeEdit = mode.equals("viewDetailAndEdit");
 
-	BaoCaoTinhHinhLop obj = null;
-	if (session.getAttribute("obj") != null) {
-		if (session.getAttribute("obj") instanceof BaoCaoTinhHinhLop) {
-			obj = (BaoCaoTinhHinhLop) session.getAttribute("obj");
+		BaoCaoTinhHinhLop obj = null;
+		if (session.getAttribute("obj") != null) {
+			if (session.getAttribute("obj") instanceof BaoCaoTinhHinhLop) {
+				obj = (BaoCaoTinhHinhLop) session.getAttribute("obj");
+			}
 		}
-	}
 %>
 <div class="row">
 	<div class="col-lg-12">
@@ -89,20 +89,20 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Thuộc Sổ cố vấn học tập</label>
-									<input readonly class="form-control" name="maSoCoVanHocTap"
-										 value="<%=session.getAttribute("maSo").toString()%>">
+									<label>Thuộc Sổ cố vấn học tập</label> <input readonly
+										class="form-control" name="maSoCoVanHocTap"
+										value="<%=session.getAttribute("maSo").toString()%>">
 								</div>
 								<div class="form-group">
 									<label>Cố vấn học tập</label>
 									<%
 										String maDangNhap1 = session.getAttribute("maDangNhap").toString();
-										ObjectDAO<TaiKhoanNhanVien> dao_TaiKhoanNhanVien = new DAO_TaiKhoanNhanVien();
-										ArrayList<TaiKhoanNhanVien> list_TaiKhoanNhanVien = dao_TaiKhoanNhanVien.listByColumns("maDangNhap",
-												maDangNhap1);
-										TaiKhoanNhanVien nv = new TaiKhoanNhanVien();
-										if (list_TaiKhoanNhanVien.size() > 0)
-											nv = list_TaiKhoanNhanVien.get(0);
+											ObjectDAO<TaiKhoanNhanVien> dao_TaiKhoanNhanVien = new DAO_TaiKhoanNhanVien();
+											ArrayList<TaiKhoanNhanVien> list_TaiKhoanNhanVien = dao_TaiKhoanNhanVien.listByColumns("maDangNhap",
+													maDangNhap1);
+											TaiKhoanNhanVien nv = new TaiKhoanNhanVien();
+											if (list_TaiKhoanNhanVien.size() > 0)
+												nv = list_TaiKhoanNhanVien.get(0);
 									%>
 
 									<input readonly class="form-control" name="maCoVanHocTap"
@@ -136,13 +136,10 @@
 
 							</div>
 							<div class="col-lg-6">
-
-
 								<div class="form-group">
-									<label>Tình hình chung</label> <input class="form-control"
-										name="tinhHinhChung"
-										value="<%=(obj != null ? obj.getTinhHinhChung() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
+									<label>Tình hình chung</label>
+									<textarea class="form-control" name="tinhHinhChung" value=""
+										<%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getTinhHinhChung() : "")%></textarea>
 								</div>
 								<div class="form-group">
 									<label>Tư tưởng chính trị</label> <input class="form-control"
@@ -151,16 +148,14 @@
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 								<div class="form-group">
-									<label>Kết quả học tập</label> <input class="form-control"
-										name="ketQuaHocTap"
-										value="<%=(obj != null ? obj.getKetQuaHocTap() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
+									<label>Kết quả học tập</label>
+									<textarea class="form-control" name="ketQuaHocTap" value=""
+										<%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getKetQuaHocTap() : "")%></textarea>
 								</div>
 								<div class="form-group">
-									<label>Kết quả rèn luyện</label> <input class="form-control"
-										name="ketQuaRenLuyen"
-										value="<%=(obj != null ? obj.getKetQuaRenLuyen() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
+									<label>Kết quả rèn luyện</label>
+									<textarea class="form-control" name="ketQuaRenLuyen" value=""
+										<%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getKetQuaRenLuyen() : "")%></textarea>
 								</div>
 								<div class="form-group">
 									<label>Kết quả các hoạt động khác</label> <input
@@ -168,45 +163,46 @@
 										value="<%=(obj != null ? obj.getKetQuaRenLuyen() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
-								<div class="form-group">
-									<label>Kiến nghị đề xuất</label> <input class="form-control"
-										name="kienNghiDeXuat"
-										value="<%=(obj != null ? obj.getKetQuaRenLuyen() : "")%>"
-										<%=(modeView ? " disabled " : "")%>>
-								</div>
-
 							</div>
 						</div>
 						<div class="row">
-							<div class="form-group">
-								<label>Mô tả</label>
-								<textarea class="form-control" cols="80" id="editor1" rows="5"
-									name="moTa" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getMoTa() : "")%></textarea>
-							</div>
-							<div class="form-group">
-								<label>Ghi chú</label>
-								<textarea class="form-control" cols="80" id="editor2" rows="5"
-									name="ghiChu" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getGhiChu() : "")%></textarea>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label>Kiến nghị đề xuất</label>
+									<textarea class="form-control" name="kienNghiDeXuat"
+										id="noiDung" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getKienNghiDeXuat() : "")%></textarea>
+								</div>
+								<div class="form-group">
+									<label>Mô tả</label>
+									<textarea class="form-control" cols="80" id="editor1" rows="5"
+										name="moTa" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getMoTa() : "")%></textarea>
+								</div>
+								<div class="form-group">
+									<label>Ghi chú</label>
+									<textarea class="form-control" cols="80" id="editor2" rows="5"
+										name="ghiChu" <%=(modeView ? " disabled " : "")%>><%=(obj != null ? obj.getGhiChu() : "")%></textarea>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="panel-footer" style="text-align: left;">
-						<div class="col-md-5"></div>
-						<div class="col-md-7">
-							<%@ include file="../../ePartial/processform.jsp"%>
+						<div class="panel-footer" style="text-align: left;">
+							<div class="col-md-5"></div>
+							<div class="col-md-7">
+								<%@ include file="../../ePartial/processform.jsp"%>
+							</div>
 						</div>
+						<!-- /.col-lg-6 (nested) -->
+						<!-- /.col-lg-6 (nested) -->
 					</div>
-					<!-- /.col-lg-6 (nested) -->
-					<!-- /.col-lg-6 (nested) -->
+					<!-- /.row (nested) -->
 				</div>
-				<!-- /.row (nested) -->
+				<!-- /.panel-body -->
 			</div>
-			<!-- /.panel-body -->
+			<!-- /.panel -->
 		</div>
-		<!-- /.panel -->
-	</div>
-	<!-- /.col-lg-12 -->
+		<!-- /.col-lg-12 -->
 	</div>
 	<!-- /.row -->
 </form>
-<% }%>
+<%
+	}
+%>
