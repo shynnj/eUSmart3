@@ -78,10 +78,11 @@
 	}
 %>
 <body>
+
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
-		<div class="navbar-header" style="background-color: #e60000">
+		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
 				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 				aria-controls="navbar">
@@ -89,16 +90,17 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.jsp" style="color: white"> 
-				&nbsp; <img src="content/images/logo.png" style="display: inline-block;" width="30px" height="30px" />
-				<span style="display: inline-block;" >
-					UTC2 Smart 1.0
-				</span>
-			</a>
+
 		</div>
-		<div id="navbar" class="collapse navbar-collapse"
-			style="background: url('content/images/bgTH2.png')'">
+		<div id="navbar" class="collapse navbar-collapse ">
 			<ul class="nav  navbar-nav navbar-dark bg-primary text-white">
+				<li class="dropdown" style="color: white;"><a
+					class="dropdown-toggle" style="color: white;"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false" href="index.jsp"> <img
+						src="content/images/logo.png" width="35px" height="35px"></img>
+						UTCC2Smart 1.0
+				</a></li>
 
 				<%=session.getAttribute("chucNangs")%>
 
@@ -107,7 +109,7 @@
 					aria-haspopup="true" aria-expanded="false" href=index.jsp?p=><i
 						class="fa fa-user"></i> <span class="masked"> Tài khoản</a>
 					<ul class="dropdown-menu">
-						<li><a href=dangXuat.action><i class="fa fa-users"></i>
+						<li><a href=dangXuat.action><i class="fa fa-sign-out"></i>
 								&nbsp;&nbsp;Đăng xuất </a>
 					</ul></li>
 			</ul>
@@ -115,8 +117,8 @@
 		<!--/.nav-collapse -->
 	</div>
 	</nav>
-
-	<div class="container" style="padding: 10px; padding-top: 100px;">
+	
+	<div class="container" style="padding: 10px; padding-top: 70px; ">
 		<div class="starter-template"
 			style="padding: 10px; background: white;">
 			<%
@@ -219,7 +221,7 @@
 			});
 		});
 	</script>
-	<!-- 	<ckeditor:replaceAll basePath="content/ckeditor/" /> -->
+		<ckeditor:replace replace="noiDung" basePath="content/ckeditor/" />
 </body>
 
 </html>

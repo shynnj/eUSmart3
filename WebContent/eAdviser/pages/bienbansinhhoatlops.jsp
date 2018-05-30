@@ -1,3 +1,7 @@
+<%@page import="eAdviser.modelDao.DAO_PhanCongCoVanHocTap"%>
+<%@page import="eAdviser.model.PhanCongCoVanHocTap"%>
+<%@page import="eCore.modelDao.DAO_TaiKhoanNhanVien"%>
+<%@page import="eCore.model.TaiKhoanNhanVien"%>
 <%@page import="eAdviser.modelDao.DAO_BienBanSinhHoatLop"%>
 <%@page import="eAdviser.model.BienBanSinhHoatLop"%>
 <%@page import="eAdviser.modelDao.DAO_CoVanHocTap"%>
@@ -9,6 +13,8 @@
 <%@page import="eCore.dao.ObjectDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+
 
 <%
 	String tenLop = "BienBanSinhHoatLop";
@@ -28,7 +34,11 @@
 	ObjectDAO<BienBanSinhHoatLop> dao = new DAO_BienBanSinhHoatLop();
 
 	ArrayList<BienBanSinhHoatLop> list = new ArrayList<BienBanSinhHoatLop>();
-
+	
+	//lấy mã sổ cố vấn học tập
+		//String maSo = session.getAttribute("maSo").toString();
+		
+	
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
 		if (listTemp.size() > 0) {
@@ -41,7 +51,9 @@
 		} else
 			list = new ArrayList<BienBanSinhHoatLop>();
 	} else {
+					//list = dao.listByColumns("soCoVanHocTap", maSo);
 		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+				
 	}
 %>
 
@@ -79,7 +91,7 @@
 						for (BienBanSinhHoatLop obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
 							String maDoiTuong = obj.getMaBienBanSinhHoatLop();
-							String tenDoiTuong = "";
+							String tenDoiTuong = obj.getMaBienBanSinhHoatLop();
 							if (obj.getSoCoVanHocTap() != null && obj.getSoCoVanHocTap().getTenSoCoVanHocTap() != null) {
 								tenDoiTuong = obj.getSoCoVanHocTap().getTenSoCoVanHocTap();
 							}
@@ -114,3 +126,4 @@
 
 <!-- Modal Tìm kiếm-->
 <%@ include file="../../ePartial/timkiemModel.jsp"%>
+

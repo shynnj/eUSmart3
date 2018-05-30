@@ -115,7 +115,7 @@
 								<div class="form-group">
 									<label>Cán bộ lớp</label> <input class="form-control"
 										name="canBoLop"
-										value="<%=(obj != null ? obj.getCanBoLop() : "")%>"
+										value="<%=((obj != null && obj.getCanBoLop() != null) ? obj.getCanBoLop() : "")%>"
 										<%=(modeView ? " disabled " : "")%>>
 								</div>
 							</div>

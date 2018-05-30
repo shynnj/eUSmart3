@@ -14,7 +14,17 @@
 <%@page import="eCore.dao.ObjectDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	if (session.getAttribute("maSo") == null) {
+%>
 
+<script type="text/javascript">
+	alert("Bạn hãy chọn sổ cố vấn học tập.");
+	window.location = "index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
+</script>
+<%
+	} else {
+%>
 <%
 	String tenLop = "ThongTinSinhVienKhoKhan";
 	String tenTrang = "Quản lý thông tin  sinh viên khó khăn";
@@ -31,7 +41,7 @@
 	ObjectDAO<ThongTinSinhVienKhoKhan> dao = new DAO_ThongTinSinhVienKhoKhan();
 
 	ArrayList<ThongTinSinhVienKhoKhan> list = new ArrayList<ThongTinSinhVienKhoKhan>();
-
+	String maSo = session.getAttribute("maSo").toString();
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
 		if (listTemp.size() > 0) {
@@ -44,7 +54,7 @@
 		} else
 			list = new ArrayList<ThongTinSinhVienKhoKhan>();
 	} else {
-		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+		list = dao.listByColumns("soCoVanHocTap", maSo);
 	}
 %>
 
@@ -71,7 +81,7 @@
 						<th>Sổ cố vấn học tập</th>
 						<th>Mã thông tin sinh viên khó khăn</th>
 						<th>Mã sinh viên</th>
-						<th>Hoàn cảnh gia đình</th>
+						<th>Lý do</th>
 						<th>Đề xuất</th>
 						<th>Thời gian ghi nhận</th>
 						<th>Xử lý</th>
@@ -93,7 +103,7 @@
 						: ""%></td>
 						<td><%=obj.getMaThongTinSinhVienKhoKhan()%></td>
 						<td><%=obj.getSinhVien().getMaSinhVien()%></td>
-						<td><%=obj.getHoanCanhGiaDinh()%></td>
+						<td><%=obj.getLyDo()%></td>
 						<td><%=obj.getDeXuat()%></td>
 						<td><%=Util_Date.dateToString2(obj.thoiGianGhiNhan)%></td>
 						<td style="text-align: center;"><%@ include
@@ -119,3 +129,4 @@
 
 <!-- Modal Tìm kiếm-->
 <%@ include file="../../ePartial/timkiemModel.jsp"%>
+<%}%>

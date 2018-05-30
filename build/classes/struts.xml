@@ -835,6 +835,14 @@
 			<result name="SUCCESS">/index.jsp</result>
 			<result name="FAIL">/index.jsp</result>
 		</action>
+
+		<!-- export danh sách -->
+		<action name="exportThongTinKhenThuongSinhVien"
+			class="eAdviser.controller.Controller_ThongTinKhenThuongSinhVien"
+			method="exportData">
+			<result name="SUCCESS">/index.jsp</result>
+			<result name="FAIL">/index.jsp</result>
+		</action>
 		<!-- kết thúc xử lý Thông tin khen thưởng sinh viên -->
 
 
@@ -1053,28 +1061,26 @@
 			<result name="FAIL">/index.jsp</result>
 		</action>
 		<!-- kết thúc xử lý Thông báo kết quả học tập và rèn luyện -->
-		
-		
-		
-		
-		
-	<!-- chọn sổ cố vấn học tập -->
+
+
+
+
+
+		<!-- chọn sổ cố vấn học tập -->
 		<action name="chonSoCoVanHocTap"
-			class="eAdviser.controller.Controller_PhanCongCoVanHocTap"
-			method="chonSo">
+			class="eAdviser.controller.Controller_PhanCongCoVanHocTap" method="chonSo">
 			<result name="SUCCESS">/index.jsp</result>
 			<result name="FAIL">/index.jsp</result>
 		</action>
 		<action name="boChonSoCoVanHocTap"
-			class="eAdviser.controller.Controller_PhanCongCoVanHocTap"
-			method="boChonSo">
+			class="eAdviser.controller.Controller_PhanCongCoVanHocTap" method="boChonSo">
 			<result name="SUCCESS">/index.jsp</result>
 			<result name="FAIL">/index.jsp</result>
 		</action>
-		
-		
-		
-		
-		
+
+
+
+
+
 	</package>
 </struts>

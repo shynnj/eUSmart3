@@ -11,15 +11,25 @@
 <%@page import="eCore.dao.ObjectDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	if (session.getAttribute("maSo") == null) {
+%>
 
+<script type="text/javascript">
+	alert("Bạn hãy chọn sổ cố vấn học tập.");
+	window.location = "index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
+</script>
+<%
+	} else {
+%>
 <%
 	String tenLop = "ThongTinSinhVien";
-	String tenTrang = "Quản lý thông tin sinh viên";
-	String trangDanhSach = "index.jsp?p=eAdviser/pages/thongtinsinhviens.jsp";
-	String[] tk_value = { "soCoVanHocTap","sinhVien", "maThongTinSinhVien", "doiTuongChinhSach", "canBoLop",
-			"email", "dienThoaiDiDong", "dienThoaiGiaDinh", "diaChiBaoTin"};
-	String[] tk_show = { "Sổ cố vấn học tập","Sinh viên", "Mã thông tin sinh viên", "Đối tượng chính sách",
-			"Cán bộ lớp", "Email", "Điện thoại di động", "Điện thoại gia đình", "Địa chỉ báo tin"};
+		String tenTrang = "Quản lý thông tin sinh viên";
+		String trangDanhSach = "index.jsp?p=eAdviser/pages/thongtinsinhviens.jsp";
+		String[] tk_value = { "soCoVanHocTap", "sinhVien", "maThongTinSinhVien", "doiTuongChinhSach",
+				"canBoLop", "email", "dienThoaiDiDong", "dienThoaiGiaDinh", "diaChiBaoTin" };
+		String[] tk_show = { "Sổ cố vấn học tập", "Sinh viên", "Mã thông tin sinh viên", "Đối tượng chính sách",
+				"Cán bộ lớp", "Email", "Điện thoại di động", "Điện thoại gia đình", "Địa chỉ báo tin" };
 %>
 
 <%@ include file="../../ePartial/code-header.jsp"%>
@@ -27,22 +37,22 @@
 <%
 	ObjectDAO<ThongTinSinhVien> dao = new DAO_ThongTinSinhVien();
 
-	ArrayList<ThongTinSinhVien> list = new ArrayList<ThongTinSinhVien>();
-
-	if (session.getAttribute("checkTimKiem") != null) {
-		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
-		if (listTemp.size() > 0) {
-			if (listTemp.get(0) instanceof ThongTinSinhVien) {
-				list = (ArrayList<ThongTinSinhVien>) listTemp;
-			} else {
-				session.setAttribute("checkTimKiem", null);
-				list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
-			}
-		} else
-			list = new ArrayList<ThongTinSinhVien>();
-	} else {
-		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
-	}
+		ArrayList<ThongTinSinhVien> list = new ArrayList<ThongTinSinhVien>();
+		String maSo = session.getAttribute("maSo").toString();
+		if (session.getAttribute("checkTimKiem") != null) {
+			ArrayList listTemp = (ArrayList) session.getAttribute("arr");
+			if (listTemp.size() > 0) {
+				if (listTemp.get(0) instanceof ThongTinSinhVien) {
+					list = (ArrayList<ThongTinSinhVien>) listTemp;
+				} else {
+					session.setAttribute("checkTimKiem", null);
+					list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+				}
+			} else
+				list = new ArrayList<ThongTinSinhVien>();
+		} else {
+			list = dao.listByColumns("soCoVanHocTap", maSo);
+		}
 %>
 
 
@@ -79,18 +89,20 @@
 				<tbody>
 					<%
 						for (ThongTinSinhVien obj : list) {
-							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
-							String maDoiTuong = obj.getMaThongTinSinhVien();
-							String tenDoiTuong = "";
-							if (obj.getSoCoVanHocTap() != null && obj.getSoCoVanHocTap().getTenSoCoVanHocTap() != null) {
-								tenDoiTuong = obj.getSoCoVanHocTap().getTenSoCoVanHocTap();
-							}
+								//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
+								String maDoiTuong = obj.getMaThongTinSinhVien();
+								String tenDoiTuong = "";
+								if (obj.getSoCoVanHocTap() != null && obj.getSoCoVanHocTap().getTenSoCoVanHocTap() != null) {
+									tenDoiTuong = obj.getSoCoVanHocTap().getTenSoCoVanHocTap();
+								}
 					%>
 					<tr class="odd gradeX">
-						<td><%=obj.getSoCoVanHocTap() != null && obj.getSoCoVanHocTap().getTenSoCoVanHocTap() != null ? obj.getSoCoVanHocTap().getTenSoCoVanHocTap() : ""%></td>
-						<td><%=obj.getSinhVien().getHoDem()+" "+ obj.getSinhVien().getTen()%></td>
+						<td><%=obj.getSoCoVanHocTap() != null && obj.getSoCoVanHocTap().getTenSoCoVanHocTap() != null
+							? obj.getSoCoVanHocTap().getTenSoCoVanHocTap()
+							: ""%></td>
+						<td><%=obj.getSinhVien().getHoDem() + " " + obj.getSinhVien().getTen()%></td>
 						<td><%=obj.getMaThongTinSinhVien()%></td>
-						<td><%=obj.getDoiTuongChinhSach()%></td>
+						<td><%=obj.getCanBoLop()%></td>
 						<td><%=obj.getEmail()%></td>
 						<td><%=obj.getDienThoaiDiDong()%></td>
 						<td><%=obj.getDienThoaiGiaDinh()%></td>
@@ -118,3 +130,6 @@
 
 <!-- Modal Tìm kiếm-->
 <%@ include file="../../ePartial/timkiemModel.jsp"%>
+<%
+	}
+%>

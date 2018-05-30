@@ -52,8 +52,8 @@
 					<div class="panel-heading" style="text-align: center;">
 						<p class="panel-title">
 							<img src="content/images/logo.png" width="50px" height="50px" /><br />
-							PHÂN HIỆU TRƯỜNG ĐH GTVT TẠI TP. HCM <br /> Hệ thống Cố vấn học tập trực tuyến trong đào tạo theo học chế tín chỉ.
-							<br>UTC2 Smart
+							PHÂN HIỆU TRƯỜNG ĐH GTVT TẠI TP. HCM <br /> Hệ thống Cố vấn học tập trực tuyến 
+							<br>trong đào tạo theo học chế tín chỉ
 						</p>
 					</div>
 					<div class="panel-body">
@@ -94,7 +94,7 @@
 		<div class="footer">
 			<hr />
 			<p style="color: white;">
-				Bản quyền thuộc UTC2 <br /> Phát triển dự án: Thạc sĩ Lê Nhật Tùng
+				Bản quyền thuộc UTC2 <br /> Phát triển dự án: SV Trần Thanh Nghĩa
 				& CTV<br /> Liên hệ kỹ thuật: Sinh viên - Phòng 6D3, CBGV - Phòng
 				2D3<br />Địa chỉ: 450, Lê Văn Việt, P. Tăng Nhơn Phú A, Q.9, TP.
 				HCM, ĐT: (028).3896.6798

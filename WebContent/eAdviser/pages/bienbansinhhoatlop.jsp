@@ -13,6 +13,18 @@
 <%@page import="eCore.model.ChucNang"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+	if (session.getAttribute("maSo") == null) {
+%>
+
+<script type="text/javascript">
+	alert("Bạn hãy chọn sổ cố vấn học tập.");
+	window.location = "index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
+</script>
+<%
+	} else {
+%>
 <%
 	String tenLop = "BienBanSinhHoatLop";
 	String tenTrang = "Quản lý biên bản sinh hoạt lớp";
@@ -73,9 +85,9 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
-									<label>Thuộc Sổ cố vấn học tập</label>
-									<input readonly class="form-control" name="maSoCoVanHocTap"
-										 value="<%=session.getAttribute("maSo").toString()%>"> 
+									<label>Thuộc Sổ cố vấn học tập</label> <input readonly
+										class="form-control" name="maSoCoVanHocTap"
+										value="<%=session.getAttribute("maSo").toString()%>">
 								</div>
 								<div class="form-group">
 									<label>Mã biên bản sinh hoạt lớp</label> <input
@@ -182,3 +194,4 @@
 	</div>
 	<!-- /.row -->
 </form>
+<%}%>

@@ -74,6 +74,11 @@
 
 
 					<a type="submit" class="btn  btn-default"
+						href="index.jsp?p=eAdviser/pages/congtaccovanhoctaps.jsp" style="text-align: left;"
+						style="width: 100%" id="nutTaiLai"> <img
+						src="content/images/refresh-32.png" width="16px" height="16px" />
+						&nbsp; Quay về trang công tác
+					</a> <a type="submit" class="btn  btn-default"
 						href="taiLai<%=tenLop%>.action" style="text-align: left;"
 						style="width: 100%" id="nutTaiLai"> <img
 						src="content/images/refresh-32.png" width="16px" height="16px" />
@@ -90,13 +95,13 @@
 						data-target="#timKiemModal" id="nutTimKiem"> <img
 						src="content/images/search-32.png" width="16px" height="16px" />
 						&nbsp; Tìm kiếm
-					</a> 
-					
-					
-<!-- 					<a class="btn   btn-default" style="text-align: left;" -->
-<!-- 						id="nutBaoCao"> <img src="content/images/report-32.png" -->
-<!-- 						width="16px" height="16px" /> &nbsp; Báo cáo -->
-<!-- 					</a> -->
+					</a>
+
+
+					<!-- 					<a class="btn   btn-default" style="text-align: left;" -->
+					<!-- 						id="nutBaoCao"> <img src="content/images/report-32.png" -->
+					<!-- 						width="16px" height="16px" /> &nbsp; Báo cáo -->
+					<!-- 					</a> -->
 
 
 

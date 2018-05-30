@@ -12,7 +12,17 @@
 <%@page import="eCore.dao.ObjectDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	if (session.getAttribute("maSo") == null) {
+%>
 
+<script type="text/javascript">
+	alert("Bạn hãy chọn sổ cố vấn học tập.");
+	window.location = "index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
+</script>
+<%
+	} else {
+%>
 <%
 	String tenLop = "ThongBaoKetQuaHocTapVaRenLuyen";
 	String tenTrang = "Quản lý thông báo kết quả và rèn luyện";
@@ -31,7 +41,7 @@
 	ObjectDAO<ThongBaoKetQuaHocTapVaRenLuyen> dao = new DAO_ThongBaoKetQuaHocTapVaRenLuyen();
 
 	ArrayList<ThongBaoKetQuaHocTapVaRenLuyen> list = new ArrayList<ThongBaoKetQuaHocTapVaRenLuyen>();
-
+	String maSo = session.getAttribute("maSo").toString();
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
 		if (listTemp.size() > 0) {
@@ -44,7 +54,7 @@
 		} else
 			list = new ArrayList<ThongBaoKetQuaHocTapVaRenLuyen>();
 	} else {
-		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+		list = dao.listByColumns("soCoVanHocTap", maSo);
 	}
 %>
 
@@ -132,3 +142,4 @@
 
 <!-- Modal Tìm kiếm-->
 <%@ include file="../../ePartial/timkiemModel.jsp"%>
+<%}%>

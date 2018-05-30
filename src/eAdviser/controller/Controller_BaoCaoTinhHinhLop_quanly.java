@@ -8,31 +8,27 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import eAdviser.model.BaoCaoTinhHinhLop;
+import eAdviser.model.BienBanSinhHoatLop;
 import eAdviser.model.CoVanHocTap;
-import eAdviser.model.PhanCongCoVanHocTap;
 import eAdviser.model.SoCoVanHocTap;
-import eAdviser.model.ThongBaoKetQuaHocTapVaRenLuyen;
+import eAdviser.modelDao.DAO_BaoCaoTinhHinhLop;
 import eAdviser.modelDao.DAO_CoVanHocTap;
-import eAdviser.modelDao.DAO_PhanCongCoVanHocTap;
 import eAdviser.modelDao.DAO_SoCoVanHocTap;
-import eAdviser.modelDao.DAO_ThongBaoKetQuaHocTapVaRenLuyen;
 import eCore.controller.ZEController;
 import eCore.dao.ObjectDAO;
-import eCore.model.SinhVien;
-import eCore.modelDao.DAO_SinhVien;
 
-public class Controller_ThongBaoKetQuaHocTapVaRenLuyen extends ThongBaoKetQuaHocTapVaRenLuyen implements ZEController {
+public class Controller_BaoCaoTinhHinhLop_quanly extends BaoCaoTinhHinhLop implements ZEController {
 
-	ObjectDAO dao = new DAO_ThongBaoKetQuaHocTapVaRenLuyen();
+	ObjectDAO dao = new DAO_BaoCaoTinhHinhLop();
 	String timKiemTheo;
 	String tuKhoa;
-	String duongDanTrang = "eAdviser/pages/thongbaoketquahoctapvarenluyens.jsp";
-	String duongDanTrangView = "eAdviser/pages/thongbaoketquahoctapvarenluyen.jsp";
-	String tenCotTimDoiTuong = "maThongBaoKetQuaHocTapVaRenLuyen";
+	String duongDanTrang = "eAdviser/pages/baocaotinhhinhlops.jsp";
+	String duongDanTrangView = "eAdviser/pages/baocaotinhhinhlop.jsp";
+	String tenCotTimDoiTuong = "maBaoCaoTinhHinhLop";
 	String maObj;
 	String maCoVanHocTap;
 	String maSoCoVanHocTap;
-	String maSinhVien;
 
 	public String getTimKiemTheo() {
 		return timKiemTheo;
@@ -89,13 +85,12 @@ public class Controller_ThongBaoKetQuaHocTapVaRenLuyen extends ThongBaoKetQuaHoc
 	public void setMaCoVanHocTap(String maCoVanHocTap) {
 		this.maCoVanHocTap = maCoVanHocTap;
 	}
-	
+
 	public CoVanHocTap getCoVanHocTap() {
-		ObjectDAO<CoVanHocTap> dao_CoVanHocTap = new DAO_CoVanHocTap();
-		ArrayList<CoVanHocTap> list_coVanHocTap = dao_CoVanHocTap.listByColumns("maCoVanHocTap", getMaCoVanHocTap());
-		System.out.println(list_coVanHocTap.size());
-		if (list_coVanHocTap.size() > 0)
-			return list_coVanHocTap.get(0);
+		ObjectDAO<CoVanHocTap> objdao_covanhoctap = new DAO_CoVanHocTap();
+		ArrayList<CoVanHocTap> list = objdao_covanhoctap.listByColumns("maCoVanHocTap", getMaCoVanHocTap());
+		if (list.size() > 0)
+			return list.get(0);
 		else
 			return null;
 	}
@@ -107,33 +102,17 @@ public class Controller_ThongBaoKetQuaHocTapVaRenLuyen extends ThongBaoKetQuaHoc
 	public void setMaSoCoVanHocTap(String maSoCoVanHocTap) {
 		this.maSoCoVanHocTap = maSoCoVanHocTap;
 	}
-	
+
 	public SoCoVanHocTap getSoCoVanHocTap() {
-		ObjectDAO dao_soCoVanHocTap = new DAO_SoCoVanHocTap();
-		ArrayList<SoCoVanHocTap> list = dao_soCoVanHocTap.listByColumns("maSoCoVanHocTap", getMaSoCoVanHocTap());
-		if(list.size()>0)
-			return list.get(0);
+		ObjectDAO<SoCoVanHocTap> objdao_socovanhoctap = new DAO_SoCoVanHocTap();
+		ArrayList<SoCoVanHocTap> list_SoCoVanHocTap = objdao_socovanhoctap.listByColumns("maSoCoVanHocTap",
+				getMaSoCoVanHocTap());
+		if (list_SoCoVanHocTap.size() > 0)
+			return list_SoCoVanHocTap.get(0);
 		else
 			return null;
-	}
-	
-	public String getMaSinhVien() {
-		return maSinhVien;
 	}
 
-	public void setMaSinhVien(String maSinhVien) {
-		this.maSinhVien = maSinhVien;
-	}
-	
-	public SinhVien getSinhVien(){
-		ObjectDAO dao_sinhVien = new DAO_SinhVien();
-		ArrayList<SinhVien> list_sinhvien = dao_sinhVien.listByColumns("maSinhVien", getMaSinhVien());
-		if(list_sinhvien.size()>0)
-			return list_sinhvien.get(0);
-		else
-			return null;
-	}
-	
 	@Override
 	public String addNew() {
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -154,7 +133,7 @@ public class Controller_ThongBaoKetQuaHocTapVaRenLuyen extends ThongBaoKetQuaHoc
 
 		session.setAttribute("mode", "viewDetail");
 
-		ArrayList<ThongBaoKetQuaHocTapVaRenLuyen> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
+		ArrayList<BaoCaoTinhHinhLop> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
 		if (arr.size() > 0) {
 			session.setAttribute("obj", arr.get(0));
 			session.setAttribute("p", duongDanTrangView);
@@ -172,7 +151,7 @@ public class Controller_ThongBaoKetQuaHocTapVaRenLuyen extends ThongBaoKetQuaHoc
 
 		String maobj = request.getParameter("maobj");
 		session.setAttribute("mode", "viewDetailAndEdit");
-		ArrayList<ThongBaoKetQuaHocTapVaRenLuyen> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
+		ArrayList<BaoCaoTinhHinhLop> arr = dao.listByColumnLike(tenCotTimDoiTuong, maobj);
 		if (arr.size() > 0) {
 			session.setAttribute("obj", arr.get(0));
 			session.setAttribute("p", duongDanTrangView);
@@ -186,31 +165,35 @@ public class Controller_ThongBaoKetQuaHocTapVaRenLuyen extends ThongBaoKetQuaHoc
 	public String saveOrUpdate() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
-
-		ThongBaoKetQuaHocTapVaRenLuyen obj = new ThongBaoKetQuaHocTapVaRenLuyen();
-		obj.coVanHocTap = getCoVanHocTap();
-		obj.soCoVanHocTap=getSoCoVanHocTap();
-		obj.sinhVien=getSinhVien();
-		obj.maThongBaoKetQuaHocTapVaRenLuyen = getMaThongBaoKetQuaHocTapVaRenLuyen();
-		obj.hocKy = getHocKy();
-		obj.namHoc = getNamHoc();
-		obj.ketQuaHocTap=getKetQuaHocTap();
-		obj.xepLoaiHocTap=getXepLoaiHocTap();
-		obj.ketQuaRenLuyen=getKetQuaRenLuyen();
-		obj.xepLoaiRenLuyen=getXepLoaiRenLuyen();
-		obj.thongBaoCuThe=getThongBaoCuThe();
-		obj.moTa = getMoTa();
-		obj.ghiChu = getGhiChu();
-		obj.thoiGianCapNhat = new Date();
-		if (dao.saveOrUpdate(obj)) {
-			session.setAttribute("msg", "Cập nhật dữ liệu thành công");
-			session.setAttribute("obj", obj);
-			session.setAttribute("mode", "viewDetailAndEdit");
-			session.setAttribute("p", duongDanTrangView);
-			return "SUCCESS";
-		} else {
-			return "FAIL";
+		if (!getMaSoCoVanHocTap().equals("null") && !getMaSoCoVanHocTap().equals("")) {
+			BaoCaoTinhHinhLop obj = new BaoCaoTinhHinhLop();
+			obj.soCoVanHocTap = getSoCoVanHocTap();
+			obj.coVanHocTap = getCoVanHocTap();
+			obj.maBaoCaoTinhHinhLop = getMaBaoCaoTinhHinhLop();
+			obj.tenBaoCaoTinhHinhLop = getTenBaoCaoTinhHinhLop();
+			obj.hocKy = getHocKy();
+			obj.namHoc = getNamHoc();
+			obj.soSinhVienTrongLop = getSoSinhVienTrongLop();
+			obj.tinhHinhChung = getTinhHinhChung();
+			obj.tuTuongChinhTri = getTuTuongChinhTri();
+			obj.ketQuaHocTap = getKetQuaHocTap();
+			obj.ketQuaRenLuyen = getKetQuaRenLuyen();
+			obj.ketQuaCacHoatDongKhac = getKetQuaCacHoatDongKhac();
+			obj.kienNghiDeXuat = getKienNghiDeXuat();
+			obj.moTa = getMoTa();
+			obj.ghiChu = getGhiChu();
+			obj.thoiGianCapNhat = new Date();
+			if (dao.saveOrUpdate(obj)) {
+				session.setAttribute("msg", "Cập nhật dữ liệu thành công");
+				session.setAttribute("obj", obj);
+				session.setAttribute("mode", "viewDetailAndEdit");
+				session.setAttribute("p", duongDanTrangView);
+				return "SUCCESS";
+			} else {
+				return "FAIL";
+			}
 		}
+		return "FAIL";
 	}
 
 	@Override
@@ -218,8 +201,8 @@ public class Controller_ThongBaoKetQuaHocTapVaRenLuyen extends ThongBaoKetQuaHoc
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		String maobj = request.getParameter("maobj");
-		ThongBaoKetQuaHocTapVaRenLuyen obj = new ThongBaoKetQuaHocTapVaRenLuyen();
-		obj.setMaThongBaoKetQuaHocTapVaRenLuyen(maobj);
+		BaoCaoTinhHinhLop obj = new BaoCaoTinhHinhLop();
+		obj.setMaBaoCaoTinhHinhLop(maobj);
 		if (dao.delete(obj)) {
 			session.setAttribute("msg", "Xóa dữ liệu thành công");
 			session.setAttribute("p", duongDanTrang);
@@ -235,7 +218,7 @@ public class Controller_ThongBaoKetQuaHocTapVaRenLuyen extends ThongBaoKetQuaHoc
 		HttpSession session = request.getSession();
 		String column = getTimKiemTheo();
 		String key = getTuKhoa();
-		ArrayList<ThongBaoKetQuaHocTapVaRenLuyen> arr = dao.listByColumnLike(column, key);
+		ArrayList<BaoCaoTinhHinhLop> arr = dao.listByColumnLike(column, key);
 		session.setAttribute("arr", arr);
 		session.setAttribute("checkTimKiem", "true");
 		session.setAttribute("p", duongDanTrang);

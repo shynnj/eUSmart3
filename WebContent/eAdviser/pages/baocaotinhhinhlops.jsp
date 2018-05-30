@@ -1,3 +1,5 @@
+<%@page import="eCore.modelDao.DAO_TaiKhoanNhanVien"%>
+<%@page import="eCore.model.TaiKhoanNhanVien"%>
 <%@page import="eAdviser.modelDao.DAO_BaoCaoTinhHinhLop"%>
 <%@page import="eAdviser.model.BaoCaoTinhHinhLop"%>
 <%@page import="eAdviser.modelDao.DAO_BienBanSinhHoatLop"%>
@@ -28,7 +30,23 @@ String[] tk_show = { "thuộc Sổ cố vấn học tập", "Cố vấn học t�
 	ObjectDAO<BaoCaoTinhHinhLop> dao = new DAO_BaoCaoTinhHinhLop();
 
 	ArrayList<BaoCaoTinhHinhLop> list = new ArrayList<BaoCaoTinhHinhLop>();
+	
+//lấy mã cố vấn học tập
+	String maDangNhap1 = session.getAttribute("maDangNhap").toString();
+	ObjectDAO<TaiKhoanNhanVien> dao_TaiKhoanNhanVien = new DAO_TaiKhoanNhanVien();
+	ArrayList<TaiKhoanNhanVien> list_TaiKhoanNhanVien = dao_TaiKhoanNhanVien.listByColumns("maDangNhap",
+			maDangNhap1);
+	String maNhanVien = "";
+	if (list_TaiKhoanNhanVien.size() > 0)
+		maNhanVien = list_TaiKhoanNhanVien.get(0).getNhanVien().getMaNhanVien();
 
+	String maCoVanHocTap = "";
+	ObjectDAO<CoVanHocTap> dao_CoVanHocTap = new DAO_CoVanHocTap();
+	ArrayList<CoVanHocTap> list_CoVanHocTap = dao_CoVanHocTap.listByColumns("nhanVien", maNhanVien);
+	if (list_CoVanHocTap.size() > 0)
+		maCoVanHocTap = list_CoVanHocTap.get(0).getMaCoVanHocTap();
+	//kết thúc đoạn lấy mã cố vấn học tập
+	
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
 		if (listTemp.size() > 0) {
@@ -41,8 +59,13 @@ String[] tk_show = { "thuộc Sổ cố vấn học tập", "Cố vấn học t�
 		} else
 			list = new ArrayList<BaoCaoTinhHinhLop>();
 	} else {
-		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
-	}
+		//hiện ra danh sách theo mã cố vấn học tập
+		if (list_CoVanHocTap.size() > 0)
+			list = dao.listByColumns("coVanHocTap", list_CoVanHocTap.get(0).getMaCoVanHocTap());
+		else
+			list = dao.listAll();
+	} 
+	
 %>
 
 
@@ -80,7 +103,7 @@ String[] tk_show = { "thuộc Sổ cố vấn học tập", "Cố vấn học t�
 						for (BaoCaoTinhHinhLop obj : list) {
 							//Bat buoc co de bo vao doan code xem chi tiet, chinh sua va xoa
 							String maDoiTuong = obj.getMaBaoCaoTinhHinhLop();
-							String tenDoiTuong = "";
+							String tenDoiTuong = obj.getMaBaoCaoTinhHinhLop();
 							if (obj.getSoCoVanHocTap() != null && obj.getSoCoVanHocTap().getTenSoCoVanHocTap() != null) {
 								tenDoiTuong = obj.getSoCoVanHocTap().getTenSoCoVanHocTap();
 							}

@@ -1,3 +1,7 @@
+<%@page import="eAdviser.modelDao.DAO_PhanCongCoVanHocTap"%>
+<%@page import="eAdviser.model.PhanCongCoVanHocTap"%>
+<%@page import="eCore.modelDao.DAO_TaiKhoanNhanVien"%>
+<%@page import="eCore.model.TaiKhoanNhanVien"%>
 <%@page import="eCore.util.Util_Date"%>
 <%@page import="eAdviser.model.ThongTinKhenThuongSinhVien"%>
 <%@page import="eAdviser.modelDao.DAO_ThongTinKhenThuongSinhVien"%>
@@ -14,7 +18,17 @@
 <%@page import="eCore.dao.ObjectDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	if (session.getAttribute("maSo") == null) {
+%>
 
+<script type="text/javascript">
+	alert("Bạn hãy chọn sổ cố vấn học tập.");
+	window.location = "index.jsp?p=eAdviser/pages/chonsocovanhoctaps.jsp";
+</script>
+<%
+	} else {
+%>
 <%
 	String tenLop = "ThongTinKhenThuongSinhVien";
 	String tenTrang = "Quản lý thông tin khen thưởng sinh viên";
@@ -26,10 +40,33 @@
 
 <%@ include file="../../ePartial/code-header.jsp"%>
 
+
+
+
+
 <%
 	ObjectDAO<ThongTinKhenThuongSinhVien> dao = new DAO_ThongTinKhenThuongSinhVien();
 
 	ArrayList<ThongTinKhenThuongSinhVien> list = new ArrayList<ThongTinKhenThuongSinhVien>();
+	String maSo = session.getAttribute("maSo").toString();
+	String maDangNhap1 = session.getAttribute("maDangNhap").toString();
+
+	ObjectDAO<TaiKhoanNhanVien> dao_TaiKhoanNhanVien = new DAO_TaiKhoanNhanVien();
+	ArrayList<TaiKhoanNhanVien> list_TaiKhoanNhanVien = dao_TaiKhoanNhanVien.listByColumns("maDangNhap",
+			maDangNhap1);
+	String maNhanVien = "";
+	if (list_TaiKhoanNhanVien.size() > 0)
+		maNhanVien = list_TaiKhoanNhanVien.get(0).getNhanVien().getMaNhanVien();
+
+	String maCoVanHocTap = "";
+	ObjectDAO<CoVanHocTap> dao_CoVanHocTap = new DAO_CoVanHocTap();
+	ArrayList<CoVanHocTap> list_CoVanHocTap = dao_CoVanHocTap.listByColumns("nhanVien", maNhanVien);
+	ObjectDAO<PhanCongCoVanHocTap> dao_PhanCongCoVanHocTap = new DAO_PhanCongCoVanHocTap();
+	ArrayList<PhanCongCoVanHocTap> list_PhanCongCoVanHocTap = new ArrayList();
+	if (list_CoVanHocTap.size() > 0){
+		maCoVanHocTap = list_CoVanHocTap.get(0).getMaCoVanHocTap();
+	 list_PhanCongCoVanHocTap = dao_PhanCongCoVanHocTap
+			.listByColumns("coVanHocTap", maCoVanHocTap);}
 
 	if (session.getAttribute("checkTimKiem") != null) {
 		ArrayList listTemp = (ArrayList) session.getAttribute("arr");
@@ -43,7 +80,7 @@
 		} else
 			list = new ArrayList<ThongTinKhenThuongSinhVien>();
 	} else {
-		list = dao.pagination((long) recordPerPage, (long) Long.parseLong(pid) * recordPerPage);
+		list = dao.listByColumns("soCoVanHocTap", maSo);
 	}
 %>
 
@@ -114,3 +151,5 @@
 
 <!-- Modal Tìm kiếm-->
 <%@ include file="../../ePartial/timkiemModel.jsp"%>
+<%} %>
+

@@ -1,3 +1,5 @@
+<%@page import="eAdviser.modelDao.DAO_PhanCongCoVanHocTap"%>
+<%@page import="eAdviser.model.PhanCongCoVanHocTap"%>
 <%@page import="eCore.modelDao.DAO_TaiKhoanNhanVien"%>
 <%@page import="eCore.model.TaiKhoanNhanVien"%>
 <%@page import="eAdviser.model.BaoCaoTinhHinhLop"%>
@@ -89,6 +91,7 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="form-group">
+								<% %>
 									<label>Thuộc Sổ cố vấn học tập</label> <input readonly
 										class="form-control" name="maSoCoVanHocTap"
 										value="<%=session.getAttribute("maSo").toString()%>">
@@ -103,11 +106,39 @@
 											TaiKhoanNhanVien nv = new TaiKhoanNhanVien();
 											if (list_TaiKhoanNhanVien.size() > 0)
 												nv = list_TaiKhoanNhanVien.get(0);
+											String maCoVanHocTap = "";
+											ObjectDAO<CoVanHocTap> dao_CoVanHocTap = new DAO_CoVanHocTap();
+											ArrayList<CoVanHocTap> list_CoVanHocTap = dao_CoVanHocTap.listByColumns("nhanVien",
+													nv.getNhanVien().getMaNhanVien());
+											if (list_CoVanHocTap.size() > 0) {
+												maCoVanHocTap = list_CoVanHocTap.get(0).getMaCoVanHocTap();
+												System.out.println(maCoVanHocTap);
 									%>
 
-									<input readonly class="form-control" name="maCoVanHocTap"
-										<%=(modeView ? " disabled " : "")%>
-										value="<%=nv.getHoVaTen()%>"> </select>
+									<!-- 									<input readonly class="form-control" name="maCoVanHocTap" -->
+									<%-- 										<%=(modeView ? " disabled " : "")%> value="<%=maCoVanHocTap%>"> --%>
+									<select name="maCoVanHocTap" class="form-control" readonly><option
+											value="<%=maCoVanHocTap%>"><%=nv.getNhanVien().getTenNhanVien()%></option></select>
+									<%
+										} else { // đây là admin
+											String maSo = session.getAttribute("maSo").toString();
+										ObjectDAO<PhanCongCoVanHocTap> dao_PhanCong = new DAO_PhanCongCoVanHocTap();
+										ArrayList<PhanCongCoVanHocTap> list_PhanCong = dao_PhanCong.listByColumns("soCoVanHocTap", maSo);
+										String maCoVanHocTap1 = list_PhanCong.get(0).getCoVanHocTap().getMaCoVanHocTap();
+										ObjectDAO<CoVanHocTap> dao_CoVanHocTap1 = new DAO_CoVanHocTap();
+										ArrayList<CoVanHocTap> list_CoVanHocTap1 = dao_CoVanHocTap.listByColumns("maCoVanHocTap", maCoVanHocTap1);
+										String maNhanVien1 = list_CoVanHocTap1.get(0).getNhanVien().getMaNhanVien();
+										ObjectDAO<NhanVien> dao_NhanVien = new DAO_NhanVien();
+										ArrayList<NhanVien> list_NhanVien = dao_NhanVien.listByColumns("maNhanVien", maNhanVien1);
+										NhanVien nhanVien = list_NhanVien.get(0);
+										
+									%>
+									<select name="maCoVanHocTap" class="form-control" readonly><option
+											value="<%=list_CoVanHocTap1.get(0).getMaCoVanHocTap()%>"><%=nhanVien.getTenNhanVien()%></option></select>
+									<%
+										}
+									%>
+
 								</div>
 								<div class="form-group">
 									<label>Mã báo cáo tình hình lớp</label> <input

@@ -1,5 +1,7 @@
 package eCore.controller;
 
+import java.io.IOException;
+
 public interface ZEController<T> {
 
 	public String addNew();
@@ -18,6 +20,6 @@ public interface ZEController<T> {
 
 	public String importData();
 
-	public String exportData();
+	public String exportData() throws IOException;
 
 }

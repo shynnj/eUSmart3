@@ -49,8 +49,7 @@
 	if (list_CoVanHocTap.size() > 0)
 		maCoVanHocTap = list_CoVanHocTap.get(0).getMaCoVanHocTap();
 
-	// 	ObjectDAO<PhanCongCoVanHocTap> dao_PhanCongCoVanHocTap = new DAO_PhanCongCoVanHocTap();
-	// 	ArrayList<PhanCongCoVanHocTap> list_PhanCongCoVanHocTap = dao_PhanCongCoVanHocTap.listByColumns(tenColumn, value);
+	// 	
 
 	// 	ObjectDAO<PhanCongCoVanHocTap> dao_PhanCongCoVanHocTap = new DAO_PhanCongCoVanHocTap();
 	// 	ArrayList<PhanCongCoVanHocTap> list_PhanCongCoVanHocTap = dao_PhanCongCoVanHocTap.listByColumns(tenColumn, value);
@@ -66,7 +65,11 @@
 		} else
 			list = new ArrayList<PhanCongCoVanHocTap>();
 	} else {
-		list = dao.listByColumns("coVanHocTap", list_CoVanHocTap.get(0).getMaCoVanHocTap());
+		// nếu là CVHT
+		if (list_CoVanHocTap.size() > 0)
+			list = dao.listByColumns("coVanHocTap", list_CoVanHocTap.get(0).getMaCoVanHocTap());
+		else
+			list = dao.listAll();
 	}
 %>
 <div class="row">
@@ -123,14 +126,17 @@
 							<form class="pull-left" action="chonSoCoVanHocTap.action">
 								<input name="maSoCoVanHocTap" hidden=""
 									value="<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>">
-								<button class="btn btn-default" type="submit" onclick="chonSo(this)" 
-								id="<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>">Chọn</button>
+								<button class="btn btn-default" type="submit"
+									onclick="chonSo(this)"
+									id="<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>">Chọn</button>
 							</form>
 							<form class="pull-left" action="boChonSoCoVanHocTap.action">
 								<input name="maSoCoVanHocTap" hidden=""
 									value="<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>">
-								<button class="btn btn-default" type="submit" onclick="boChonSo(this)"
-								id="<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>">Bỏ chọn</button>
+								<button class="btn btn-default" type="submit"
+									onclick="boChonSo(this)"
+									id="<%=obj.getSoCoVanHocTap().getMaSoCoVanHocTap()%>">Bỏ
+									chọn</button>
 							</form>
 						</td>
 					</tr>
@@ -156,11 +162,11 @@
 	document.getElementById("nutThemMoi").style.display = "none";
 	document.getElementById("nutNhapLieuExcel").style.display = "none";
 
-	function chonSo(that){
-		alert("Bạn đã chọn sổ "+ that.id);
+	function chonSo(that) {
+		alert("Bạn đã chọn sổ " + that.id);
 	}
-	function boChonSo(that){
-		alert("Bạn đã hủy chọn sổ "+ that.id);
+	function boChonSo(that) {
+		alert("Bạn đã hủy chọn sổ " + that.id);
 	}
 </script>
 
